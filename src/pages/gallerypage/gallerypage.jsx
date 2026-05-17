@@ -255,7 +255,7 @@ const GalleryPage = () => {
               .trim()
         )
 
-      : [];
+      : allImages;
 
   /* ================= LOAD MORE ================= */
 
@@ -274,6 +274,43 @@ const GalleryPage = () => {
 
       <div className="gallery-main-wrapper">
 
+        {/* ================= FILTER TABS ================= */}
+
+        <div className="text-tabs-wrapper">
+
+          <div className="text-tabs-scroll">
+
+            {Object.keys(categoryData).map(
+              (key) => (
+
+                <div
+                  key={key}
+
+                  className={`nav-text-item ${
+                    category === key
+                      ? "active"
+                      : ""
+                  }`}
+
+                  onClick={() =>
+                    navigate(
+                      `/galleryDetails/${key}`
+                    )
+                  }
+                >
+
+                  {key
+                    .replace(/-/g, " ")
+                    .toUpperCase()}
+
+                </div>
+              )
+            )}
+
+          </div>
+
+        </div>
+
         {/* ================= HEADER ================= */}
 
         <motion.header
@@ -290,8 +327,7 @@ const GalleryPage = () => {
           <h2>
             {categoryData[category]
               ?.title ||
-              categoryData.all
-                .title}
+              categoryData.all.title}
           </h2>
 
           <div className="accent-line"></div>
@@ -299,8 +335,7 @@ const GalleryPage = () => {
           <p className="category-desc">
             {categoryData[category]
               ?.desc ||
-              categoryData.all
-                .desc}
+              categoryData.all.desc}
           </p>
 
         </motion.header>
@@ -317,8 +352,7 @@ const GalleryPage = () => {
 
           </div>
 
-        ) : !category ||
-          category === "all" ? (
+        ) : category === "all" ? (
 
           /* ================= ALL COLLECTIONS ================= */
 
