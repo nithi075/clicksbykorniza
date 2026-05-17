@@ -189,8 +189,16 @@ export default function GalleryUpload() {
               Bridal Photography
             </option>
 
-            <option value="pre-wedding">
-              Pre Wedding
+            {/* UPDATED */}
+
+            <option value="outdoor-shoot">
+              Outdoor Shoot
+            </option>
+
+            {/* NEW MODEL SHOOTS */}
+
+            <option value="model-shoots">
+              Model Shoots
             </option>
 
             {/* ENGAGEMENT */}
@@ -219,8 +227,8 @@ export default function GalleryUpload() {
 
             {/* PORTRAIT */}
 
-            <option value="model">
-              Model Photography
+            <option value="bridal">
+              Portrait Photography
             </option>
 
           </select>
