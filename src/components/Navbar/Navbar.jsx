@@ -41,6 +41,8 @@ export default function Navbar() {
       href: "/"
     },
 
+    /* ================= WEDDINGS ================= */
+
     {
       name: "Weddings",
 
@@ -64,7 +66,7 @@ export default function Navbar() {
       ]
     },
 
-    /* UPDATED */
+    /* ================= OUTDOOR ================= */
 
     {
       name: "Outdoor Shoots",
@@ -81,9 +83,6 @@ export default function Navbar() {
           href: "/galleryDetails/engagement"
         },
 
-      
-        /* NEW */
-
         {
           name: "Model Shoots",
           href: "/galleryDetails/model-shoots"
@@ -91,6 +90,8 @@ export default function Navbar() {
 
       ]
     },
+
+    /* ================= MATERNITY ================= */
 
     {
       name: "Maternity & Baby",
@@ -109,6 +110,8 @@ export default function Navbar() {
 
       ]
     },
+
+    /* ================= PORTRAITS ================= */
 
     {
       name: "Portraits",
@@ -145,7 +148,7 @@ export default function Navbar() {
 
       <div className="navbar-container">
 
-        {/* LOGO */}
+        {/* ================= LOGO ================= */}
 
         <div className="logo-wrapper">
 
@@ -161,7 +164,7 @@ export default function Navbar() {
 
         </div>
 
-        {/* DESKTOP MENU */}
+        {/* ================= DESKTOP MENU ================= */}
 
         <div className="desktop-menu">
 
@@ -223,7 +226,7 @@ export default function Navbar() {
 
         </div>
 
-        {/* MOBILE BUTTON */}
+        {/* ================= MOBILE BUTTON ================= */}
 
         <div
           className="menu-btn"
@@ -252,7 +255,7 @@ export default function Navbar() {
 
       </div>
 
-      {/* MOBILE MENU */}
+      {/* ================= MOBILE MENU ================= */}
 
       <AnimatePresence>
 
