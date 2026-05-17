@@ -81,7 +81,7 @@ export default function Gallery() {
         "Portraits",
 
       route:
-        "bridal",
+        "model-shoots",
 
       img:
         portrait
