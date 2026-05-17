@@ -82,6 +82,12 @@ export default function Navbar() {
         },
 
       
+        /* NEW */
+
+        {
+          name: "Model Shoots",
+          href: "/galleryDetails/model-shoots"
+        }
 
       ]
     },
