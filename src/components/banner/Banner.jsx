@@ -67,7 +67,7 @@ const Banner = () => {
 
         {/* Button */}
         <motion.a
-          href="https://yourwebsite.com"
+          href="https://blue-moon-eta.vercel.app/"
           target="_blank"
           rel="noreferrer"
 
