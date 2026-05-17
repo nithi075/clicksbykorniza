@@ -71,8 +71,8 @@ function HomePage() {
       <section id="about">
 
         <About />
-               <Banner/>
 
+        <Banner />
 
       </section>
 
@@ -142,8 +142,20 @@ function App() {
         element={<Gallery />}
       />
 
+      {/* UPDATED ROUTES */}
+
       <Route
         path="/galleryDetails/:category"
+        element={<GalleryDetails />}
+      />
+
+      <Route
+        path="/galleryDetails/outdoor-shoot"
+        element={<GalleryDetails />}
+      />
+
+      <Route
+        path="/galleryDetails/model-shoots"
         element={<GalleryDetails />}
       />
 
