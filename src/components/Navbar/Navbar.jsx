@@ -64,19 +64,28 @@ export default function Navbar() {
       ]
     },
 
+    /* UPDATED */
+
     {
-      name: "Pre Wedding",
+      name: "Outdoor Shoots",
 
       dropdown: [
 
         {
-          name: "Pre Wedding Shoot",
-          href: "/galleryDetails/pre-wedding"
+          name: "Outdoor Shoot",
+          href: "/galleryDetails/outdoor-shoot"
         },
 
         {
           name: "Engagement",
           href: "/galleryDetails/engagement"
+        },
+
+        /* NEW */
+
+        {
+          name: "Model Shoots",
+          href: "/galleryDetails/model-shoots"
         }
 
       ]
@@ -106,7 +115,7 @@ export default function Navbar() {
       dropdown: [
 
         {
-          name: "Model Photography",
+          name: "Bridal Photography",
           href: "/galleryDetails/bridal-photography"
         }
 
