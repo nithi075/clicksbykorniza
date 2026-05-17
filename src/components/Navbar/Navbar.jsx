@@ -106,8 +106,8 @@ export default function Navbar() {
       dropdown: [
 
         {
-          name: "Bridal Photography",
-          href: "/galleryDetails/bridal-photography"
+          name: "Model Photography",
+          href: "/galleryDetails/model-photography"
         }
 
       ]
