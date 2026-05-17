@@ -119,12 +119,24 @@ const GalleryPage = () => {
         "Capturing timeless bridal elegance and beauty.",
     },
 
-    "pre-wedding": {
+    /* UPDATED */
+
+    "outdoor-shoot": {
       title:
-        "Pre Wedding",
+        "Outdoor Shoot",
 
       desc:
-        "Romantic cinematic love stories.",
+        "Creative outdoor cinematic photography sessions.",
+    },
+
+    /* NEW CATEGORY */
+
+    "model-shoots": {
+      title:
+        "Model Shoots",
+
+      desc:
+        "Stylish and professional model photography.",
     },
 
     maternity: {
@@ -145,7 +157,7 @@ const GalleryPage = () => {
 
     bridal: {
       title:
-        "Model Photography",
+        "Portrait Photography",
 
       desc:
         "Elegant portrait sessions.",
@@ -180,7 +192,9 @@ const GalleryPage = () => {
 
     "bridal-photography",
 
-    "pre-wedding",
+    "outdoor-shoot",
+
+    "model-shoots",
 
     "birthday",
 
