@@ -145,7 +145,7 @@ const GalleryPage = () => {
 
     bridal: {
       title:
-        "Portrait Photography",
+        "Model Photography",
 
       desc:
         "Elegant portrait sessions.",
