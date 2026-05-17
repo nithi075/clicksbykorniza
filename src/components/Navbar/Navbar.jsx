@@ -81,12 +81,7 @@ export default function Navbar() {
           href: "/galleryDetails/engagement"
         },
 
-        /* NEW */
-
-        {
-          name: "Model Shoots",
-          href: "/galleryDetails/model-shoots"
-        }
+      
 
       ]
     },
