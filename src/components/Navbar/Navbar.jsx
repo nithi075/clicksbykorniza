@@ -107,7 +107,7 @@ export default function Navbar() {
 
         {
           name: "Model Photography",
-          href: "/galleryDetails/model-photography"
+          href: "/galleryDetails/bridal-photography"
         }
 
       ]
