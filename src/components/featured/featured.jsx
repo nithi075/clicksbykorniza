@@ -19,7 +19,7 @@ const Featured = () => {
       try {
         const response =
           await axios.get(
-            "http://localhost:5000/featured/all"
+            "https://korniza-backend.onrender.com/featured/all"
           );
 
         // Backend returns:

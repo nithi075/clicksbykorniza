@@ -21,7 +21,7 @@ export default function Testimonials() {
       try {
         const response =
           await axios.get(
-            "http://localhost:5000/testimonial/all"
+            "https://korniza-backend.onrender.com/testimonial/all"
           );
 
         const formattedData =
