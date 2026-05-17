@@ -155,13 +155,7 @@ const GalleryPage = () => {
         "Capturing little smiles forever.",
     },
 
-    bridal: {
-      title:
-        "Portrait Photography",
-
-      desc:
-        "Elegant portrait sessions.",
-    },
+ 
 
     birthday: {
       title:
