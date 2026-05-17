@@ -219,8 +219,8 @@ export default function GalleryUpload() {
 
             {/* PORTRAIT */}
 
-            <option value="bridal">
-              Portrait Photography
+            <option value="model">
+              Model Photography
             </option>
 
           </select>
