@@ -7,12 +7,14 @@ import {
 
 import { motion } from "framer-motion";
 
+import { Link } from "react-router-dom";
+
 import "./footer.css";
 
 export default function Footer() {
 
   const currentYear =
-  new Date().getFullYear();
+    new Date().getFullYear();
 
   return (
 
@@ -52,33 +54,40 @@ export default function Footer() {
 
           <div className="footer-brand-section">
 
-            <motion.h2
-
-              className="footer-logo"
-
-              initial={{
-                opacity:0,
-                letterSpacing:"12px"
-              }}
-
-              whileInView={{
-                opacity:1,
-                letterSpacing:"4px"
-              }}
-
-              transition={{
-                duration:1.2
-              }}
-
-              viewport={{
-                once:true
-              }}
-
+            <Link
+              to="/admin"
+              className="footer-logo-link"
             >
 
-              CLICKS BY KORNIZA
+              <motion.h2
 
-            </motion.h2>
+                className="footer-logo"
+
+                initial={{
+                  opacity:0,
+                  letterSpacing:"12px"
+                }}
+
+                whileInView={{
+                  opacity:1,
+                  letterSpacing:"4px"
+                }}
+
+                transition={{
+                  duration:1.2
+                }}
+
+                viewport={{
+                  once:true
+                }}
+
+              >
+
+                CLICKS BY KORNIZA
+
+              </motion.h2>
+
+            </Link>
 
             <span className="footer-tagline">
 
@@ -321,5 +330,7 @@ export default function Footer() {
       </div>
 
     </footer>
+
   );
+
 }

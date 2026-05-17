@@ -256,3 +256,49 @@
     line-height: 1.2;
   }
 }
+/* Mobile Responsive Only */
+
+@media (max-width: 768px) {
+
+  .testimonials {
+    padding: 60px 15px;
+  }
+
+  .slider-container {
+    width: 100%;
+  }
+
+  .featured-slide {
+    max-width: 100%;
+  }
+
+  .journal-img-box img {
+    height: 320px;
+  }
+
+  .floating-title-box {
+    padding: 12px;
+  }
+
+  .card-title {
+    font-size: 16px;
+  }
+
+  .card-author {
+    font-size: 12px;
+  }
+
+  .card-text {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .testimonials-header h2 {
+    font-size: 32px;
+  }
+
+  .testimonials-header p {
+    font-size: 13px;
+  }
+
+}

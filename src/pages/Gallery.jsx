@@ -1,9 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, {
+  useEffect,
+  useState
+} from "react";
 
 import {
   motion,
   AnimatePresence
 } from "framer-motion";
+
+import {
+  useNavigate
+} from "react-router-dom";
 
 import "./Gallery.css";
 
@@ -13,7 +20,10 @@ import couple from "../assets/img3.jpg";
 import portrait from "../assets/img4.jpg";
 import candid from "../assets/img5.jpg";
 
-export default function Gallery(){
+export default function Gallery() {
+
+  const navigate =
+    useNavigate();
 
   /* =========================================
      DATA
@@ -22,33 +32,73 @@ export default function Gallery(){
   const items = [
 
     {
-      title:"Baby Shower",
-      category:"Celebrations",
-      img:wedding2
+      title:
+        "Baby Shower",
+
+      category:
+        "Celebrations",
+
+      route:
+        "baby-shoots",
+
+      img:
+        wedding2
     },
 
     {
-      title:"Wedding Moments",
-      category:"Luxury Weddings",
-      img:wedding
+      title:
+        "Wedding Moments",
+
+      category:
+        "Luxury Weddings",
+
+      route:
+        "traditional-wedding",
+
+      img:
+        wedding
     },
 
     {
-      title:"Couple Moments",
-      category:"Love Stories",
-      img:couple
+      title:
+        "Couple Moments",
+
+      category:
+        "Love Stories",
+
+      route:
+        "pre-wedding",
+
+      img:
+        couple
     },
 
     {
-      title:"Portrait Studio",
-      category:"Portraits",
-      img:portrait
+      title:
+        "Portrait Studio",
+
+      category:
+        "Portraits",
+
+      route:
+        "bridal",
+
+      img:
+        portrait
     },
 
     {
-      title:"Bride Photography",
-      category:"Moments",
-      img:candid
+      title:
+        "Bride Photography",
+
+      category:
+        "Moments",
+
+      route:
+        "bridal-photography",
+
+      img:
+        candid
     }
 
   ];
@@ -57,59 +107,86 @@ export default function Gallery(){
      ACTIVE CARD
   ========================================= */
 
-  const [activeIndex,setActiveIndex] = useState(1);
+  const [
+    activeIndex,
+    setActiveIndex
+  ] = useState(1);
 
   /* =========================================
      AUTO SLIDE
   ========================================= */
 
-  useEffect(()=>{
+  useEffect(() => {
 
-    const interval = setInterval(()=>{
+    const interval =
+      setInterval(() => {
 
-      setActiveIndex((prev)=>
+        setActiveIndex((prev) =>
 
-        prev === items.length - 1
-        ? 0
-        : prev + 1
+          prev ===
+          items.length - 1
 
-      );
+            ? 0
 
-    },4000);
+            : prev + 1
+        );
 
-    return ()=> clearInterval(interval);
+      }, 4000);
 
-  },[items.length]);
+    return () =>
+      clearInterval(interval);
+
+  }, [items.length]);
 
   /* =========================================
      POSITION LOGIC
   ========================================= */
 
-  const getPosition = (index)=>{
+  const getPosition = (
+    index
+  ) => {
 
-    const total = items.length;
+    const total =
+      items.length;
 
-    let position = index - activeIndex;
+    let position =
+      index - activeIndex;
 
     /* loop effect */
 
-    if(position < -total / 2){
+    if (
+      position <
+      -total / 2
+    ) {
 
       position += total;
-
     }
 
-    if(position > total / 2){
+    if (
+      position >
+      total / 2
+    ) {
 
       position -= total;
-
     }
 
     return position;
-
   };
 
-  return(
+  /* =========================================
+     NAVIGATION
+  ========================================= */
+
+  const handleNavigate = (
+    route
+  ) => {
+
+    navigate(
+      `/galleryDetails/${route}`
+    );
+  };
+
+  return (
 
     <section
       className="portfolio"
@@ -127,22 +204,27 @@ export default function Gallery(){
           className="portfolio-header"
 
           initial={{
-            opacity:0,
-            y:40
+            opacity: 0,
+            y: 40
           }}
 
           whileInView={{
-            opacity:1,
-            y:0
+            opacity: 1,
+            y: 0
           }}
 
           transition={{
-            duration:1.2,
-            ease:[0.16,1,0.3,1]
+            duration: 1.2,
+            ease: [
+              0.16,
+              1,
+              0.3,
+              1
+            ]
           }}
 
           viewport={{
-            once:true
+            once: true
           }}
 
         >
@@ -156,7 +238,7 @@ export default function Gallery(){
           <h2 className="portfolio-title">
 
             Timeless Frames &
-            <br/>
+            <br />
 
             <span>
 
@@ -168,8 +250,9 @@ export default function Gallery(){
 
           <p className="p-sub">
 
-            Explore our curated collection
-            of cinematic wedding storytelling,
+            Explore our curated
+            collection of cinematic
+            wedding storytelling,
             luxury celebrations,
             and emotional moments.
 
@@ -183,112 +266,145 @@ export default function Gallery(){
 
         <div className="portfolio-slider">
 
-          {items.map((item,index)=>{
+          {items.map(
+            (
+              item,
+              index
+            ) => {
 
-            const position =
-            getPosition(index);
+              const position =
+                getPosition(
+                  index
+                );
 
-            const isActive =
-            index === activeIndex;
+              const isActive =
+                index ===
+                activeIndex;
 
-            return(
+              return (
 
-              <motion.div
+                <motion.div
 
-                key={index}
+                  key={index}
 
-                className={`portfolio-card ${
-                  isActive
-                  ? "active"
-                  : ""
-                }`}
+                  className={`portfolio-card ${
+                    isActive
+                      ? "active"
+                      : ""
+                  }`}
 
-                animate={{
+                  animate={{
 
-                  x:
+                    x:
 
-                  position === 0
-                  ? "0%"
+                      position ===
+                      0
 
-                  : position < 0
-                  ? "-105%"
+                        ? "0%"
 
-                  : "105%",
+                        : position <
+                          0
 
-                  scale:
+                        ? "-105%"
 
-                  isActive
-                  ? 1
-                  : 0.82,
+                        : "105%",
 
-                  rotate:
+                    scale:
 
-                  position < 0
-                  ? -6
-                  : position > 0
-                  ? 6
-                  : 0,
+                      isActive
+                        ? 1
+                        : 0.82,
 
-                  opacity:
+                    rotate:
 
-                  Math.abs(position) > 1
-                  ? 0
-                  : 1,
+                      position < 0
+                        ? -6
+                        : position >
+                          0
+                        ? 6
+                        : 0,
 
-                  filter:
+                    opacity:
 
-                  isActive
-                  ? "blur(0px)"
-                  : "blur(1px)"
+                      Math.abs(
+                        position
+                      ) > 1
+                        ? 0
+                        : 1,
 
-                }}
+                    filter:
 
-                transition={{
+                      isActive
+                        ? "blur(0px)"
+                        : "blur(1px)"
+                  }}
 
-                  duration:1.2,
+                  transition={{
 
-                  ease:[0.16,1,0.3,1]
+                    duration: 1.2,
 
-                }}
+                    ease: [
+                      0.16,
+                      1,
+                      0.3,
+                      1
+                    ]
+                  }}
 
-                style={{
+                  style={{
 
-                  zIndex:
+                    zIndex:
 
-                  isActive
-                  ? 10
-                  : 1
+                      isActive
+                        ? 10
+                        : 1
+                  }}
 
-                }}
+                  onClick={() => {
 
-                onClick={()=>
-                  setActiveIndex(index)
-                }
+                    if (
+                      isActive
+                    ) {
 
-              >
+                      handleNavigate(
+                        item.route
+                      );
 
-                {/* =========================================
-                   IMAGE
-                ========================================= */}
+                    } else {
 
-                <div className="card-image-wrap">
+                      setActiveIndex(
+                        index
+                      );
+                    }
+                  }}
 
-                  <img
-                    src={item.img}
-                    alt={item.title}
-                  />
+                >
 
-                  {/* overlay */}
+                  {/* =========================================
+                     IMAGE
+                  ========================================= */}
 
-                  <div className="card-overlay"></div>
+                  <div className="card-image-wrap">
 
-                </div>
+                    <img
+                      src={
+                        item.img
+                      }
+                      alt={
+                        item.title
+                      }
+                    />
 
-              </motion.div>
+                    {/* overlay */}
 
-            );
+                    <div className="card-overlay"></div>
 
-          })}
+                  </div>
+
+                </motion.div>
+              );
+            }
+          )}
 
         </div>
 
@@ -307,48 +423,75 @@ export default function Gallery(){
             className="active-details"
 
             initial={{
-              opacity:0,
-              y:40
+              opacity: 0,
+              y: 40
             }}
 
             animate={{
-              opacity:1,
-              y:0
+              opacity: 1,
+              y: 0
             }}
 
             exit={{
-              opacity:0,
-              y:-20
+              opacity: 0,
+              y: -20
             }}
 
             transition={{
-              duration:0.8,
-              ease:[0.16,1,0.3,1]
+              duration: 0.8,
+              ease: [
+                0.16,
+                1,
+                0.3,
+                1
+              ]
             }}
 
           >
 
             <span className="active-category">
 
-              {items[activeIndex].category}
+              {
+                items[
+                  activeIndex
+                ].category
+              }
 
             </span>
 
             <h3>
 
-              {items[activeIndex].title}
+              {
+                items[
+                  activeIndex
+                ].title
+              }
 
             </h3>
 
             <p>
 
-              A celebration of emotions,
-              timeless storytelling,
-              and artistic luxury photography.
+              A celebration of
+              emotions, timeless
+              storytelling, and
+              artistic luxury
+              photography.
 
             </p>
 
-            <button className="portfolio-btn">
+            <button
+
+              className="portfolio-btn"
+
+              onClick={() =>
+                handleNavigate(
+                  items[
+                    activeIndex
+                  ].route
+                )
+              }
+
+            >
 
               VIEW FULL GALLERY
 
@@ -361,7 +504,5 @@ export default function Gallery(){
       </div>
 
     </section>
-
   );
-
 }

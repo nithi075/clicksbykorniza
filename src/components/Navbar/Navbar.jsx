@@ -1,114 +1,417 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { FiChevronDown } from "react-icons/fi";
+
 import "./Navbar.css";
-import logo from "../../assets/logo.png"; // Ensure this path is correct based on your project structure
+import logo from "../../assets/logo.png";
 
 export default function Navbar() {
+
   const [menuOpen, setMenuOpen] = useState(false);
+
   const [scrolled, setScrolled] = useState(false);
 
+  const [openMobileDropdown, setOpenMobileDropdown] =
+    useState(null);
+
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 40);
+
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 40);
+    };
+
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    return () =>
+      window.removeEventListener("scroll", handleScroll);
+
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "auto";
+
+    document.body.style.overflow =
+      menuOpen ? "hidden" : "auto";
+
   }, [menuOpen]);
 
   const navItems = [
-    { name: "HOME", href: "#hero" },
-    { name: "ABOUT US", href: "#about", hasSub: true },
-    { name: "DESTINATION", href: "#destination", hasSub: true },
-    { name: "FILMS", href: "#films" },
-    { name: "PHOTOGRAPHY", href: "#photography", hasSub: true },
-    { name: "POETRY", href: "#poetry" },
-    { name: "BLOG", href: "#blog" },
-    { name: "BOOK US", href: "#contact" }
+
+    {
+      name: "Home",
+      href: "/"
+    },
+
+    {
+      name: "Weddings",
+
+      dropdown: [
+
+        {
+          name: "Traditional Wedding",
+          href: "/galleryDetails/traditional-wedding"
+        },
+
+        {
+          name: "Destination Wedding",
+          href: "/galleryDetails/destination-wedding"
+        },
+
+        {
+          name: "Reception",
+          href: "/galleryDetails/reception"
+        }
+
+      ]
+    },
+
+    {
+      name: "Pre Wedding",
+
+      dropdown: [
+
+        {
+          name: "Pre Wedding Shoot",
+          href: "/galleryDetails/pre-wedding"
+        },
+
+        {
+          name: "Engagement",
+          href: "/galleryDetails/engagement"
+        }
+
+      ]
+    },
+
+    {
+      name: "Maternity & Baby",
+
+      dropdown: [
+
+        {
+          name: "Maternity",
+          href: "/galleryDetails/maternity"
+        },
+
+        {
+          name: "Baby Shoots",
+          href: "/galleryDetails/baby-shoots"
+        }
+
+      ]
+    },
+
+    {
+      name: "Portraits",
+
+      dropdown: [
+
+        {
+          name: "Bridal Photography",
+          href: "/galleryDetails/bridal-photography"
+        }
+
+      ]
+    },
+
+    {
+      name: "Packages",
+      href: "#packages"
+    },
+
+    {
+      name: "Contact",
+      href: "#contact"
+    }
+
   ];
 
   return (
-    <nav className={`navbar ${scrolled ? "navbar-scroll" : ""}`}>
+
+    <nav
+      className={`navbar ${
+        scrolled ? "navbar-scroll" : ""
+      }`}
+    >
+
       <div className="navbar-container">
-        
-        {/* LOGO IMAGE - Updated here */}
+
+        {/* LOGO */}
+
         <div className="logo-wrapper">
-          <a href="#hero">
-            <img 
+
+          <a href="/">
+
+            <img
               src={logo}
-              alt="ClickBy Korniza Logo" 
-              className="logo-img" 
+              alt="Logo"
+              className="logo-img"
             />
+
           </a>
+
         </div>
 
         {/* DESKTOP MENU */}
+
         <div className="desktop-menu">
+
           {navItems.map((item, index) => (
-            <a href={item.href} key={index} className="nav-link">
-              {item.name}
-            </a>
+
+            <div
+              key={index}
+              className="nav-item"
+            >
+
+              {!item.dropdown ? (
+
+                <a
+                  href={item.href}
+                  className="nav-link"
+                >
+                  {item.name}
+                </a>
+
+              ) : (
+
+                <div className="dropdown-wrapper">
+
+                  <div className="dropdown-title">
+
+                    {item.name}
+
+                    <span className="dropdown-arrow">
+                      +
+                    </span>
+
+                  </div>
+
+                  <div className="dropdown-menu">
+
+                    {item.dropdown.map(
+                      (subItem, subIndex) => (
+
+                        <a
+                          key={subIndex}
+                          href={subItem.href}
+                          className="dropdown-link"
+                        >
+                          {subItem.name}
+                        </a>
+
+                      )
+                    )}
+
+                  </div>
+
+                </div>
+
+              )}
+
+            </div>
+
           ))}
+
         </div>
 
-        {/* HAMBURGER BUTTON */}
-        <div 
-          className={`menu-btn ${menuOpen ? "active" : ""}`} 
-          onClick={() => setMenuOpen(!menuOpen)}
+        {/* MOBILE BUTTON */}
+
+        <div
+          className="menu-btn"
+          onClick={() =>
+            setMenuOpen(!menuOpen)
+          }
         >
-          <div className="btn-line"></div>
-          <div className="btn-line"></div>
+
+          {menuOpen ? (
+
+            <div className="close-btn"></div>
+
+          ) : (
+
+            <div className="hamburger">
+
+              <div className="btn-line"></div>
+
+              <div className="btn-line"></div>
+
+            </div>
+
+          )}
+
         </div>
+
       </div>
 
-      {/* MOBILE OVERLAY */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div 
-            className="mobile-overlay"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <div className="grain-overlay"></div>
+      {/* MOBILE MENU */}
 
-            <motion.div 
+      <AnimatePresence>
+
+        {menuOpen && (
+
+          <motion.div
+
+            className="mobile-overlay"
+
+            initial={{ opacity: 0 }}
+
+            animate={{ opacity: 1 }}
+
+            exit={{ opacity: 0 }}
+
+          >
+
+            <motion.div
+
               className="mobile-menu-container"
+
               initial={{ x: "100%" }}
+
               animate={{ x: 0 }}
+
               exit={{ x: "100%" }}
-              transition={{ duration: 0.8, ease: [0.19, 1, 0.22, 1] }}
+
+              transition={{ duration: 0.45 }}
+
             >
-           
 
               <div className="mobile-menu-list">
+
                 {navItems.map((item, index) => (
-                  <motion.div 
+
+                  <div
                     key={index}
-                    className="mobile-item-wrapper"
-                    initial={{ opacity: 0, x: 30 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.1 + index * 0.08 }}
+                    className="mobile-menu-item"
                   >
-                    <a href={item.href} onClick={() => setMenuOpen(false)}>
-                      <span className="mobile-num">0{index + 1}</span>
-                      <span className="mobile-text">{item.name}</span>
-                    </a>
-                  </motion.div>
+
+                    {!item.dropdown ? (
+
+                      <a
+
+                        href={item.href}
+
+                        className="mobile-main-link"
+
+                        onClick={() =>
+                          setMenuOpen(false)
+                        }
+
+                      >
+
+                        {item.name}
+
+                      </a>
+
+                    ) : (
+
+                      <>
+
+                        <div
+
+                          className="mobile-dropdown-header"
+
+                          onClick={() =>
+
+                            setOpenMobileDropdown(
+
+                              openMobileDropdown === index
+                                ? null
+                                : index
+
+                            )
+
+                          }
+
+                        >
+
+                          <span>{item.name}</span>
+
+                          <FiChevronDown
+
+                            className={`dropdown-icon ${
+                              openMobileDropdown === index
+                                ? "rotate"
+                                : ""
+                            }`}
+
+                          />
+
+                        </div>
+
+                        <AnimatePresence>
+
+                          {openMobileDropdown === index && (
+
+                            <motion.div
+
+                              className="mobile-submenu"
+
+                              initial={{
+                                height: 0,
+                                opacity: 0
+                              }}
+
+                              animate={{
+                                height: "auto",
+                                opacity: 1
+                              }}
+
+                              exit={{
+                                height: 0,
+                                opacity: 0
+                              }}
+
+                            >
+
+                              {item.dropdown.map(
+                                (subItem, subIndex) => (
+
+                                  <a
+
+                                    key={subIndex}
+
+                                    href={subItem.href}
+
+                                    className="mobile-sub-link"
+
+                                    onClick={() =>
+                                      setMenuOpen(false)
+                                    }
+
+                                  >
+
+                                    {subItem.name}
+
+                                  </a>
+
+                                )
+                              )}
+
+                            </motion.div>
+
+                          )}
+
+                        </AnimatePresence>
+
+                      </>
+
+                    )}
+
+                  </div>
+
                 ))}
+
               </div>
-              
-              <div className="mobile-footer">
-                <div className="mob-socials">
-                   <a href="#">INSTAGRAM</a>
-                   <a href="#">WHATSAPP</a>
-                </div>
-              </div>
+
             </motion.div>
+
           </motion.div>
+
         )}
+
       </AnimatePresence>
+
     </nav>
+
   );
+
 }

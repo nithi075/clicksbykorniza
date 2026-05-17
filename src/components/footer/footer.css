@@ -898,3 +898,26 @@
   }
 
 }
+.footer-logo-link {
+
+  text-decoration: none;
+
+  color: inherit;
+
+  display: inline-block;
+
+}
+
+.footer-logo {
+
+  transition: 0.35s ease;
+
+}
+
+.footer-logo-link:hover .footer-logo {
+
+  color: var(--gold);
+
+  transform: scale(1.03);
+
+}
