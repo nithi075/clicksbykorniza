@@ -67,7 +67,7 @@ export default function Gallery() {
         "Love Stories",
 
       route:
-        "pre-wedding",
+        "outdoor-shoot",
 
       img:
         couple
@@ -293,6 +293,61 @@ export default function Gallery() {
                       : ""
                   }`}
 
+                  /* =========================================
+                     MANUAL DRAG / SWIPE
+                  ========================================= */
+
+                  drag="x"
+
+                  dragConstraints={{
+                    left: 0,
+                    right: 0
+                  }}
+
+                  dragElastic={0.08}
+
+                  onDragEnd={(
+                    event,
+                    info
+                  ) => {
+
+                    /* swipe left */
+
+                    if (
+                      info.offset.x < -80
+                    ) {
+
+                      setActiveIndex(
+                        (prev) =>
+
+                          prev ===
+                          items.length - 1
+
+                            ? 0
+
+                            : prev + 1
+                      );
+                    }
+
+                    /* swipe right */
+
+                    if (
+                      info.offset.x > 80
+                    ) {
+
+                      setActiveIndex(
+                        (prev) =>
+
+                          prev === 0
+
+                            ? items.length - 1
+
+                            : prev - 1
+                      );
+                    }
+
+                  }}
+
                   animate={{
 
                     x:
@@ -395,7 +450,7 @@ export default function Gallery() {
                       }
                     />
 
-                    {/* overlay */}
+                    {/* OVERLAY */}
 
                     <div className="card-overlay"></div>
 

@@ -1,387 +1,538 @@
-:root {
-  --gold: #b39055;
-  --white: #ffffff;
-  --black: #0a0a0a;
-  --transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
+/* =========================================
+   PREMIUM CINEMATIC TESTIMONIALS
+========================================= */
 
-.testimonials {
-  position: relative;
-  width: 100%;
-  background: #050505;
-  padding: 140px 0;
-  overflow: hidden;
+:root{
+
+  --bg-black:
+  #050505;
+
+  --bg-dark:
+  #0b0b0b;
+
+  --bg-soft:
+  #111111;
+
+  --gold:
+  #d4af37;
+
+  --gold-light:
+  #f2c94c;
+
+  --text-white:
+  #ffffff;
+
+  --text-light:
+  rgba(255,255,255,0.68);
+
+  --card:
+  rgba(255,255,255,0.03);
+
+  --pink:
+  #d6a4b4;
+
+  --shadow:
+  0 20px 60px
+  rgba(0,0,0,.35);
+
 }
 
 /* =========================================
-   HEADER (Matched with Packages/About)
+   SECTION
 ========================================= */
 
-.testimonials-header {
-  text-align: center;
-  margin-bottom: 80px;
-}
+.testimonials-section{
 
-.testimonials-header p {
-  color: var(--gold);
-  letter-spacing: 6px;
-  font-size: 0.75rem;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-}
+  position:relative;
 
-.testimonials-header h2 {
-  font-size: clamp(2.5rem, 5vw, 5rem);
-  color: #fff;
-  font-family: 'Cormorant Garamond', serif; /* Or your preferred serif font */
-  font-weight: 500;
-}
+  width:100%;
 
-.testimonials-header span {
-  color: var(--gold);
-  font-family: 'Great Vibes', cursive;
-  font-style: italic;
-  margin-left: 10px;
+  overflow:hidden;
+
+  padding:120px 5%;
+
+  text-align:center;
+
+  background:
+  linear-gradient(
+    180deg,
+    #050505 0%,
+    #0b0b0b 45%,
+    #111111 100%
+  );
+
 }
 
 /* =========================================
-   HORIZONTAL SCROLL WRAPPER
+   GOLD AMBIENT GLOW
 ========================================= */
 
-.journal-container {
-  width: 100%;
-  padding-left: 6%; /* Peeking effect start */
+.testimonials-section::before{
+
+  content:"";
+
+  position:absolute;
+
+  width:650px;
+  height:650px;
+
+  top:-260px;
+  right:-180px;
+
+  background:
+  radial-gradient(
+    circle,
+    rgba(212,175,55,.10),
+    transparent 72%
+  );
+
+  pointer-events:none;
+
+  filter:blur(10px);
+
 }
 
-.journal-scroll-wrapper {
-  display: flex; /* Switched from grid to flex for horizontal scroll */
-  gap: 30px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding: 20px 0 60px;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Edge */
-}
+.testimonials-section::after{
 
-.journal-scroll-wrapper::-webkit-scrollbar {
-  display: none; /* Chrome/Safari */
+  content:"";
+
+  position:absolute;
+
+  width:420px;
+  height:420px;
+
+  bottom:-180px;
+  left:-140px;
+
+  background:
+  radial-gradient(
+    circle,
+    rgba(242,201,76,.06),
+    transparent 70%
+  );
+
+  pointer-events:none;
+
 }
 
 /* =========================================
-   CARD STYLING
+   HEADING
 ========================================= */
 
-.journal-card {
-  min-width: 450px; /* Width for desktop */
-  scroll-snap-align: center;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  transition: var(--transition);
-}
+.testimonial-heading{
 
-.journal-img-box {
-  position: relative;
-  width: 100%;
-  height: 520px;
-  overflow: hidden;
-}
+  position:relative;
 
-.journal-img-box img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: 1.5s ease;
-}
+  z-index:2;
 
-.journal-card:hover img {
-  transform: scale(1.08);
-}
+  font-size:
+  clamp(2.8rem,5vw,5rem);
 
-.journal-img-box::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent 50%);
-}
+  line-height:1.08;
 
-.floating-title-box {
-  position: absolute;
-  left: 30px;
-  bottom: 30px;
-  z-index: 5;
-}
+  margin-bottom:90px;
 
-.card-title {
-  font-size: 1.8rem;
-  color: white;
-  margin-bottom: 10px;
-  font-family: 'Cormorant Garamond', serif;
-}
+  color:
+  var(--text-white);
 
-.card-author {
-  color: var(--gold);
-  font-size: 0.65rem;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-}
+  font-family:
+  "Cormorant Garamond",
+  serif;
 
-.card-body {
-  padding: 35px;
-}
+  font-weight:600;
 
-.card-text {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 0.9rem;
-  line-height: 1.8;
-  margin-bottom: 30px;
-}
+  letter-spacing:1px;
 
-.card-footer {
-  display: flex;
-  gap: 20px;
-  color: rgba(255, 255, 255, 0.3);
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
 }
 
 /* =========================================
-   RESPONSIVE (Mobile)
+   WRAPPER
 ========================================= */
 
-@media (max-width: 768px) {
-  .testimonials {
-    padding: 80px 0;
-  }
+.testimonial-wrapper{
 
-  .journal-card {
-    min-width: 85vw; /* Card takes most of the screen width on mobile */
-  }
+  position:relative;
 
-  .journal-img-box {
-    height: 400px;
-  }
+  max-width:760px;
 
-  .card-title {
-    font-size: 1.5rem;
-  }
-}
-.slider-container {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  perspective: 1000px;
-  min-height: 700px; /* Adjust based on card height */
+  margin:auto;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  z-index:2;
+
 }
 
-.slider-content {
-  position: relative;
-  width: min(90%, 600px); /* Desktop width */
-  display: flex;
-  justify-content: center;
-}
-
-.featured-slide {
-  width: 100%;
-  flex-shrink: 0;
-  cursor: grab;
-}
-
-/* Dots Navigation */
-.dots {
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.dot {
-  width: 8px;
-  height: 2px;
-  background: rgba(255, 255, 255, 0.2);
-  transition: 0.4s;
-}
-
-.dot.active {
-  width: 24px;
-  background: var(--gold);
-}
-
-/* Mobile Adjustments */
-@media (max-width: 768px) {
-  .slider-content {
-    width: 90%;
-  }
-  
-  .slider-container {
-    min-height: 600px;
-  }
-}
 /* =========================================
-   MOBILE RESPONSIVE CSS ONLY
+   CARD
 ========================================= */
 
-@media (max-width: 768px) {
+.testimonial-card{
 
-  .testimonials {
+  position:relative;
 
-    padding: 80px 0;
+  width:100%;
+
+  max-width:520px;
+
+  padding:
+  95px 42px 50px;
+
+  border-radius:30px;
+
+  background:
+  rgba(255,255,255,0.03);
+
+  backdrop-filter:
+  blur(14px);
+
+  border:
+  1px solid
+  rgba(255,255,255,.06);
+
+  box-shadow:
+  0 20px 60px
+  rgba(0,0,0,.35);
+
+  transition:
+  all .45s ease;
+
+}
+
+.testimonial-card:hover{
+
+  transform:
+  translateY(-6px);
+
+  border-color:
+  rgba(212,175,55,.22);
+
+}
+
+/* =========================================
+   CLIENT IMAGE
+========================================= */
+
+.client-image{
+
+  position:absolute;
+
+  top:-58px;
+
+  left:50%;
+
+  transform:
+  translateX(-50%);
+
+  width:116px;
+  height:116px;
+
+  border-radius:50%;
+
+  padding:4px;
+
+  background:
+  linear-gradient(
+    135deg,
+    var(--gold),
+    var(--gold-light)
+  );
+
+  box-shadow:
+  0 12px 24px
+  rgba(212,175,55,.22);
+
+}
+
+.client-image img{
+
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+  border-radius:50%;
+
+  border:
+  4px solid #111;
+
+}
+
+/* =========================================
+   CLIENT NAME
+========================================= */
+
+.testimonial-card h3{
+
+  font-size:2rem;
+
+  margin-bottom:12px;
+
+  color:
+  var(--text-white);
+
+  font-family:
+  "Cormorant Garamond",
+  serif;
+
+  font-weight:600;
+
+}
+
+/* =========================================
+   STARS
+========================================= */
+
+.stars{
+
+  display:flex;
+
+  justify-content:center;
+
+  gap:4px;
+
+  margin-bottom:16px;
+
+  color:
+  var(--gold-light);
+
+  font-size:.85rem;
+
+}
+
+/* =========================================
+   QUOTE ICON
+========================================= */
+
+.quote{
+
+  font-size:3.6rem;
+
+  line-height:1;
+
+  margin-bottom:16px;
+
+  color:
+  var(--pink);
+
+  font-family:serif;
+
+}
+
+/* =========================================
+   REVIEW TEXT
+========================================= */
+
+.testimonial-card p{
+
+  max-width:400px;
+
+  margin:auto;
+
+  color:
+  rgba(255,255,255,.68);
+
+  line-height:2;
+
+  font-size:.95rem;
+
+  font-weight:300;
+
+}
+
+/* =========================================
+   ARROWS
+========================================= */
+
+.arrow{
+
+  position:absolute;
+
+  top:50%;
+
+  transform:
+  translateY(-50%);
+
+  width:54px;
+  height:54px;
+
+  border:none;
+
+  border-radius:50%;
+
+  cursor:pointer;
+
+  z-index:10;
+
+  background:
+  rgba(255,255,255,.05);
+
+  backdrop-filter:
+  blur(10px);
+
+  color:
+  var(--gold);
+
+  font-size:1rem;
+
+  box-shadow:
+  0 10px 20px
+  rgba(0,0,0,.18);
+
+  transition:
+  .35s ease;
+
+}
+
+.arrow:hover{
+
+  background:
+  var(--gold);
+
+  color:#111;
+
+  transform:
+  translateY(-50%)
+  scale(1.08);
+
+}
+
+.left-arrow{
+
+  left:-90px;
+
+}
+
+.right-arrow{
+
+  right:-90px;
+
+}
+
+/* =========================================
+   DOTS
+========================================= */
+
+.dots{
+
+  display:flex;
+
+  justify-content:center;
+
+  gap:10px;
+
+  margin-top:38px;
+
+}
+
+.dot{
+
+  width:10px;
+  height:10px;
+
+  border-radius:50%;
+
+  background:
+  rgba(255,255,255,.18);
+
+  transition:
+  .35s ease;
+
+}
+
+.active-dot{
+
+  width:30px;
+
+  border-radius:30px;
+
+  background:
+  var(--gold);
+
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media(max-width:900px){
+
+  .left-arrow{
+
+    left:-20px;
+
   }
 
-  /* ===============================
-     HEADER
-  ================================ */
+  .right-arrow{
 
-  .testimonials-header {
+    right:-20px;
 
-    margin-bottom: 45px;
-
-    padding: 0 5%;
   }
 
-  .testimonials-header p {
+}
 
-    font-size: 0.62rem;
+/* =========================================
+   MOBILE
+========================================= */
 
-    letter-spacing: 4px;
+@media(max-width:768px){
 
-    margin-bottom: 14px;
+  .testimonials-section{
+
+    padding:90px 5%;
+
   }
 
-  .testimonials-header h2 {
+  .testimonial-heading{
 
-    font-size: 2.2rem;
+    font-size:2.4rem;
 
-    line-height: 1.15;
+    margin-bottom:70px;
+
   }
 
-  .testimonials-header span {
+  .testimonial-card{
 
-    margin-left: 6px;
+    padding:
+    85px 26px 38px;
+
   }
 
-  /* ===============================
-     CONTAINER
-  ================================ */
+  .testimonial-card h3{
 
-  .journal-container {
+    font-size:1.7rem;
 
-    padding-left: 5%;
   }
 
-  .journal-scroll-wrapper {
+  .testimonial-card p{
 
-    gap: 18px;
+    font-size:.88rem;
 
-    padding: 10px 0 30px;
+    line-height:1.9;
+
   }
 
-  /* ===============================
-     CARD
-  ================================ */
+  .arrow{
 
-  .journal-card {
+    width:42px;
+    height:42px;
 
-    min-width: 88vw;
-
-    border: 1px solid rgba(255,255,255,0.06);
   }
 
-  .journal-img-box {
+  .left-arrow{
 
-    height: 360px;
+    left:-10px;
+
   }
 
-  /* floating title */
+  .right-arrow{
 
-  .floating-title-box {
+    right:-10px;
 
-    left: 20px;
-    bottom: 20px;
-  }
-
-  .card-title {
-
-    font-size: 1.4rem;
-
-    margin-bottom: 6px;
-  }
-
-  .card-author {
-
-    font-size: 0.58rem;
-
-    letter-spacing: 2px;
-  }
-
-  /* ===============================
-     CARD BODY
-  ================================ */
-
-  .card-body {
-
-    padding: 24px;
-  }
-
-  .card-text {
-
-    font-size: 0.78rem;
-
-    line-height: 1.8;
-
-    margin-bottom: 24px;
-  }
-
-  .card-footer {
-
-    gap: 14px;
-
-    font-size: 0.58rem;
-
-    letter-spacing: 0.8px;
-
-    flex-wrap: wrap;
-  }
-
-  /* ===============================
-     SLIDER
-  ================================ */
-
-  .slider-container {
-
-    min-height: auto;
-
-    padding: 0 5%;
-  }
-
-  .slider-content {
-
-    width: 100%;
-  }
-
-  .featured-slide {
-
-    width: 100%;
-  }
-
-  /* dots */
-
-  .dots {
-
-    gap: 8px;
-
-    margin-top: 18px;
-  }
-
-  .dot {
-
-    width: 6px;
-    height: 2px;
-  }
-
-  .dot.active {
-
-    width: 20px;
   }
 
 }
@@ -390,73 +541,421 @@
    SMALL MOBILE
 ========================================= */
 
+@media(max-width:500px){
+
+  .testimonial-heading{
+
+    font-size:2rem;
+
+  }
+
+  .testimonial-card{
+
+    padding:
+    80px 22px 34px;
+
+  }
+
+  .client-image{
+
+    width:100px;
+    height:100px;
+
+  }
+
+  .left-arrow,
+  .right-arrow{
+
+    display:none;
+
+  }
+
+}
+
+/* =========================================
+   EXTRA MOBILE RESPONSIVE FIX
+========================================= */
+
 @media (max-width: 480px) {
 
-  .testimonials {
-
-    padding: 65px 0;
+  .testimonials-section{
+    padding: 70px 18px;
   }
 
-  .testimonials-header {
-
-    margin-bottom: 35px;
+  .testimonial-heading{
+    font-size: 1.8rem;
+    line-height: 1.2;
+    margin-bottom: 60px;
   }
 
-  .testimonials-header h2 {
-
-    font-size: 1.9rem;
+  .testimonial-wrapper{
+    width: 100%;
   }
 
-  .journal-container {
-
-    padding-left: 4%;
+  .testimonial-card{
+    max-width: 100%;
+    padding: 75px 18px 30px;
+    border-radius: 22px;
   }
 
-  .journal-card {
-
-    min-width: 92vw;
+  .client-image{
+    width: 85px;
+    height: 85px;
+    top: -45px;
   }
 
-  .journal-img-box {
-
-    height: 300px;
+  .testimonial-card h3{
+    font-size: 1.4rem;
+    margin-bottom: 10px;
   }
 
-  .floating-title-box {
-
-    left: 16px;
-    bottom: 16px;
+  .stars{
+    font-size: .75rem;
+    gap: 3px;
   }
 
-  .card-title {
-
-    font-size: 1.2rem;
+  .quote{
+    font-size: 2.8rem;
+    margin-bottom: 10px;
   }
 
-  .card-author {
-
-    font-size: 0.52rem;
-
-    letter-spacing: 1.5px;
+  .testimonial-card p{
+    font-size: .82rem;
+    line-height: 1.7;
+    max-width: 100%;
   }
 
-  .card-body {
-
-    padding: 20px;
+  .dots{
+    margin-top: 28px;
+    gap: 8px;
   }
 
-  .card-text {
-
-    font-size: 0.74rem;
-
-    line-height: 1.75;
+  .dot{
+    width: 8px;
+    height: 8px;
   }
 
-  .card-footer {
+  .active-dot{
+    width: 24px;
+  }
 
-    font-size: 0.52rem;
+  /* reduce heavy glow */
 
-    gap: 10px;
+  .testimonials-section::before,
+  .testimonials-section::after{
+    display:none;
+  }
+
+}
+/* =========================================
+   MOBILE RESPONSIVE CSS
+========================================= */
+
+@media (max-width: 768px){
+
+  .testimonials-section{
+
+    padding:90px 22px;
+
+  }
+
+  /* =========================
+     GLOW REDUCE
+  ========================= */
+
+  .testimonials-section::before{
+
+    width:320px;
+    height:320px;
+
+    top:-120px;
+    right:-120px;
+
+    filter:blur(6px);
+
+  }
+
+  .testimonials-section::after{
+
+    width:220px;
+    height:220px;
+
+    bottom:-100px;
+    left:-100px;
+
+  }
+
+  /* =========================
+     HEADING
+  ========================= */
+
+  .testimonial-heading{
+
+    font-size:2.3rem;
+
+    line-height:1.12;
+
+    margin-bottom:65px;
+
+    letter-spacing:.5px;
+
+  }
+
+  /* =========================
+     WRAPPER
+  ========================= */
+
+  .testimonial-wrapper{
+
+    width:100%;
+
+  }
+
+  /* =========================
+     CARD
+  ========================= */
+
+  .testimonial-card{
+
+    max-width:100%;
+
+    padding:
+    82px 24px 34px;
+
+    border-radius:24px;
+
+    backdrop-filter:
+    blur(10px);
+
+  }
+
+  /* =========================
+     CLIENT IMAGE
+  ========================= */
+
+  .client-image{
+
+    width:95px;
+    height:95px;
+
+    top:-48px;
+
+  }
+
+  .client-image img{
+
+    border-width:3px;
+
+  }
+
+  /* =========================
+     NAME
+  ========================= */
+
+  .testimonial-card h3{
+
+    font-size:1.55rem;
+
+    margin-bottom:10px;
+
+  }
+
+  /* =========================
+     STARS
+  ========================= */
+
+  .stars{
+
+    font-size:.72rem;
+
+    gap:3px;
+
+    margin-bottom:14px;
+
+  }
+
+  /* =========================
+     QUOTE
+  ========================= */
+
+  .quote{
+
+    font-size:2.7rem;
+
+    margin-bottom:12px;
+
+  }
+
+  /* =========================
+     TEXT
+  ========================= */
+
+  .testimonial-card p{
+
+    font-size:.84rem;
+
+    line-height:1.8;
+
+    max-width:100%;
+
+  }
+
+  /* =========================
+     ARROWS
+  ========================= */
+
+  .arrow{
+
+    width:40px;
+    height:40px;
+
+    font-size:.85rem;
+
+  }
+
+  .left-arrow{
+
+    left:-6px;
+
+  }
+
+  .right-arrow{
+
+    right:-6px;
+
+  }
+
+  /* =========================
+     DOTS
+  ========================= */
+
+  .dots{
+
+    margin-top:30px;
+
+    gap:8px;
+
+  }
+
+  .dot{
+
+    width:8px;
+    height:8px;
+
+  }
+
+  .active-dot{
+
+    width:24px;
+
+  }
+
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 480px){
+
+  .testimonials-section{
+
+    padding:70px 18px;
+
+  }
+
+  /* remove heavy glow */
+
+  .testimonials-section::before,
+  .testimonials-section::after{
+
+    display:none;
+
+  }
+
+  /* heading */
+
+  .testimonial-heading{
+
+    font-size:1.9rem;
+
+    line-height:1.15;
+
+    margin-bottom:55px;
+
+  }
+
+  /* card */
+
+  .testimonial-card{
+
+    padding:
+    72px 18px 28px;
+
+    border-radius:20px;
+
+  }
+
+  /* image */
+
+  .client-image{
+
+    width:82px;
+    height:82px;
+
+    top:-42px;
+
+  }
+
+  /* title */
+
+  .testimonial-card h3{
+
+    font-size:1.35rem;
+
+  }
+
+  /* stars */
+
+  .stars{
+
+    font-size:.68rem;
+
+  }
+
+  /* quote */
+
+  .quote{
+
+    font-size:2.3rem;
+
+  }
+
+  /* text */
+
+  .testimonial-card p{
+
+    font-size:.78rem;
+
+    line-height:1.7;
+
+  }
+
+  /* arrows hide */
+
+  .left-arrow,
+  .right-arrow{
+
+    display:none;
+
+  }
+
+  /* dots */
+
+  .dots{
+
+    margin-top:24px;
+
   }
 
 }
@@ -465,26 +964,131 @@
    EXTRA SMALL DEVICES
 ========================================= */
 
-@media (max-width: 360px) {
+@media (max-width: 360px){
 
-  .testimonials-header h2 {
+  .testimonial-heading{
 
-    font-size: 1.65rem;
+    font-size:1.65rem;
+
   }
 
-  .journal-img-box {
+  .testimonial-card{
 
-    height: 250px;
+    padding:
+    68px 16px 24px;
+
   }
 
-  .card-title {
+  .testimonial-card h3{
 
-    font-size: 1.05rem;
+    font-size:1.2rem;
+
   }
 
-  .card-text {
+  .testimonial-card p{
 
-    font-size: 0.7rem;
+    font-size:.74rem;
+
+  }
+
+}
+.testimonial-heading{
+
+  position:relative;
+
+  z-index:2;
+
+  font-size:
+  clamp(2.8rem,5vw,5rem);
+
+  line-height:1.08;
+
+  margin-bottom:90px;
+
+  font-family:
+  "Cormorant Garamond",
+  serif;
+
+  font-weight:600;
+
+  letter-spacing:1px;
+
+  background:
+  linear-gradient(
+    135deg,
+    #d4af37 0%,
+    #f2c94c 100%,
+    #fff3c4 10%
+  );
+
+  -webkit-background-clip:text;
+
+  -webkit-text-fill-color:transparent;
+
+  text-shadow:
+  0 0 18px rgba(212,175,55,.18);
+
+}
+/* =========================================
+   MOBILE HEADING
+========================================= */
+
+@media (max-width:768px){
+
+  .testimonial-heading{
+
+    font-size:2.3rem;
+
+    line-height:1.15;
+
+    margin-bottom:65px;
+
+    letter-spacing:.5px;
+
+    text-shadow:
+    0 0 14px rgba(212,175,55,.16);
+
+  }
+
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width:480px){
+
+  .testimonial-heading{
+
+    font-size:1.9rem;
+
+    line-height:1.2;
+
+    margin-bottom:50px;
+
+    letter-spacing:.3px;
+
+    text-shadow:
+    0 0 10px rgba(212,175,55,.14);
+
+  }
+
+}
+
+/* =========================================
+   EXTRA SMALL DEVICES
+========================================= */
+
+@media (max-width:360px){
+
+  .testimonial-heading{
+
+    font-size:1.6rem;
+
+    line-height:1.2;
+
+    margin-bottom:42px;
+
   }
 
 }

@@ -14,13 +14,17 @@
 .packages {
   position: relative;
   padding: 140px 8%;
-  background: linear-gradient(180deg, #050505 0%, #0d0d0d 100%);
+  background: linear-gradient(
+    180deg,
+    #050505 0%,
+    #0d0d0d 100%
+  );
   overflow: hidden;
 }
 
-/* ===============================
+/* =========================================
    HEADER
-================================ */
+========================================= */
 
 .packages-header {
   text-align: center;
@@ -49,58 +53,74 @@
   margin-left: 10px;
 }
 
-/* ===============================
-   CONTAINER & HORIZONTAL SCROLL
-================================ */
+/* =========================================
+   CONTAINER
+========================================= */
 
 .packages-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
-  transition: var(--transition);
 }
 
-/* ===============================
-   CARD STYLING
-================================ */
+/* =========================================
+   CARD
+========================================= */
 
 .package-card {
   position: relative;
   padding: 60px 40px;
   background: var(--card-bg);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255,255,255,0.08);
   backdrop-filter: blur(14px);
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   transition: var(--transition);
+  overflow: hidden;
+  min-height: 920px;
 }
 
 .package-card::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at top, rgba(212, 175, 55, 0.1), transparent 70%);
+  background: radial-gradient(
+    circle at top,
+    rgba(212,175,55,0.1),
+    transparent 70%
+  );
   opacity: 0;
   transition: var(--transition);
 }
 
 .package-card:hover {
-  border-color: rgba(212, 175, 55, 0.3);
+  border-color: rgba(212,175,55,0.3);
   transform: translateY(-10px);
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+  box-shadow:
+    0 30px 80px rgba(0,0,0,0.5);
 }
 
 .package-card:hover::before {
   opacity: 1;
 }
 
-/* Featured / Most Popular Card */
+/* =========================================
+   FEATURED CARD
+========================================= */
+
 .featured {
-  border: 1px solid rgba(212, 175, 55, 0.4);
-  background: rgba(212, 175, 55, 0.02);
+  border:
+  1px solid rgba(212,175,55,0.4);
+
+  background:
+  rgba(212,175,55,0.02);
 }
 
-/* Badge */
+/* =========================================
+   BADGE
+========================================= */
+
 .badge {
   position: absolute;
   top: 25px;
@@ -112,9 +132,23 @@
   letter-spacing: 2px;
   text-transform: uppercase;
   font-weight: 700;
+  z-index: 10;
 }
 
-/* Typography Inside Card */
+/* =========================================
+   CONTENT WRAPPER
+========================================= */
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* =========================================
+   TYPOGRAPHY
+========================================= */
+
 .package-card h3 {
   font-size: 1.8rem;
   color: #fff;
@@ -124,7 +158,7 @@
 }
 
 .subtitle {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255,255,255,0.5);
   font-size: 0.7rem;
   letter-spacing: 2px;
   margin-bottom: 35px;
@@ -132,7 +166,10 @@
   line-height: 1.5;
 }
 
-/* Price Section */
+/* =========================================
+   PRICE
+========================================= */
+
 .price-box {
   display: flex;
   align-items: baseline;
@@ -148,39 +185,111 @@
 }
 
 .event-text {
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255,255,255,0.4);
   font-size: 0.8rem;
 }
 
-/* Features List */
+/* =========================================
+   FEATURES
+========================================= */
+
 .features {
-  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin-bottom: 50px;
+  margin-bottom: 35px;
+  flex: 1;
+}
+
+.features h4 {
+  color: var(--gold);
+  font-size: 0.8rem;
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
 }
 
 .features p {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 0.85rem;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  color: rgba(255,255,255,0.72);
+  font-size: 0.82rem;
+  line-height: 1.6;
 }
 
-/* Button */
+/* =========================================
+   DELIVERABLE BUTTON
+========================================= */
+
+.deliverable-toggle {
+  width: 100%;
+  padding: 16px 18px;
+  background:
+  rgba(212,175,55,0.08);
+  border:
+  1px solid rgba(212,175,55,0.25);
+  color: var(--gold-light);
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.4s ease;
+  margin-top: auto;
+  margin-bottom: 18px;
+  position: relative;
+  z-index: 5;
+}
+
+.deliverable-toggle:hover {
+  background:
+  rgba(212,175,55,0.18);
+  border-color: var(--gold);
+}
+
+/* =========================================
+   DELIVERABLES
+========================================= */
+
+.deliverables {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 25px;
+  padding: 5px 2px;
+}
+
+.deliverables h4 {
+  color: var(--gold);
+  font-size: 0.8rem;
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.deliverables p {
+  color:
+  rgba(255,255,255,0.72);
+  font-size: 0.78rem;
+  line-height: 1.6;
+}
+
+/* =========================================
+   BOOK NOW BUTTON
+========================================= */
+
 .package-btn {
   width: 100%;
   padding: 18px;
   background: transparent;
-  border: 1px solid rgba(212, 175, 55, 0.4);
+  border:
+  1px solid rgba(212,175,55,0.4);
   color: #fff;
   font-size: 0.7rem;
   letter-spacing: 3px;
   text-transform: uppercase;
   cursor: pointer;
   transition: 0.4s ease;
+  position: relative;
+  z-index: 5;
 }
 
 .package-btn:hover {
@@ -190,238 +299,107 @@
 }
 
 /* =========================================
-   TABLET & MOBILE (Horizontal Scroll)
+   TABLET
 ========================================= */
 
 @media (max-width: 1024px) {
+
   .packages-container {
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     gap: 20px;
-    padding: 20px 0 60px 0;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE */
+    padding-bottom: 20px;
+    scrollbar-width: none;
   }
 
-  /* Hide scrollbar for Chrome/Safari */
   .packages-container::-webkit-scrollbar {
     display: none;
   }
 
   .package-card {
-    min-width: 85%; /* Shows a peek of the next card */
+    min-width: 85%;
+    min-height: auto;
     scroll-snap-align: center;
-    transform: none !important; /* Disable hover lifting on mobile for better UX */
-  }
-
-  .featured {
-    transform: none;
+    transform: none !important;
   }
 }
 
-@media (max-width: 600px) {
-  .packages {
-    padding: 100px 5%;
-  }
-
-  .packages-header h2 {
-    font-size: 2.8rem;
-  }
-
-  .package-card {
-    min-width: 90%;
-    padding: 45px 30px;
-  }
-
-  .price-box h1 {
-    font-size: 2.4rem;
-  }
-}
 /* =========================================
-   MOBILE RESPONSIVE CSS ONLY
+   MOBILE
 ========================================= */
 
 @media (max-width: 768px) {
 
   .packages {
-
     padding: 80px 5%;
   }
 
-  /* ===============================
-     HEADER
-  ================================ */
-
   .packages-header {
-
     margin-bottom: 50px;
   }
 
   .packages-header p {
-
     font-size: 0.62rem;
-
     letter-spacing: 4px;
-
     margin-bottom: 16px;
   }
 
   .packages-header h2 {
-
     font-size: 2.2rem;
-
     line-height: 1.15;
   }
 
-  .packages-header span {
-
-    margin-left: 6px;
-  }
-
-  /* ===============================
-     HORIZONTAL SCROLL
-  ================================ */
-
   .packages-container {
-
     display: flex;
-
     overflow-x: auto;
-
     gap: 18px;
-
-    padding-bottom: 10px;
-
     scroll-snap-type: x mandatory;
-
     scrollbar-width: none;
-
-    -ms-overflow-style: none;
   }
 
   .packages-container::-webkit-scrollbar {
-
     display: none;
   }
 
-  /* ===============================
-     CARD
-  ================================ */
-
   .package-card {
-
     min-width: 88%;
-
+    min-height: auto;
     padding: 38px 24px;
-
     scroll-snap-align: center;
-
-    backdrop-filter: blur(10px);
-
-    transform: none !important;
   }
-
-  .package-card:hover {
-
-    transform: none;
-  }
-
-  /* featured */
-
-  .featured {
-
-    border-color: rgba(212, 175, 55, 0.28);
-  }
-
-  /* badge */
 
   .badge {
-
     top: 18px;
     right: 18px;
-
     padding: 5px 10px;
-
     font-size: 0.52rem;
-
-    letter-spacing: 1.5px;
   }
 
-  /* ===============================
-     TYPOGRAPHY
-  ================================ */
-
   .package-card h3 {
-
     font-size: 1.45rem;
-
-    margin-bottom: 8px;
   }
 
   .subtitle {
-
     font-size: 0.62rem;
-
-    letter-spacing: 1.5px;
-
     margin-bottom: 28px;
-
-    line-height: 1.6;
-  }
-
-  /* ===============================
-     PRICE
-  ================================ */
-
-  .price-box {
-
-    gap: 8px;
-
-    margin-bottom: 30px;
   }
 
   .price-box h1 {
-
     font-size: 2.2rem;
   }
 
-  .event-text {
-
-    font-size: 0.7rem;
+  .features p,
+  .deliverables p {
+    font-size: 0.76rem;
   }
 
-  /* ===============================
-     FEATURES
-  ================================ */
-
-  .features {
-
-    gap: 14px;
-
-    margin-bottom: 35px;
-  }
-
-  .features p {
-
-    font-size: 0.78rem;
-
-    line-height: 1.5;
-  }
-
-  /* ===============================
-     BUTTON
-  ================================ */
-
+  .deliverable-toggle,
   .package-btn {
-
     padding: 15px;
-
     font-size: 0.62rem;
-
     letter-spacing: 2px;
   }
-
 }
 
 /* =========================================
@@ -431,70 +409,28 @@
 @media (max-width: 480px) {
 
   .packages {
-
     padding: 65px 4%;
   }
 
-  .packages-header {
-
-    margin-bottom: 40px;
-  }
-
   .packages-header h2 {
-
     font-size: 1.9rem;
   }
 
   .package-card {
-
     min-width: 92%;
-
     padding: 34px 22px;
   }
 
   .package-card h3 {
-
     font-size: 1.3rem;
   }
 
   .price-box h1 {
-
     font-size: 2rem;
   }
 
-  .features p {
-
-    font-size: 0.74rem;
+  .features p,
+  .deliverables p {
+    font-size: 0.72rem;
   }
-
-  .package-btn {
-
-    font-size: 0.58rem;
-
-    letter-spacing: 1.5px;
-  }
-
-}
-
-/* =========================================
-   EXTRA SMALL DEVICES
-========================================= */
-
-@media (max-width: 360px) {
-
-  .packages-header h2 {
-
-    font-size: 1.7rem;
-  }
-
-  .package-card {
-
-    min-width: 95%;
-  }
-
-  .price-box h1 {
-
-    font-size: 1.8rem;
-  }
-
 }

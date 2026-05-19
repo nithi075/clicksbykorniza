@@ -1,201 +1,469 @@
 import "./Packages.css";
 
-import { motion } from "framer-motion";
+import {
+  motion,
+  AnimatePresence
+} from "framer-motion";
+
+import {
+  useState
+} from "react";
+
+import OverlayForm from "../OverlayForm/OverlayForm";
 
 const packagesData = [
+
   {
-    title: "Basic",
-    subtitle: "ONE PHOTOGRAPHER",
-    price: "₹49,999",
+    title: "Bronze",
+    subtitle: "TRADITIONAL COVERAGE",
+    price: "₹55,000",
+
     features: [
-      "1 Photographer",
-      "4 Hours of Photo Coverage",
-      "250 Edited Images",
-      "Photo Print Release"
+      "Traditional Photography",
+      "Traditional Videography"
+    ],
+
+    deliverables: [
+      "Unlimited Softcopies",
+      "2 Premium Albums (12x36)",
+      "Wedding & Reception",
+      "Album 200 Photos - Per Album 30 Sheets",
+      "Full Function HD Editing Video Output",
+      "64 GB 3.0 Fast Pendrive",
+      "2 Monthly Calendars",
+      "12x18 Two Photo Frames"
     ]
   },
+
   {
-    title: "Plus",
-    subtitle: "TWO PHOTOGRAPHERS + VIDEOGRAPHY",
-    price: "₹89,999",
-    badge: "Most Popular",
+    title: "Silver",
+    subtitle: "TRADITIONAL + CANDID",
+    price: "₹90,000",
+
     features: [
-      "2 Photographers",
-      "1 Cinematographer",
-      "6 Hours of Photo & Video Coverage",
-      "500 Edited Images",
-      "Photo Print Release",
-      "1 Teaser Video",
-      "Full Event Video"
+      "Traditional Photography",
+      "Traditional Videography",
+      "Candid Photography"
+    ],
+
+    deliverables: [
+      "Unlimited Softcopies",
+      "2 Premium Albums (12x36)",
+      "Wedding & Reception",
+      "Album 240 Photos - Per Album 30 Sheets",
+      "Full Function HD Editing Video Output",
+      "64 GB 3.0 Fast Pendrive",
+      "2 Monthly Calendars",
+      "12x18 Two Photo Frames"
     ]
   },
+
   {
-    title: "Premium",
-    subtitle: "PHOTO + VIDEO + DRONE COVERAGE",
-    price: "₹1,29,999",
+    title: "Gold",
+    subtitle: "CANDID + OUTDOOR SHOOT",
+    price: "₹1,49,000",
+
     features: [
-      "2 Photographers",
-      "2 Cinematographers",
-      "8 Hours of Photo & Video Coverage",
-      "900 Edited Images",
-      "Photo Print Release",
-      "1 Teaser Video",
-      "Full Event Video"
+      "Traditional Photography",
+      "Traditional Videography",
+      "Candid Photography",
+      "Candid Videography",
+      "3-4 Hrs Outdoor Shoot"
+    ],
+
+    deliverables: [
+      "Unlimited Softcopies",
+      "2 Premium Albums (12x36)",
+      "Wedding & Reception",
+      "Album 240 Photos - Per Album 30 Sheets",
+      "Candid Edited Song Video",
+      "Candid 1 Min Teaser",
+      "Full Function HD Editing Video Output",
+      "64 GB 3.0 Fast Pendrive",
+      "2 Monthly Calendars",
+      "12x18 Three Photo Frames"
+    ]
+  },
+
+  {
+    title: "Platinum",
+    subtitle: "DRONE + LED WALL",
+    price: "₹1,69,000",
+
+    features: [
+      "Traditional Photography",
+      "Traditional Videography",
+      "Candid Photography",
+      "Candid Videography",
+      "Drone Videography",
+      "LED Wall 6x8",
+      "3-4 Hrs Outdoor Shoot"
+    ],
+
+    deliverables: [
+      "Unlimited Softcopies",
+      "2 Premium Albums (12x36)",
+      "Wedding & Reception",
+      "Album 240 Photos - Per Album 30 Sheets",
+      "Candid Edited Song Video",
+      "Candid 1 Min Teaser",
+      "Drone Highlights Instantly in 4-8 Hours",
+      "Full Function HD Editing Video Output",
+      "64 GB 3.0 Fast Pendrive",
+      "2 Monthly Calendars",
+      "12x18 Three Photo Frames"
+    ]
+  },
+
+  {
+    title: "Diamond",
+    subtitle: "360 BOOTH + DRONE",
+    price: "₹2,20,000",
+
+    features: [
+      "Traditional Photography",
+      "Traditional Videography",
+      "Candid Photography",
+      "Candid Videography",
+      "Drone Videography",
+      "LED Wall 6x8",
+      "360 Booth (R)",
+      "Instant Photobooth (R)",
+      "3-4 Hrs Outdoor Shoot"
+    ],
+
+    deliverables: [
+      "Unlimited Softcopies",
+      "2 Jewel Box Albums (12x36)",
+      "Wedding & Reception",
+      "Album 280 Photos - Per Album 40 Sheets",
+      "Candid Edited Song Video",
+      "Candid 1 Min Teaser",
+      "Two Edited Reels",
+      "Drone Highlights Instantly in 4-8 Hours",
+      "Full Function HD Editing Video Output",
+      "64 GB 3.0 Fast Pendrive",
+      "2 Monthly Calendars",
+      "12x18 Four Photo Frames"
+    ]
+  },
+
+  {
+    title: "Luxury",
+    subtitle: "ULTIMATE CINEMATIC EXPERIENCE",
+    price: "₹3,70,000",
+
+    features: [
+      "1 Traditional Photographer",
+      "2 Traditional Videographers",
+      "2 Candid Photographers",
+      "2 Candid Videographers",
+      "1 Drone Videographer",
+      "Canva Backdrop Shooter",
+      "Instant Photo Print",
+      "LED Wall 12x8",
+      "360 Booth (R)",
+      "Live Stream",
+      "Live Mixing Edit",
+      "Instant Photobooth (R)",
+      "8 Hrs Outdoor Shoot"
+    ],
+
+    deliverables: [
+      "Unlimited Softcopies",
+      "2 Jewel Box Luxury Albums (12x36)",
+      "Wedding & Reception",
+      "Album 400 Photos - Per Album 60 Sheets",
+      "Candid Edited Song Video",
+      "2 Candid 1 Min Teasers",
+      "Four Edited Reels",
+      "Drone Highlights Instantly in 4-8 Hours",
+      "Full Function HD Editing Video Output",
+      "64 GB 3.0 Fast Pendrive",
+      "2 Monthly Calendars",
+      "12x18 Six Photo Frames"
     ]
   }
+
 ];
 
 export default function Packages() {
 
+  const [openIndex, setOpenIndex] =
+    useState(null);
+
+  const [showForm, setShowForm] =
+    useState(false);
+
+  /* =========================================
+     TOGGLE DELIVERABLES
+  ========================================= */
+
+  const toggleDeliverables = (index) => {
+
+    setOpenIndex(
+      openIndex === index
+        ? null
+        : index
+    );
+
+  };
+
   return (
 
-    <section
-      className="packages"
-      id="packages"
-    >
+    <>
 
-      {/* HEADER */}
-
-      <motion.div
-        className="packages-header"
-
-        initial={{
-          opacity:0,
-          y:40
-        }}
-
-        whileInView={{
-          opacity:1,
-          y:0
-        }}
-
-        transition={{
-          duration:1
-        }}
-
-        viewport={{
-          once:true
-        }}
+      <section
+        className="packages"
+        id="packages"
       >
 
-        <p>PRICING</p>
+        {/* HEADER */}
 
-        <h2>
-          Event <span>Packages</span>
-        </h2>
+        <motion.div
+          className="packages-header"
 
-      </motion.div>
+          initial={{
+            opacity:0,
+            y:40
+          }}
 
-      {/* CARDS */}
+          whileInView={{
+            opacity:1,
+            y:0
+          }}
 
-      <div className="packages-container">
+          transition={{
+            duration:1
+          }}
 
-        {packagesData.map((item,index)=>(
+          viewport={{
+            once:true
+          }}
+        >
 
-          <motion.div
+          <p>PRICING</p>
 
-            key={index}
+          <h2>
+            Wedding <span>Packages</span>
+          </h2>
 
-            className={`package-card ${
-              item.badge
-              ? "featured"
-              : ""
-            }`}
+        </motion.div>
 
-            initial={{
-              opacity:0,
-              y:80
-            }}
+        {/* CARDS */}
 
-            whileInView={{
-              opacity:1,
-              y:0
-            }}
+        <div className="packages-container">
 
-            transition={{
-              duration:1,
-              delay:index * 0.2
-            }}
+          {packagesData.map((item,index)=>(
 
-            viewport={{
-              once:true
-            }}
+            <motion.div
 
-            whileHover={{
-              y:-14,
-              scale:1.02
-            }}
+              key={index}
 
-          >
+              className={`package-card ${
+                item.badge
+                ? "featured"
+                : ""
+              }`}
 
-            {/* badge */}
+              initial={{
+                opacity:0,
+                y:80
+              }}
 
-            {item.badge && (
+              whileInView={{
+                opacity:1,
+                y:0
+              }}
 
-              <div className="badge">
+              transition={{
+                duration:1,
+                delay:index * 0.15
+              }}
 
-                {item.badge}
+              viewport={{
+                once:true
+              }}
+
+              whileHover={{
+                y:-14,
+                scale:1.02
+              }}
+
+            >
+
+              {/* BADGE */}
+
+              {item.badge && (
+
+                <div className="badge">
+
+                  {item.badge}
+
+                </div>
+
+              )}
+
+              {/* CONTENT WRAPPER */}
+
+              <div className="card-content">
+
+                {/* TITLE */}
+
+                <h3>{item.title}</h3>
+
+                <p className="subtitle">
+
+                  {item.subtitle}
+
+                </p>
+
+                {/* PRICE */}
+
+                <div className="price-box">
+
+                  <h1>{item.price}</h1>
+
+                  <span className="event-text">
+
+                    /package
+
+                  </span>
+
+                </div>
+
+                {/* FEATURES */}
+
+                <div className="features">
+
+                  <h4>Services</h4>
+
+                  {item.features.map((feature,i)=>(
+
+                    <p key={i}>
+
+                      ✦ {feature}
+
+                    </p>
+
+                  ))}
+
+                </div>
 
               </div>
 
-            )}
+              {/* DELIVERABLE BUTTON */}
 
-            {/* title */}
+              <button
+                className="deliverable-toggle"
 
-            <h3>{item.title}</h3>
+                onClick={() =>
+                  toggleDeliverables(index)
+                }
+              >
 
-            <p className="subtitle">
+                {
+                  openIndex === index
+                  ? "Hide Deliverables −"
+                  : "View Deliverables +"
+                }
 
-              {item.subtitle}
+              </button>
 
-            </p>
+              {/* DELIVERABLES */}
 
-            {/* price */}
+              <AnimatePresence>
 
-            <div className="price-box">
+                {
+                  openIndex === index && (
 
-              <h1>{item.price}</h1>
+                    <motion.div
 
-              <span className="event-text">
+                      className="deliverables"
 
-                /event
+                      initial={{
+                        opacity:0,
+                        height:0
+                      }}
 
-              </span>
+                      animate={{
+                        opacity:1,
+                        height:"auto"
+                      }}
 
-            </div>
+                      exit={{
+                        opacity:0,
+                        height:0
+                      }}
 
-            {/* features */}
+                      transition={{
+                        duration:0.45
+                      }}
 
-            <div className="features">
+                    >
 
-              {item.features.map(
-                (feature,i)=>(
+                      <h4>
+                        Deliverables
+                      </h4>
 
-                  <p key={i}>
+                      {
+                        item.deliverables.map(
+                          (deliverable,i)=>(
 
-                    ✦ {feature}
+                            <p key={i}>
 
-                  </p>
+                              ✦ {deliverable}
 
-                )
-              )}
+                            </p>
 
-            </div>
+                          )
+                        )
+                      }
 
-            {/* button */}
+                    </motion.div>
 
-            <button className="package-btn">
+                  )
+                }
 
-              Book Experience ↗
+              </AnimatePresence>
 
-            </button>
+              {/* BOOK NOW */}
 
-          </motion.div>
+              <button
 
-        ))}
+                className="package-btn"
 
-      </div>
+                onClick={() =>
+                  setShowForm(true)
+                }
 
-    </section>
+              >
+
+                Book Now ↗
+
+              </button>
+
+            </motion.div>
+
+          ))}
+
+        </div>
+
+      </section>
+
+      {/* OVERLAY FORM */}
+
+      {
+        showForm && (
+
+          <OverlayForm
+            setShowForm={setShowForm}
+          />
+
+        )
+      }
+
+    </>
+
   );
 }

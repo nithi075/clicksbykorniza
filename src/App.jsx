@@ -26,6 +26,7 @@ import TestimonialUpload from "./pages/Admin/TestimonialUpload";
 import InstagramUpload from "./pages/Admin/InstagramUpload";
 import Dashboard from "./pages/Admin/Dashboard";
 import Banner from "./components/banner/Banner";
+import OverlayForm from "./components/OverlayForm/OverlayForm";
 
 function HomePage() {
 
@@ -33,6 +34,11 @@ function HomePage() {
     menuOpen,
     setMenuOpen,
   ] = useState(false);
+
+  const [
+  showForm,
+  setShowForm
+] = useState(false);
 
   return (
     <>
@@ -149,15 +155,7 @@ function App() {
         element={<GalleryDetails />}
       />
 
-      <Route
-        path="/galleryDetails/outdoor-shoot"
-        element={<GalleryDetails />}
-      />
-
-      <Route
-        path="/galleryDetails/model-shoots"
-        element={<GalleryDetails />}
-      />
+      
 
       {/* ================= ADMIN ROUTES ================= */}
 

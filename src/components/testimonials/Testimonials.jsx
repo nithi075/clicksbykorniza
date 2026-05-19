@@ -1,9 +1,22 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+
+import {
+  motion,
+  AnimatePresence
+} from "framer-motion";
+
 import axios from "axios";
+
+import {
+  FaChevronLeft,
+  FaChevronRight,
+  FaStar
+} from "react-icons/fa";
+
 import "./Testimonials.css";
 
 export default function Testimonials() {
+
   const [index, setIndex] =
     useState(0);
 
@@ -15,10 +28,15 @@ export default function Testimonials() {
   const [reviews, setReviews] =
     useState([]);
 
-  // Fetch testimonials from backend
+  /* =========================================
+     FETCH DATA
+  ========================================= */
+
   const getTestimonials =
     async () => {
+
       try {
+
         const response =
           await axios.get(
             "https://korniza-backend.onrender.com/testimonial/all"
@@ -27,11 +45,12 @@ export default function Testimonials() {
         const formattedData =
           response.data.map(
             (item) => ({
-              img: item.imageUrl,
-              title:
+              img:
+                item.imageUrl,
+
+              name:
                 item.clientName,
-              author:
-                item.clientName,
+
               text:
                 item.review
             })
@@ -40,17 +59,25 @@ export default function Testimonials() {
         setReviews(
           formattedData
         );
+
       } catch (error) {
+
         console.log(error);
       }
     };
 
   useEffect(() => {
+
     getTestimonials();
+
   }, []);
 
-  // Auto-slide every 4 seconds
+  /* =========================================
+     AUTO SLIDE
+  ========================================= */
+
   useEffect(() => {
+
     if (
       reviews.length === 0
     )
@@ -58,202 +85,261 @@ export default function Testimonials() {
 
     const timer =
       setInterval(() => {
-        nextStep();
+
+        nextSlide();
+
       }, 4000);
 
     return () =>
       clearInterval(timer);
+
   }, [index, reviews]);
 
-  const nextStep = () => {
+  /* =========================================
+     NEXT
+  ========================================= */
+
+  const nextSlide = () => {
+
     setDirection(1);
 
     setIndex((prev) =>
+
       prev + 1 ===
       reviews.length
+
         ? 0
+
         : prev + 1
     );
   };
 
-  // Animation variants
+  /* =========================================
+     PREV
+  ========================================= */
+
+  const prevSlide = () => {
+
+    setDirection(-1);
+
+    setIndex((prev) =>
+
+      prev === 0
+
+        ? reviews.length - 1
+
+        : prev - 1
+    );
+  };
+
+  /* =========================================
+     ANIMATION
+  ========================================= */
+
   const variants = {
-    enter: (
-      direction
-    ) => ({
+
+    enter: (direction) => ({
+
       x:
         direction > 0
-          ? 1000
-          : -1000,
-      opacity: 0,
-      scale: 0.9
+          ? 200
+          : -200,
+
+      opacity: 0
     }),
 
     center: {
-      zIndex: 1,
+
       x: 0,
-      opacity: 1,
-      scale: 1
+
+      opacity: 1
     },
 
-    exit: (
-      direction
-    ) => ({
-      zIndex: 0,
+    exit: (direction) => ({
+
       x:
         direction < 0
-          ? 1000
-          : -1000,
-      opacity: 0,
-      scale: 0.9
+          ? 200
+          : -200,
+
+      opacity: 0
     })
   };
 
   return (
+
     <section
-      className="testimonials"
+      className="testimonials-section"
       id="testimonials"
     >
-      <motion.div
-        className="testimonials-header"
+
+      {/* HEADING */}
+
+      <motion.h2
+
+        className="testimonial-heading"
+
         initial={{
           opacity: 0,
           y: 30
         }}
+
         whileInView={{
           opacity: 1,
           y: 0
         }}
+
         transition={{
           duration: 1
         }}
+
         viewport={{
           once: true
         }}
+
       >
-        <p>
-          TESTIMONIALS
-        </p>
 
-        <h2>
-          Client{" "}
-          <span>
-            Stories
-          </span>
-        </h2>
-      </motion.div>
+      Trusted by Our Clients
 
-      <div className="slider-container">
-        <div className="slider-content">
-          {reviews.length >
-            0 && (
-            <AnimatePresence
-              initial={
-                false
-              }
-              custom={
-                direction
-              }
-              mode="wait"
+      </motion.h2>
+
+      {/* WRAPPER */}
+
+      <div className="testimonial-wrapper">
+
+        {/* LEFT ARROW */}
+
+        <button
+          className="arrow left-arrow"
+          onClick={prevSlide}
+        >
+
+          <FaChevronLeft />
+
+        </button>
+
+        {/* CARD */}
+
+        {reviews.length > 0 && (
+
+          <AnimatePresence
+            mode="wait"
+            custom={direction}
+          >
+
+            <motion.div
+
+              key={index}
+
+              custom={direction}
+
+              variants={variants}
+
+              initial="enter"
+
+              animate="center"
+
+              exit="exit"
+
+              transition={{
+                duration: 0.6
+              }}
+
+              className="testimonial-card"
             >
-              <motion.div
-                key={index}
-                custom={
-                  direction
-                }
-                variants={
-                  variants
-                }
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{
-                  x: {
-                    type:
-                      "spring",
-                    stiffness: 300,
-                    damping: 30
-                  },
-                  opacity: {
-                    duration: 0.6
+
+              {/* IMAGE */}
+
+              <div className="client-image">
+
+                <img
+                  src={
+                    reviews[index]
+                      .img
                   }
-                }}
-                className="journal-card featured-slide"
-              >
-                <div className="journal-img-box">
-                  <img
-                    src={
-                      reviews[
-                        index
-                      ].img
-                    }
-                    alt={
-                      reviews[
-                        index
-                      ].title
-                    }
-                  />
+                  alt={
+                    reviews[index]
+                      .name
+                  }
+                />
 
-                  <div className="floating-title-box">
-                    <h3 className="card-title">
-                      {
-                        reviews[
-                          index
-                        ]
-                          .title
-                      }
-                    </h3>
+              </div>
 
-                    <span className="card-author">
-                      {
-                        reviews[
-                          index
-                        ]
-                          .author
-                      }
-                    </span>
-                  </div>
-                </div>
+              {/* NAME */}
 
-                <div className="card-body">
-                  <p className="card-text">
-                    "
-                    {
-                      reviews[
-                        index
-                      ].text
-                    }
-                    "
-                  </p>
+              <h3>
 
-                  <div className="card-footer">
-                    <div className="dots">
-                      {reviews.map(
-                        (
-                          _,
-                          i
-                        ) => (
-                          <span
-                            key={
-                              i
-                            }
-                            className={`dot ${
-                              i ===
-                              index
-                                ? "active"
-                                : ""
-                            }`}
-                          />
-                        )
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          )}
-        </div>
+                {
+                  reviews[index]
+                    .name
+                }
+
+              </h3>
+
+              {/* STARS */}
+
+             
+              {/* QUOTE */}
+
+              <div className="quote">
+
+                “
+
+              </div>
+
+              {/* TEXT */}
+
+              <p>
+
+                {
+                  reviews[index]
+                    .text
+                }
+
+              </p>
+
+            </motion.div>
+
+          </AnimatePresence>
+        )}
+
+        {/* RIGHT ARROW */}
+
+        <button
+          className="arrow right-arrow"
+          onClick={nextSlide}
+        >
+
+          <FaChevronRight />
+
+        </button>
+
       </div>
+
+      {/* DOTS */}
+
+      <div className="dots">
+
+        {reviews.map(
+          (_, i) => (
+
+            <span
+
+              key={i}
+
+              className={`dot ${
+                i === index
+                  ? "active-dot"
+                  : ""
+              }`}
+
+            />
+
+          )
+        )}
+
+      </div>
+
     </section>
   );
 }

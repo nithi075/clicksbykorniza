@@ -15,7 +15,8 @@ import api from "../../services/api";
 
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/footer/footer";
-import Packages from "../../components/packages/Packages";
+
+import Testimonials from "../../components/testimonials/Testimonials";
 
 import "./gallerypage.css";
 
@@ -33,8 +34,9 @@ const GalleryPage = () => {
   const [loading, setLoading] =
     useState(true);
 
+  /* FIRST 8 IMAGES */
   const [visibleCount, setVisibleCount] =
-    useState(12);
+    useState(8);
 
   const queryParams =
     new URLSearchParams(
@@ -96,14 +98,6 @@ const GalleryPage = () => {
         "Beautiful traditional rituals captured forever.",
     },
 
-    "destination-wedding": {
-      title:
-        "Destination Wedding",
-
-      desc:
-        "Luxury destination wedding memories.",
-    },
-
     reception: {
       title: "Reception",
 
@@ -119,8 +113,6 @@ const GalleryPage = () => {
         "Capturing timeless bridal elegance and beauty.",
     },
 
-    /* UPDATED */
-
     "outdoor-shoot": {
       title:
         "Outdoor Shoot",
@@ -128,8 +120,6 @@ const GalleryPage = () => {
       desc:
         "Creative outdoor cinematic photography sessions.",
     },
-
-    /* NEW CATEGORY */
 
     "model-shoots": {
       title:
@@ -155,8 +145,6 @@ const GalleryPage = () => {
         "Capturing little smiles forever.",
     },
 
- 
-
     birthday: {
       title:
         "Birthday Photography",
@@ -165,36 +153,7 @@ const GalleryPage = () => {
         "Capturing joyful birthday celebrations.",
     },
 
-    engagement: {
-      title:
-        "Engagement Photography",
-
-      desc:
-        "Beautiful engagement moments captured forever.",
-    },
   };
-
-  /* ================= PACKAGE CHECK ================= */
-
-  const showPackages = [
-
-    "traditional-wedding",
-
-    "destination-wedding",
-
-    "reception",
-
-    "bridal-photography",
-
-    "outdoor-shoot",
-
-    "model-shoots",
-
-    "birthday",
-
-    "engagement",
-
-  ].includes(category);
 
   /* ================= SCROLL ================= */
 
@@ -205,7 +164,7 @@ const GalleryPage = () => {
       behavior: "smooth",
     });
 
-    setVisibleCount(12);
+    setVisibleCount(8);
 
   }, [category]);
 
@@ -270,7 +229,7 @@ const GalleryPage = () => {
   const handleViewMore = () => {
 
     setVisibleCount(
-      (prev) => prev + 12
+      (prev) => prev + 8
     );
   };
 
@@ -362,8 +321,6 @@ const GalleryPage = () => {
 
         ) : category === "all" ? (
 
-          /* ================= ALL COLLECTIONS ================= */
-
           <motion.div
             className="luxury-grid"
 
@@ -448,8 +405,6 @@ const GalleryPage = () => {
 
         ) : (
 
-          /* ================= DETAIL VIEW ================= */
-
           <motion.div
             className="luxury-grid"
 
@@ -523,39 +478,35 @@ const GalleryPage = () => {
                 handleViewMore
               }
             >
-              Load More
+              View More
             </button>
 
           </motion.div>
         )}
 
-        {/* ================= PACKAGES ================= */}
+        {/* ================= TESTIMONIALS ================= */}
 
-        {showPackages && (
+        <motion.div
 
-          <motion.div
-            initial={{
-              opacity: 0,
-              y: 50,
-            }}
+          initial={{
+            opacity: 0,
+            y: 50,
+          }}
 
-            whileInView={{
-              opacity: 1,
-              y: 0,
-            }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
 
-            transition={{
-              duration: 0.7,
-            }}
-          >
+          transition={{
+            duration: 0.7,
+          }}
 
-            <Packages
-              category={category}
-              showPrice={true}
-            />
+        >
 
-          </motion.div>
-        )}
+          <Testimonials />
+
+        </motion.div>
 
       </div>
 

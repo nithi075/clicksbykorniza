@@ -81,12 +81,8 @@ export default function Navbar() {
         {
           name: "Engagement",
           href: "/galleryDetails/engagement"
-        },
-
-        {
-          name: "Model Shoots",
-          href: "/galleryDetails/model-shoots"
         }
+
 
       ]
     },
@@ -114,13 +110,13 @@ export default function Navbar() {
     /* ================= PORTRAITS ================= */
 
     {
-      name: "Portraits",
+      name: "Model Shoots",
 
       dropdown: [
 
         {
-          name: "Bridal Photography",
-          href: "/galleryDetails/bridal-photography"
+          name: "Model Shoots",
+          href: "/galleryDetails/model-shoots"
         }
 
       ]
