@@ -9,7 +9,8 @@ export default function FeaturedUpload() {
   const [items, setItems] =
     useState([]);
 
-  // Add Images
+  /* ================= ADD IMAGES ================= */
+
   const handleImageChange = (
     e
   ) => {
@@ -22,31 +23,40 @@ export default function FeaturedUpload() {
     const formatted =
       selectedFiles.map(
         (file) => ({
+
           image: file,
+
           title: ""
+
         })
       );
 
     setItems((prev) => {
 
-      let updated = [
+      let updatedItems = [
         ...prev,
         ...formatted
       ];
 
-      // Max 5 images
+      /* KEEP ONLY 5 */
+
       if (
-        updated.length > 5
+        updatedItems.length >
+        5
       ) {
-        updated =
-          updated.slice(-5);
+
+        updatedItems =
+          updatedItems.slice(
+            -5
+          );
       }
 
-      return updated;
+      return updatedItems;
     });
   };
 
-  // Remove Image
+  /* ================= REMOVE IMAGE ================= */
+
   const handleRemoveImage = (
     index
   ) => {
@@ -59,25 +69,31 @@ export default function FeaturedUpload() {
     );
   };
 
-  // Change Title
+  /* ================= TITLE CHANGE ================= */
+
   const handleTitleChange = (
     index,
     value
   ) => {
 
     setItems((prev) =>
-      prev.map((item, i) =>
-        i === index
-          ? {
-              ...item,
-              title: value
-            }
-          : item
+      prev.map(
+        (
+          item,
+          i
+        ) =>
+          i === index
+            ? {
+                ...item,
+                title: value
+              }
+            : item
       )
     );
   };
 
-  // Submit
+  /* ================= SUBMIT ================= */
+
   const handleSubmit =
     async (e) => {
 
@@ -164,6 +180,8 @@ export default function FeaturedUpload() {
           Featured Upload
         </h2>
 
+        {/* FILE INPUT */}
+
         <input
           type="file"
           multiple
@@ -182,7 +200,8 @@ export default function FeaturedUpload() {
           {items.length}/5
         </p>
 
-        {/* Preview */}
+        {/* PREVIEW */}
+
         <div
           style={{
             display: "flex",
@@ -214,13 +233,15 @@ export default function FeaturedUpload() {
                 }}
               >
 
+                {/* IMAGE */}
+
                 <img
                   src={URL.createObjectURL(
                     item.image
                   )}
                   alt=""
                   width="100%"
-                  height="200"
+                  height="220"
                   style={{
                     objectFit:
                       "cover",
@@ -231,32 +252,45 @@ export default function FeaturedUpload() {
                   }}
                 />
 
+                {/* TITLE */}
+
                 <input
                   type="text"
-                  placeholder="Enter Title"
+                  placeholder="Enter title"
+
                   value={
                     item.title
                   }
+
                   onChange={(e) =>
                     handleTitleChange(
                       index,
                       e.target.value
                     )
                   }
+
                   style={{
                     width: "100%",
                     padding:
-                      "10px"
+                      "10px",
+                    border:
+                      "1px solid #ccc",
+                    borderRadius:
+                      "5px"
                   }}
                 />
 
+                {/* REMOVE BUTTON */}
+
                 <button
                   type="button"
+
                   onClick={() =>
                     handleRemoveImage(
                       index
                     )
                   }
+
                   style={{
                     position:
                       "absolute",
@@ -286,6 +320,8 @@ export default function FeaturedUpload() {
           )}
 
         </div>
+
+        {/* SUBMIT */}
 
         <button
           type="submit"

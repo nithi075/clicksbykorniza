@@ -38,17 +38,18 @@ const Featured = () => {
           response.data;
 
         /*
-          Expected Backend Response:
+          Expected API Response:
 
           {
+            success: true,
             featured: [
               {
                 title: "Wedding Bliss",
-                image: "image-url"
+                image: "https://..."
               },
               {
                 title: "The Model Edit",
-                image: "image-url"
+                image: "https://..."
               }
             ]
           }
@@ -157,6 +158,8 @@ const Featured = () => {
 
     <section className="featured-section">
 
+      {/* ================= HEADER ================= */}
+
       <motion.div
         className="portfolio-header"
 
@@ -189,6 +192,8 @@ const Featured = () => {
 
       </motion.div>
 
+      {/* ================= LOADER ================= */}
+
       {loading ? (
 
         <div className="featured-loader">
@@ -210,6 +215,8 @@ const Featured = () => {
         </div>
 
       ) : (
+
+        /* ================= GRID ================= */
 
         <div className="bento-container">
 
@@ -247,6 +254,8 @@ const Featured = () => {
                   }}
                 >
 
+                  {/* IMAGE */}
+
                   <div className="img-wrapper">
 
                     <motion.img
@@ -265,7 +274,7 @@ const Featured = () => {
 
                   </div>
 
-                  {/* Overlay */}
+                  {/* OVERLAY */}
 
                   <div className="overlay">
 
