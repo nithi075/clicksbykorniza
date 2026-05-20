@@ -5,121 +5,80 @@ import React, {
 import api from "../../services/api";
 
 export default function FeaturedUpload() {
+  const [title, setTitle] =
+    useState("");
 
-  const [items, setItems] =
+  const [images, setImages] =
     useState([]);
 
-  /* ================= ADD IMAGES ================= */
-
+  // Add Images
   const handleImageChange = (
     e
   ) => {
-
     const selectedFiles =
       Array.from(
         e.target.files
       );
 
-    const formatted =
-      selectedFiles.map(
-        (file) => ({
+    setImages(
+      (prevImages) => {
+        let updatedImages = [
+          ...prevImages,
+          ...selectedFiles
+        ];
 
-          image: file,
+        // Keep only latest 5 images
+        if (
+          updatedImages.length >
+          5
+        ) {
+          updatedImages =
+            updatedImages.slice(
+              -5
+            );
+        }
 
-          title: ""
-
-        })
-      );
-
-    setItems((prev) => {
-
-      let updatedItems = [
-        ...prev,
-        ...formatted
-      ];
-
-      /* KEEP ONLY 5 IMAGES */
-
-      if (
-        updatedItems.length >
-        5
-      ) {
-
-        updatedItems =
-          updatedItems.slice(
-            -5
-          );
+        return updatedImages;
       }
-
-      return updatedItems;
-    });
+    );
   };
 
-  /* ================= REMOVE IMAGE ================= */
-
+  // Remove Image
   const handleRemoveImage = (
     index
   ) => {
-
-    setItems((prev) =>
-      prev.filter(
-        (_, i) =>
-          i !== index
-      )
+    setImages(
+      (prevImages) =>
+        prevImages.filter(
+          (_, i) =>
+            i !== index
+        )
     );
   };
 
-  /* ================= TITLE CHANGE ================= */
-
-  const handleTitleChange = (
-    index,
-    value
-  ) => {
-
-    setItems((prev) =>
-      prev.map(
-        (
-          item,
-          i
-        ) =>
-
-          i === index
-            ? {
-                ...item,
-                title: value
-              }
-            : item
-      )
-    );
-  };
-
-  /* ================= SUBMIT ================= */
-
+  // Submit
   const handleSubmit =
     async (e) => {
-
       e.preventDefault();
 
       const formData =
         new FormData();
 
-      items.forEach(
-        (item) => {
+      formData.append(
+        "title",
+        title
+      );
 
+      images.forEach(
+        (image) => {
           formData.append(
             "images",
-            item.image
-          );
-
-          formData.append(
-            "titles",
-            item.title
+            image
           );
         }
       );
 
       try {
-
         const res =
           await api.post(
             "/featured/add",
@@ -140,16 +99,14 @@ export default function FeaturedUpload() {
           "Featured uploaded successfully"
         );
 
-        setItems([]);
-
+        setTitle("");
+        setImages([]);
       } catch (error) {
-
         console.log(error);
       }
     };
 
   return (
-
     <div
       style={{
         minHeight: "100vh",
@@ -159,11 +116,9 @@ export default function FeaturedUpload() {
         alignItems:
           "center",
         background:
-          "#f8f5ef",
-        padding: "40px 20px"
+          "#f8f5ef"
       }}
     >
-
       <form
         onSubmit={
           handleSubmit
@@ -173,23 +128,30 @@ export default function FeaturedUpload() {
             "#fff",
           padding: "30px",
           borderRadius:
-            "12px",
-          width: "450px",
-          boxShadow:
-            "0 5px 20px rgba(0,0,0,0.08)"
+            "10px",
+          width: "400px"
         }}
       >
-
-        <h2
-          style={{
-            marginBottom:
-              "20px"
-          }}
-        >
+        <h2>
           Featured Upload
         </h2>
 
-        {/* FILE INPUT */}
+        <input
+          type="text"
+          placeholder="Title"
+          value={title}
+          onChange={(e) =>
+            setTitle(
+              e.target.value
+            )
+          }
+          style={{
+            width: "100%",
+            padding: "10px",
+            marginBottom:
+              "15px"
+          }}
+        />
 
         <input
           type="file"
@@ -204,122 +166,65 @@ export default function FeaturedUpload() {
           }}
         />
 
-        <p
+        <p>
+          Selected Images:
+          {
+            images.length
+          }
+          /5
+        </p>
+
+        {/* Preview */}
+        <div
           style={{
+            display: "flex",
+            flexWrap:
+              "wrap",
+            gap: "10px",
             marginBottom:
               "20px"
           }}
         >
-          Selected Images:
-          {items.length}/5
-        </p>
-
-        {/* IMAGE LIST */}
-
-        <div
-          style={{
-            display: "flex",
-            flexDirection:
-              "column",
-            gap: "20px",
-            marginBottom:
-              "25px"
-          }}
-        >
-
-          {items.map(
+          {images.map(
             (
-              item,
+              img,
               index
             ) => (
-
               <div
                 key={index}
                 style={{
-                  border:
-                    "1px solid #e5e5e5",
-                  padding:
-                    "12px",
-                  borderRadius:
-                    "10px",
                   position:
                     "relative"
                 }}
               >
-
-                {/* IMAGE */}
-
                 <img
                   src={URL.createObjectURL(
-                    item.image
+                    img
                   )}
-
-                  alt="preview"
-
-                  width="100%"
-
-                  height="220"
-
+                  alt=""
+                  width="80"
+                  height="80"
                   style={{
                     objectFit:
                       "cover",
                     borderRadius:
-                      "8px",
-                    marginBottom:
-                      "12px"
+                      "5px"
                   }}
                 />
-
-                {/* TITLE INPUT */}
-
-                <input
-                  type="text"
-
-                  placeholder="Enter image title"
-
-                  value={
-                    item.title
-                  }
-
-                  onChange={(e) =>
-                    handleTitleChange(
-                      index,
-                      e.target.value
-                    )
-                  }
-
-                  style={{
-                    width: "100%",
-                    padding:
-                      "12px",
-                    border:
-                      "1px solid #ccc",
-                    borderRadius:
-                      "6px",
-                    outline:
-                      "none",
-                    fontSize:
-                      "14px"
-                  }}
-                />
-
-                {/* REMOVE BUTTON */}
 
                 <button
                   type="button"
-
                   onClick={() =>
                     handleRemoveImage(
                       index
                     )
                   }
-
                   style={{
                     position:
                       "absolute",
-                    top: "-10px",
+                    top: "-5px",
                     right:
-                      "-10px",
+                      "-5px",
                     background:
                       "red",
                     color:
@@ -328,32 +233,25 @@ export default function FeaturedUpload() {
                       "none",
                     borderRadius:
                       "50%",
-                    width: "28px",
+                    width: "20px",
                     height:
-                      "28px",
+                      "20px",
                     cursor:
-                      "pointer",
-                    fontSize:
-                      "16px"
+                      "pointer"
                   }}
                 >
                   ×
                 </button>
-
               </div>
             )
           )}
-
         </div>
-
-        {/* SUBMIT */}
 
         <button
           type="submit"
-
           style={{
             width: "100%",
-            padding: "14px",
+            padding: "12px",
             border: "none",
             background:
               "#000",
@@ -361,18 +259,12 @@ export default function FeaturedUpload() {
             cursor:
               "pointer",
             borderRadius:
-              "6px",
-            fontSize:
-              "15px",
-            fontWeight:
-              "600"
+              "5px"
           }}
         >
           Upload
         </button>
-
       </form>
-
     </div>
   );
 }
