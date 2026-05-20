@@ -37,23 +37,45 @@ const Featured = () => {
         const data =
           response.data;
 
+        /*
+          Expected Backend Response:
+
+          {
+            featured: [
+              {
+                title: "Wedding Bliss",
+                image: "image-url"
+              },
+              {
+                title: "The Model Edit",
+                image: "image-url"
+              }
+            ]
+          }
+        */
+
         if (
           data &&
-          data.images &&
-          data.images.length > 0
+          data.featured &&
+          data.featured.length > 0
         ) {
 
           const formatted =
-            data.images.map(
-              (img, index) => ({
+            data.featured.map(
+              (
+                item,
+                index
+              ) => ({
 
-                id: index + 1,
+                id:
+                  index + 1,
 
                 title:
-                  data.title ||
+                  item.title ||
                   "Featured Work",
 
-                img: img,
+                img:
+                  item.image,
 
                 class:
                   `item-${index + 1}`
@@ -61,7 +83,9 @@ const Featured = () => {
               })
             );
 
-          setItems(formatted);
+          setItems(
+            formatted
+          );
         }
 
       } catch (error) {
@@ -73,7 +97,9 @@ const Featured = () => {
 
       } finally {
 
-        setLoading(false);
+        setLoading(
+          false
+        );
       }
     };
 
@@ -238,6 +264,8 @@ const Featured = () => {
                     />
 
                   </div>
+
+                  {/* Overlay */}
 
                   <div className="overlay">
 
