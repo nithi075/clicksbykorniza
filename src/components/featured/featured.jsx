@@ -37,41 +37,23 @@ const Featured = () => {
         const data =
           response.data;
 
-        /*
-          Expected Backend Response:
-
-          {
-            featured: [
-              {
-                title: "Living Room",
-                image: "image-url"
-              },
-              {
-                title: "Bedroom",
-                image: "image-url"
-              }
-            ]
-          }
-        */
-
         if (
           data &&
-          data.featured &&
-          data.featured.length > 0
+          data.images &&
+          data.images.length > 0
         ) {
 
           const formatted =
-            data.featured.map(
-              (item, index) => ({
+            data.images.map(
+              (img, index) => ({
 
                 id: index + 1,
 
                 title:
-                  item.title ||
+                  data.title ||
                   "Featured Work",
 
-                img:
-                  item.image,
+                img: img,
 
                 class:
                   `item-${index + 1}`
