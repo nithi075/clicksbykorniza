@@ -38,7 +38,7 @@ export default function FeaturedUpload() {
         ...formatted
       ];
 
-      /* KEEP ONLY 5 */
+      /* KEEP ONLY 5 IMAGES */
 
       if (
         updatedItems.length >
@@ -82,6 +82,7 @@ export default function FeaturedUpload() {
           item,
           i
         ) =>
+
           i === index
             ? {
                 ...item,
@@ -158,7 +159,8 @@ export default function FeaturedUpload() {
         alignItems:
           "center",
         background:
-          "#f8f5ef"
+          "#f8f5ef",
+        padding: "40px 20px"
       }}
     >
 
@@ -171,12 +173,19 @@ export default function FeaturedUpload() {
             "#fff",
           padding: "30px",
           borderRadius:
-            "10px",
-          width: "450px"
+            "12px",
+          width: "450px",
+          boxShadow:
+            "0 5px 20px rgba(0,0,0,0.08)"
         }}
       >
 
-        <h2>
+        <h2
+          style={{
+            marginBottom:
+              "20px"
+          }}
+        >
           Featured Upload
         </h2>
 
@@ -195,12 +204,17 @@ export default function FeaturedUpload() {
           }}
         />
 
-        <p>
+        <p
+          style={{
+            marginBottom:
+              "20px"
+          }}
+        >
           Selected Images:
           {items.length}/5
         </p>
 
-        {/* PREVIEW */}
+        {/* IMAGE LIST */}
 
         <div
           style={{
@@ -209,7 +223,7 @@ export default function FeaturedUpload() {
               "column",
             gap: "20px",
             marginBottom:
-              "20px"
+              "25px"
           }}
         >
 
@@ -223,11 +237,11 @@ export default function FeaturedUpload() {
                 key={index}
                 style={{
                   border:
-                    "1px solid #ddd",
+                    "1px solid #e5e5e5",
                   padding:
-                    "10px",
+                    "12px",
                   borderRadius:
-                    "8px",
+                    "10px",
                   position:
                     "relative"
                 }}
@@ -239,24 +253,29 @@ export default function FeaturedUpload() {
                   src={URL.createObjectURL(
                     item.image
                   )}
-                  alt=""
+
+                  alt="preview"
+
                   width="100%"
+
                   height="220"
+
                   style={{
                     objectFit:
                       "cover",
                     borderRadius:
-                      "5px",
+                      "8px",
                     marginBottom:
-                      "10px"
+                      "12px"
                   }}
                 />
 
-                {/* TITLE */}
+                {/* TITLE INPUT */}
 
                 <input
                   type="text"
-                  placeholder="Enter title"
+
+                  placeholder="Enter image title"
 
                   value={
                     item.title
@@ -272,11 +291,15 @@ export default function FeaturedUpload() {
                   style={{
                     width: "100%",
                     padding:
-                      "10px",
+                      "12px",
                     border:
                       "1px solid #ccc",
                     borderRadius:
-                      "5px"
+                      "6px",
+                    outline:
+                      "none",
+                    fontSize:
+                      "14px"
                   }}
                 />
 
@@ -294,9 +317,9 @@ export default function FeaturedUpload() {
                   style={{
                     position:
                       "absolute",
-                    top: "-8px",
+                    top: "-10px",
                     right:
-                      "-8px",
+                      "-10px",
                     background:
                       "red",
                     color:
@@ -305,11 +328,13 @@ export default function FeaturedUpload() {
                       "none",
                     borderRadius:
                       "50%",
-                    width: "25px",
+                    width: "28px",
                     height:
-                      "25px",
+                      "28px",
                     cursor:
-                      "pointer"
+                      "pointer",
+                    fontSize:
+                      "16px"
                   }}
                 >
                   ×
@@ -325,9 +350,10 @@ export default function FeaturedUpload() {
 
         <button
           type="submit"
+
           style={{
             width: "100%",
-            padding: "12px",
+            padding: "14px",
             border: "none",
             background:
               "#000",
@@ -335,7 +361,11 @@ export default function FeaturedUpload() {
             cursor:
               "pointer",
             borderRadius:
-              "5px"
+              "6px",
+            fontSize:
+              "15px",
+            fontWeight:
+              "600"
           }}
         >
           Upload

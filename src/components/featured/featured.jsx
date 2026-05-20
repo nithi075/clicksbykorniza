@@ -37,19 +37,39 @@ const Featured = () => {
         const data =
           response.data;
 
-        /* ONLY TITLE FIXED */
+        /*
+          Expected API Response:
+
+          {
+            success: true,
+            images: [
+              {
+                title: "Wedding Bliss",
+                image: "https://..."
+              },
+              {
+                title: "The Model Edit",
+                image: "https://..."
+              }
+            ]
+          }
+        */
 
         if (
           data &&
-          data.featured &&
-          data.featured.length > 0
+          data.images &&
+          data.images.length > 0
         ) {
 
           const formatted =
-            data.featured.map(
-              (item, index) => ({
+            data.images.map(
+              (
+                item,
+                index
+              ) => ({
 
-                id: index + 1,
+                id:
+                  index + 1,
 
                 title:
                   item.title ||
@@ -64,7 +84,9 @@ const Featured = () => {
               })
             );
 
-          setItems(formatted);
+          setItems(
+            formatted
+          );
         }
 
       } catch (error) {
@@ -76,7 +98,9 @@ const Featured = () => {
 
       } finally {
 
-        setLoading(false);
+        setLoading(
+          false
+        );
       }
     };
 
@@ -134,6 +158,8 @@ const Featured = () => {
 
     <section className="featured-section">
 
+      {/* ================= HEADER ================= */}
+
       <motion.div
         className="portfolio-header"
 
@@ -166,6 +192,8 @@ const Featured = () => {
 
       </motion.div>
 
+      {/* ================= LOADING ================= */}
+
       {loading ? (
 
         <div className="featured-loader">
@@ -187,6 +215,8 @@ const Featured = () => {
         </div>
 
       ) : (
+
+        /* ================= GRID ================= */
 
         <div className="bento-container">
 
@@ -224,6 +254,8 @@ const Featured = () => {
                   }}
                 >
 
+                  {/* IMAGE */}
+
                   <div className="img-wrapper">
 
                     <motion.img
@@ -241,6 +273,8 @@ const Featured = () => {
                     />
 
                   </div>
+
+                  {/* TITLE OVERLAY */}
 
                   <div className="overlay">
 
