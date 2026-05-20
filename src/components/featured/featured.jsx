@@ -17,8 +17,6 @@ const Featured = () => {
   const [loading, setLoading] =
     useState(true);
 
-  /* ================= FETCH ================= */
-
   const getFeatured =
     async () => {
 
@@ -29,35 +27,33 @@ const Featured = () => {
             "https://korniza-backend.onrender.com/featured/all"
           );
 
-        console.log(
-          "FEATURED RESPONSE:",
-          response.data
-        );
-
         const data =
           response.data;
 
         if (
           data &&
-          data.images &&
-          data.images.length > 0
+          data.items &&
+          data.items.length > 0
         ) {
 
           const formatted =
-            data.images.map(
-              (img, index) => ({
+            data.items.map(
+              (
+                item,
+                index
+              ) => ({
 
-                id: index + 1,
+                id:
+                  index + 1,
 
                 title:
-                  data.title ||
-                  "Featured Work",
+                  item.title,
 
-                img: img,
+                img:
+                  item.image,
 
                 class:
                   `item-${index + 1}`
-
               })
             );
 
@@ -66,14 +62,12 @@ const Featured = () => {
 
       } catch (error) {
 
-        console.log(
-          "Featured Fetch Error:",
-          error
-        );
+        console.log(error);
 
       } finally {
 
         setLoading(false);
+
       }
     };
 
@@ -83,180 +77,52 @@ const Featured = () => {
 
   }, []);
 
-  /* ================= ANIMATION ================= */
-
-  const containerVariants = {
-
-    hidden: {
-      opacity: 0
-    },
-
-    visible: {
-
-      opacity: 1,
-
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  };
-
-  const cardVariants = {
-
-    hidden: {
-      opacity: 0,
-      y: 30
-    },
-
-    visible: {
-
-      opacity: 1,
-      y: 0,
-
-      transition: {
-
-        duration: 0.8,
-
-        ease: [
-          0.16,
-          1,
-          0.3,
-          1
-        ]
-      }
-    }
-  };
-
   return (
 
     <section className="featured-section">
 
-      <motion.div
-        className="portfolio-header"
+      <div className="bento-container">
 
-        initial={{
-          opacity: 0,
-          y: -20
-        }}
+        <motion.div
+          className="bento-grid"
+        >
 
-        whileInView={{
-          opacity: 1,
-          y: 0
-        }}
+          {items.map(
+            (item) => (
 
-        viewport={{
-          once: true
-        }}
+              <motion.div
+                key={item.id}
+                className={`bento-item ${item.class}`}
+              >
 
-        transition={{
-          duration: 1
-        }}
-      >
+                <div className="img-wrapper">
 
-        <span className="tagline">
-          Portfolio
-        </span>
+                  <img
+                    src={item.img}
+                    alt={item.title}
+                  />
 
-        <h2>
-          Our Recent Works
-        </h2>
+                </div>
 
-      </motion.div>
+                <div className="overlay">
 
-      {loading ? (
+                  <div className="text-content">
 
-        <div className="featured-loader">
-
-          <p>
-            Loading...
-          </p>
-
-        </div>
-
-      ) : items.length === 0 ? (
-
-        <div className="featured-loader">
-
-          <p>
-            No featured images found
-          </p>
-
-        </div>
-
-      ) : (
-
-        <div className="bento-container">
-
-          <motion.div
-            className="bento-grid"
-
-            variants={
-              containerVariants
-            }
-
-            initial="hidden"
-
-            whileInView="visible"
-
-            viewport={{
-              once: true,
-              amount: 0.2
-            }}
-          >
-
-            {items.map(
-              (item) => (
-
-                <motion.div
-                  key={item.id}
-
-                  className={`bento-item ${item.class}`}
-
-                  variants={
-                    cardVariants
-                  }
-
-                  whileHover={{
-                    scale: 0.98
-                  }}
-                >
-
-                  <div className="img-wrapper">
-
-                    <motion.img
-                      src={item.img}
-
-                      alt={item.title}
-
-                      whileHover={{
-                        scale: 1.1
-                      }}
-
-                      transition={{
-                        duration: 0.6
-                      }}
-                    />
+                    <h3>
+                      {item.title}
+                    </h3>
 
                   </div>
 
-                  <div className="overlay">
+                </div>
 
-                    <div className="text-content">
+              </motion.div>
+            )
+          )}
 
-                    
+        </motion.div>
 
-                    </div>
-
-                  </div>
-
-                </motion.div>
-              )
-            )}
-
-          </motion.div>
-
-        </div>
-      )}
+      </div>
 
     </section>
   );
