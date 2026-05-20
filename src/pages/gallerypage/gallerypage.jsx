@@ -108,6 +108,10 @@ const GalleryPage = () => {
       desc:
         "Grand reception celebrations documented.",
     },
+    engagement: {
+  title: "Engagement",
+  desc: "Capturing beautiful engagement moments forever.",
+},
 
     "bridal-photography": {
       title:
@@ -141,6 +145,7 @@ const GalleryPage = () => {
         "Celebrating motherhood beautifully.",
     },
 
+
     "baby-shoots": {
       title:
         "Baby Photography",
@@ -149,13 +154,7 @@ const GalleryPage = () => {
         "Capturing little smiles forever.",
     },
 
-    birthday: {
-      title:
-        "Birthday Photography",
-
-      desc:
-        "Capturing joyful birthday celebrations.",
-    },
+   
 
   };
 

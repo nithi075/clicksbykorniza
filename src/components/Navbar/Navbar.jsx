@@ -54,8 +54,8 @@ export default function Navbar() {
         },
 
         {
-          name: "Destination Wedding",
-          href: "/galleryDetails/destination-wedding"
+          name: "Engagement",
+          href: "/galleryDetails/engagement"
         },
 
         {
@@ -78,10 +78,7 @@ export default function Navbar() {
           href: "/galleryDetails/outdoor-shoot"
         },
 
-        {
-          name: "Engagement",
-          href: "/galleryDetails/engagement"
-        }
+       
 
 
       ]
