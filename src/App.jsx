@@ -64,6 +64,14 @@ function HomePage() {
 
       </section>
 
+        {/* ================= TESTIMONIALS ================= */}
+
+      <section id="testimonials">
+
+        <Testimonials />
+
+      </section>
+
       {/* ================= FEATURED ================= */}
 
       <section id="featured">
@@ -90,13 +98,7 @@ function HomePage() {
 
       </section>
 
-      {/* ================= TESTIMONIALS ================= */}
-
-      <section id="testimonials">
-
-        <Testimonials />
-
-      </section>
+    
 
       {/* ================= INSTAGRAM ================= */}
 

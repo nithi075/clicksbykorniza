@@ -42,7 +42,10 @@ export default function Gallery() {
         "baby-shoots",
 
       img:
-        wedding2
+        wedding2,
+
+      description:
+        "Beautiful baby shower memories filled with joy, love, and family emotions."
     },
 
     {
@@ -56,7 +59,10 @@ export default function Gallery() {
         "traditional-wedding",
 
       img:
-        wedding
+        wedding,
+
+      description:
+        "Capturing timeless wedding rituals, emotions, and luxurious celebrations."
     },
 
     {
@@ -70,7 +76,10 @@ export default function Gallery() {
         "outdoor-shoot",
 
       img:
-        couple
+        couple,
+
+      description:
+        "Romantic outdoor couple stories crafted with cinematic elegance."
     },
 
     {
@@ -84,7 +93,10 @@ export default function Gallery() {
         "model-shoots",
 
       img:
-        portrait
+        portrait,
+
+      description:
+        "Creative portrait sessions with premium lighting and editorial styling."
     },
 
     {
@@ -98,7 +110,10 @@ export default function Gallery() {
         "bridal-photography",
 
       img:
-        candid
+        candid,
+
+      description:
+        "Elegant bridal portraits capturing grace, beauty, and emotions."
     }
 
   ];
@@ -231,7 +246,7 @@ export default function Gallery() {
 
           <span className="p-tag">
 
-            PORTFOLIO
+            CURATED MOMENTS
 
           </span>
 
@@ -293,10 +308,6 @@ export default function Gallery() {
                       : ""
                   }`}
 
-                  /* =========================================
-                     MANUAL DRAG / SWIPE
-                  ========================================= */
-
                   drag="x"
 
                   dragConstraints={{
@@ -310,8 +321,6 @@ export default function Gallery() {
                     event,
                     info
                   ) => {
-
-                    /* swipe left */
 
                     if (
                       info.offset.x < -80
@@ -328,8 +337,6 @@ export default function Gallery() {
                             : prev + 1
                       );
                     }
-
-                    /* swipe right */
 
                     if (
                       info.offset.x > 80
@@ -450,8 +457,6 @@ export default function Gallery() {
                       }
                     />
 
-                    {/* OVERLAY */}
-
                     <div className="card-overlay"></div>
 
                   </div>
@@ -526,11 +531,11 @@ export default function Gallery() {
 
             <p>
 
-              A celebration of
-              emotions, timeless
-              storytelling, and
-              artistic luxury
-              photography.
+              {
+                items[
+                  activeIndex
+                ].description
+              }
 
             </p>
 
@@ -559,5 +564,6 @@ export default function Gallery() {
       </div>
 
     </section>
+
   );
 }

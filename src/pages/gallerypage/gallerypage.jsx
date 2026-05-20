@@ -34,7 +34,11 @@ const GalleryPage = () => {
   const [loading, setLoading] =
     useState(true);
 
+  const [selectedImage, setSelectedImage] =
+    useState(null);
+
   /* FIRST 8 IMAGES */
+
   const [visibleCount, setVisibleCount] =
     useState(8);
 
@@ -442,8 +446,15 @@ const GalleryPage = () => {
                       src={
                         image.imageUrl
                       }
+
                       alt={
                         image.title
+                      }
+
+                      onClick={() =>
+                        setSelectedImage(
+                          image.imageUrl
+                        )
                       }
                     />
 
@@ -509,6 +520,43 @@ const GalleryPage = () => {
         </motion.div>
 
       </div>
+
+      {/* ================= IMAGE OVERLAY ================= */}
+
+      {
+        selectedImage && (
+
+          <div
+            className="image-overlay"
+
+            onClick={() =>
+              setSelectedImage(null)
+            }
+          >
+
+            <button
+              className="overlay-close-btn"
+
+              onClick={() =>
+                setSelectedImage(null)
+              }
+            >
+
+              ✕
+
+            </button>
+
+            <img
+              src={selectedImage}
+
+              alt="Preview"
+
+              className="overlay-image"
+            />
+
+          </div>
+        )
+      }
 
       <Footer />
 

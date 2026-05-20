@@ -7,7 +7,6 @@ import "./Hero.css";
 
 import hero1 from "../../assets/hero1.jpg";
 import hero2 from "../../assets/hero2.jpg";
-import hero3 from "../../assets/hero3.jpg";
 
 import OverlayForm from "../OverlayForm/OverlayForm";
 
@@ -24,9 +23,9 @@ export default function Hero() {
   const [currentImage, setCurrentImage] = useState(0);
 
   const heroImages = [
-    hero1,
     hero2,
-    hero3
+    hero1,
+  
   ];
 
   /* =========================================
@@ -43,7 +42,7 @@ export default function Hero() {
           : prev + 1
       );
 
-    }, 6500);
+    }, 10000);
 
     return () => clearInterval(interval);
 
@@ -226,7 +225,7 @@ export default function Hero() {
                   Memories
                 </span>
 
-                {" "}for a big day!
+                {" "}for your big day!
 
               </motion.div>
 

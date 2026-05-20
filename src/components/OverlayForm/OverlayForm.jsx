@@ -17,13 +17,89 @@ export default function OverlayForm({
       lastName:"",
       email:"",
       phone:"",
-      date:"",
+
+      startDate:"",
+      endDate:"",
+
       event:"",
       crowd:"",
+
       location:"",
+      budget:"",
+      customBudget:"",
+
       message:""
 
     });
+
+  /* =========================================
+     EVENT OPTIONS
+  ========================================= */
+
+  const eventOptions = [
+
+    "Wedding & Reception",
+
+    "Reception",
+
+    "Engagement",
+
+    "Birthday",
+
+    "Ear Piercing Ceremony",
+
+    "Half Saree Ceremony",
+
+    "Name Ceremony",
+
+    "Corporate Events"
+
+  ];
+
+  /* =========================================
+     BUDGET OPTIONS
+  ========================================= */
+
+  const weddingBudgets = [
+
+    "Bronze 55-65K",
+
+    "Silver 70-80K",
+
+    "Gold 80-90K",
+
+    "Diamond 130-150K",
+
+    "About 2L - 2.5L",
+
+    "3L - 12L",
+
+    "Custom"
+
+  ];
+
+  const normalBudgets = [
+
+    "Bronze 18-24K",
+
+    "Silver 28-32K",
+
+    "Gold 40-50K",
+
+    "Diamond 65-75K",
+
+    "Custom"
+
+  ];
+
+  const selectedBudgetOptions =
+
+    formData.event ===
+    "Wedding & Reception"
+
+      ? weddingBudgets
+
+      : normalBudgets;
 
   /* =========================================
      HANDLE CHANGE
@@ -63,17 +139,29 @@ ${formData.email}
 📱 Whatsapp:
 ${formData.phone}
 
-📅 Event Date:
-${formData.date}
+📅 Start Date:
+${formData.startDate}
+
+📅 End Date:
+${formData.endDate}
 
 🎉 Event Type:
 ${formData.event}
 
-👥 Crowd Count:
+👥 Expected Crowd:
 ${formData.crowd}
 
-📍 Location:
+📍 Event Location:
 ${formData.location}
+
+💰 Expected Budget:
+${
+  formData.budget === "Custom"
+
+    ? formData.customBudget
+
+    : formData.budget
+}
 
 📝 Additional Details:
 ${formData.message}
@@ -229,22 +317,47 @@ ${formData.message}
 
           </div>
 
-          {/* EVENT DATE */}
+          {/* START DATE */}
 
           <div className="input-group">
 
             <label>
 
-              Event Date
+              Start Date
               <span>*</span>
 
             </label>
 
             <input
               type="date"
-              name="date"
+              name="startDate"
               value={
-                formData.date
+                formData.startDate
+              }
+              onChange={
+                handleChange
+              }
+              required
+            />
+
+          </div>
+
+          {/* END DATE */}
+
+          <div className="input-group">
+
+            <label>
+
+              End Date
+              <span>*</span>
+
+            </label>
+
+            <input
+              type="date"
+              name="endDate"
+              value={
+                formData.endDate
               }
               onChange={
                 handleChange
@@ -280,25 +393,24 @@ ${formData.message}
                 Please Select
               </option>
 
-              <option>
-                Wedding
-              </option>
+              {
+                eventOptions.map(
+                  (
+                    item,
+                    index
+                  ) => (
 
-              <option>
-                Reception
-              </option>
+                    <option
+                      key={index}
+                      value={item}
+                    >
 
-              <option>
-                Birthday
-              </option>
+                      {item}
 
-              <option>
-                Engagement
-              </option>
-
-              <option>
-                Corporate Event
-              </option>
+                    </option>
+                  )
+                )
+              }
 
             </select>
 
@@ -310,7 +422,7 @@ ${formData.message}
 
             <label>
 
-              Number of Crowd
+              Expected Crowd
               <span>*</span>
 
             </label>
@@ -318,7 +430,7 @@ ${formData.message}
             <input
               type="number"
               name="crowd"
-              placeholder="Approx count"
+              placeholder="Approx crowd count"
               value={
                 formData.crowd
               }
@@ -355,6 +467,86 @@ ${formData.message}
             />
 
           </div>
+
+          {/* BUDGET */}
+
+          <div className="input-group">
+
+            <label>
+
+              Expected Budget
+              <small>
+                (Optional)
+              </small>
+
+            </label>
+
+            <select
+              name="budget"
+              value={
+                formData.budget
+              }
+              onChange={
+                handleChange
+              }
+            >
+
+              <option value="">
+                Select Budget
+              </option>
+
+              {
+                selectedBudgetOptions.map(
+                  (
+                    item,
+                    index
+                  ) => (
+
+                    <option
+                      key={index}
+                      value={item}
+                    >
+
+                      {item}
+
+                    </option>
+                  )
+                )
+              }
+
+            </select>
+
+          </div>
+
+          {/* CUSTOM BUDGET */}
+
+          {
+            formData.budget ===
+            "Custom" && (
+
+              <div className="input-group">
+
+                <label>
+
+                  Enter Custom Budget
+
+                </label>
+
+                <input
+                  type="text"
+                  name="customBudget"
+                  placeholder="Enter your expected budget"
+                  value={
+                    formData.customBudget
+                  }
+                  onChange={
+                    handleChange
+                  }
+                />
+
+              </div>
+            )
+          }
 
           {/* MESSAGE */}
 
@@ -396,5 +588,6 @@ ${formData.message}
       </div>
 
     </div>
+
   );
 }
