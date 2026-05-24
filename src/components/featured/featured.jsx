@@ -3,7 +3,13 @@ import React, {
   useState
 } from "react";
 
-import { motion } from "framer-motion";
+import {
+  motion
+} from "framer-motion";
+
+import {
+  useNavigate
+} from "react-router-dom";
 
 import axios from "axios";
 
@@ -14,8 +20,12 @@ const Featured = () => {
   const [items, setItems] =
     useState([]);
 
-  const [loading, setLoading] =
-    useState(true);
+  const navigate =
+    useNavigate();
+
+  /* =========================================
+     FETCH FEATURED
+  ========================================= */
 
   const getFeatured =
     async () => {
@@ -27,17 +37,13 @@ const Featured = () => {
             "https://korniza-backend.onrender.com/featured/all"
           );
 
-        const data =
-          response.data;
-
         if (
-          data &&
-          data.items &&
-          data.items.length > 0
+          response.data &&
+          response.data.items
         ) {
 
           const formatted =
-            data.items.map(
+            response.data.items.map(
               (
                 item,
                 index
@@ -47,28 +53,34 @@ const Featured = () => {
                   index + 1,
 
                 title:
-                  item.title,
+                  item.title ||
+                  "Untitled",
 
-                img:
+                image:
                   item.image,
 
-                class:
-                  `item-${index + 1}`
+                category:
+                  item.category ||
+                  "all"
+
               })
             );
 
-          setItems(formatted);
+          setItems(
+            formatted
+          );
+
         }
 
       } catch (error) {
 
-        console.log(error);
-
-      } finally {
-
-        setLoading(false);
+        console.log(
+          "Featured Fetch Error:",
+          error
+        );
 
       }
+
     };
 
   useEffect(() => {
@@ -77,46 +89,175 @@ const Featured = () => {
 
   }, []);
 
+  /* =========================================
+     NAVIGATE
+  ========================================= */
+
+  const goToCategory =
+    (category) => {
+
+      if (!category) return;
+
+      navigate(
+        `/galleryDetails/${encodeURIComponent(
+          category
+        )}`
+      );
+
+    };
+
+  /* =========================================
+     FORMAT CATEGORY
+  ========================================= */
+
+  const formatCategory =
+    (text) => {
+
+      return text
+
+        ?.replaceAll(
+          "-",
+          " "
+        )
+
+        ?.replace(
+          /\b\w/g,
+          (char) =>
+            char.toUpperCase()
+        );
+
+    };
+
   return (
 
     <section className="featured-section">
 
+      {/* HEADER */}
+
+      <div className="portfolio-header">
+
+        <span className="tagline">
+
+          Featured Stories
+
+        </span>
+
+        <h2>
+
+          Cinematic Moments
+
+        </h2>
+
+      </div>
+
+      {/* GRID */}
+
       <div className="bento-container">
 
         <motion.div
+
           className="bento-grid"
+
+          initial={{
+            opacity: 0,
+            y: 40
+          }}
+
+          whileInView={{
+            opacity: 1,
+            y: 0
+          }}
+
+          transition={{
+            duration: 0.7
+          }}
+
+          viewport={{
+            once: true
+          }}
+
         >
 
           {items.map(
-            (item) => (
+            (
+              item,
+              index
+            ) => (
 
               <motion.div
+
                 key={item.id}
-                className={`bento-item ${item.class}`}
+
+                className={`bento-item item-${index + 1}`}
+
+                whileHover={{
+                  scale: 1.02
+                }}
+
+                transition={{
+                  duration: 0.35
+                }}
+
               >
 
-                <div className="img-wrapper">
+                {/* CLICKABLE CARD */}
 
-                  <img
-                    src={item.img}
-                    alt={item.title}
-                  />
+                <div
 
-                </div>
+                  className="featured-click"
 
-                <div className="overlay">
+                  onClick={() =>
 
-                  <div className="text-content">
+                    goToCategory(
+                      item.category
+                    )
 
-                    <h3>
-                      {item.title}
-                    </h3>
+                  }
+
+                >
+
+                  {/* IMAGE */}
+
+                  <div className="img-wrapper">
+
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      loading="lazy"
+                    />
+
+                  </div>
+
+                  {/* OVERLAY */}
+
+                  <div className="overlay">
+
+                    <div className="text-content">
+
+                      <div>
+
+                        {/* TITLE */}
+
+                        <h3>
+
+                          {item.title}
+
+                        </h3>
+
+                        {/* CATEGORY */}
+
+                        
+
+                      </div>
+
+                    </div>
 
                   </div>
 
                 </div>
 
               </motion.div>
+
             )
           )}
 
@@ -125,7 +266,9 @@ const Featured = () => {
       </div>
 
     </section>
+
   );
+
 };
 
 export default Featured;

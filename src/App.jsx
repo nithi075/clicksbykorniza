@@ -90,13 +90,7 @@ function HomePage() {
 
       </section>
 
-      {/* ================= PACKAGES ================= */}
-
-      <section id="packages">
-
-        <Packages />
-
-      </section>
+ 
 
     
 
@@ -156,7 +150,13 @@ function App() {
         path="/galleryDetails/:category"
         element={<GalleryDetails />}
       />
-
+    
+    <Route 
+      path="/book-event"
+      element={
+        <OverlayForm setShowForm={() => {}}/>
+      }
+      />
       
 
       {/* ================= ADMIN ROUTES ================= */}
@@ -176,10 +176,7 @@ function App() {
         element={<FeaturedUpload />}
       />
 
-      <Route
-        path="/instagram-upload"
-        element={<InstagramUpload />}
-      />
+    
 
       <Route
         path="/testimonial-upload"

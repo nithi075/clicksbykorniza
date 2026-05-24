@@ -1,10 +1,12 @@
 import { useState } from "react";
 
+import { useNavigate } from "react-router-dom";
+
 import "./OverlayForm.css";
 
-export default function OverlayForm({
-  setShowForm
-}) {
+export default function OverlayForm() {
+
+  const navigate = useNavigate();
 
   /* =========================================
      FORM STATE
@@ -13,13 +15,9 @@ export default function OverlayForm({
   const [formData, setFormData] =
     useState({
 
-      firstName:"",
-      lastName:"",
-      email:"",
+      name:"",
       phone:"",
-
-      startDate:"",
-      endDate:"",
+      eventDate:"",
 
       event:"",
       crowd:"",
@@ -70,9 +68,9 @@ export default function OverlayForm({
 
     "Diamond 130-150K",
 
-    "About 2L - 2.5L",
+    "Royal 2L - 2.5L",
 
-    "3L - 12L",
+    "Luxury 3L - 12L",
 
     "Custom"
 
@@ -128,22 +126,18 @@ export default function OverlayForm({
     const whatsappNumber =
       "918680068246";
 
-    const whatsappMessage = `✨ Premium Photography Inquiry
+    const whatsappMessage = `🚨 Alert: Fresh Story Incoming 📲
+
+Welcome to the Clicks By Korniza family 🤍
 
 👤 Name:
-${formData.firstName} ${formData.lastName}
-
-📧 Email:
-${formData.email}
+${formData.name}
 
 📱 Whatsapp:
 ${formData.phone}
 
-📅 Start Date:
-${formData.startDate}
-
-📅 End Date:
-${formData.endDate}
+📅 Event Date:
+${formData.eventDate}
 
 🎉 Event Type:
 ${formData.event}
@@ -157,15 +151,14 @@ ${formData.location}
 💰 Expected Budget:
 ${
   formData.budget === "Custom"
-
     ? formData.customBudget
-
     : formData.budget
 }
 
 📝 Additional Details:
 ${formData.message}
 
+✨ We’ll get back to you shortly with a luxury cinematic experience.
 `;
 
     const whatsappURL =
@@ -185,9 +178,7 @@ ${formData.message}
 
       <div
         className="overlay-bg"
-        onClick={() =>
-          setShowForm(false)
-        }
+        onClick={() => navigate(-1)}
       />
 
       {/* FORM CONTAINER */}
@@ -198,9 +189,7 @@ ${formData.message}
 
         <button
           className="close-btn"
-          onClick={() =>
-            setShowForm(false)
-          }
+          onClick={() => navigate(-1)}
         >
 
           ✕
@@ -238,55 +227,13 @@ ${formData.message}
 
             </label>
 
-            <div className="name-fields">
-
-              <input
-                type="text"
-                name="firstName"
-                placeholder="First Name"
-                value={
-                  formData.firstName
-                }
-                onChange={
-                  handleChange
-                }
-                required
-              />
-
-              <input
-                type="text"
-                name="lastName"
-                placeholder="Last Name"
-                value={
-                  formData.lastName
-                }
-                onChange={
-                  handleChange
-                }
-              />
-
-            </div>
-
-          </div>
-
-          {/* EMAIL */}
-
-          <div className="input-group">
-
-            <label>
-              Email
-            </label>
-
             <input
-              type="email"
-              name="email"
-              placeholder="Enter your email"
-              value={
-                formData.email
-              }
-              onChange={
-                handleChange
-              }
+              type="text"
+              name="name"
+              placeholder="Enter your name"
+              value={formData.name}
+              onChange={handleChange}
+              required
             />
 
           </div>
@@ -306,62 +253,29 @@ ${formData.message}
               type="tel"
               name="phone"
               placeholder="+91 00000 00000"
-              value={
-                formData.phone
-              }
-              onChange={
-                handleChange
-              }
+              value={formData.phone}
+              onChange={handleChange}
               required
             />
 
           </div>
 
-          {/* START DATE */}
+          {/* EVENT DATE */}
 
           <div className="input-group">
 
             <label>
 
-              Start Date
+              Event Date
               <span>*</span>
 
             </label>
 
             <input
               type="date"
-              name="startDate"
-              value={
-                formData.startDate
-              }
-              onChange={
-                handleChange
-              }
-              required
-            />
-
-          </div>
-
-          {/* END DATE */}
-
-          <div className="input-group">
-
-            <label>
-
-              End Date
-              <span>*</span>
-
-            </label>
-
-            <input
-              type="date"
-              name="endDate"
-              value={
-                formData.endDate
-              }
-              onChange={
-                handleChange
-              }
+              name="eventDate"
+              value={formData.eventDate}
+              onChange={handleChange}
               required
             />
 
@@ -380,12 +294,8 @@ ${formData.message}
 
             <select
               name="event"
-              value={
-                formData.event
-              }
-              onChange={
-                handleChange
-              }
+              value={formData.event}
+              onChange={handleChange}
               required
             >
 
@@ -431,12 +341,8 @@ ${formData.message}
               type="number"
               name="crowd"
               placeholder="Approx crowd count"
-              value={
-                formData.crowd
-              }
-              onChange={
-                handleChange
-              }
+              value={formData.crowd}
+              onChange={handleChange}
               required
             />
 
@@ -457,12 +363,8 @@ ${formData.message}
               type="text"
               name="location"
               placeholder="Enter location"
-              value={
-                formData.location
-              }
-              onChange={
-                handleChange
-              }
+              value={formData.location}
+              onChange={handleChange}
               required
             />
 
@@ -483,12 +385,8 @@ ${formData.message}
 
             <select
               name="budget"
-              value={
-                formData.budget
-              }
-              onChange={
-                handleChange
-              }
+              value={formData.budget}
+              onChange={handleChange}
             >
 
               <option value="">
@@ -536,12 +434,8 @@ ${formData.message}
                   type="text"
                   name="customBudget"
                   placeholder="Enter your expected budget"
-                  value={
-                    formData.customBudget
-                  }
-                  onChange={
-                    handleChange
-                  }
+                  value={formData.customBudget}
+                  onChange={handleChange}
                 />
 
               </div>
@@ -555,6 +449,7 @@ ${formData.message}
             <label>
 
               Tell us more
+              <small>(Optional)</small>
 
             </label>
 
@@ -562,12 +457,8 @@ ${formData.message}
               rows="5"
               name="message"
               placeholder="Tell us about your event..."
-              value={
-                formData.message
-              }
-              onChange={
-                handleChange
-              }
+              value={formData.message}
+              onChange={handleChange}
             />
 
           </div>

@@ -18,8 +18,13 @@ export default function GalleryUpload() {
     const file = e.target.files[0];
 
     if (file) {
+
       setImage(file);
-      setPreview(URL.createObjectURL(file));
+
+      setPreview(
+        URL.createObjectURL(file)
+      );
+
     }
   };
 
@@ -32,34 +37,60 @@ export default function GalleryUpload() {
     e.preventDefault();
 
     if (!image) {
+
       alert("Please select image");
+
       return;
+
     }
 
     if (!category) {
+
       alert("Please select category");
+
       return;
+
     }
 
     try {
 
       setLoading(true);
 
-      const formData = new FormData();
+      const formData =
+        new FormData();
 
-      formData.append("title", title);
-      formData.append("category", category);
-      formData.append("image", image);
+      formData.append(
+        "title",
+        title
+      );
 
-      await api.post("/gallery/add", formData);
+      formData.append(
+        "category",
+        category
+      );
 
-      alert("Gallery uploaded successfully ✅");
+      formData.append(
+        "image",
+        image
+      );
+
+      await api.post(
+        "/gallery/add",
+        formData
+      );
+
+      alert(
+        "Gallery uploaded successfully ✅"
+      );
 
       /* RESET */
 
       setTitle("");
+
       setCategory("");
+
       setImage(null);
+
       setPreview("");
 
     } catch (error) {
@@ -71,54 +102,160 @@ export default function GalleryUpload() {
     } finally {
 
       setLoading(false);
+
     }
   };
 
   /* =========================
-     STYLES
+     DARK LUXURY STYLES
   ========================= */
 
   const styles = {
 
     container: {
+
       minHeight: "100vh",
-      background: "#f8f5ef",
+
+      background:
+        "linear-gradient(180deg,#000000 0%,#090909 45%,#121212 100%)",
+
       display: "flex",
+
       justifyContent: "center",
+
       alignItems: "center",
+
       padding: "20px",
+
     },
 
     card: {
+
       width: "100%",
-      maxWidth: "500px",
-      background: "#fff",
+
+      maxWidth: "520px",
+
+      background:
+        "rgba(255,255,255,.03)",
+
       padding: "40px",
-      borderRadius: "16px",
-      boxShadow: "0px 8px 25px rgba(0,0,0,0.1)",
+
+      borderRadius: "28px",
+
+      backdropFilter:
+        "blur(16px)",
+
+      border:
+        "1px solid rgba(255,255,255,.06)",
+
+      boxShadow:
+        "0 20px 60px rgba(0,0,0,.45)",
+
+    },
+
+    title: {
+
+      textAlign: "center",
+
+      marginBottom: "10px",
+
+      fontSize: "42px",
+
+      fontWeight: "500",
+
+      fontFamily:
+        "'Cormorant Garamond', serif",
+
+      background:
+        "linear-gradient(135deg,#ffffff 0%,#cfcfcf 50%,#7d7d7d 100%)",
+
+      WebkitBackgroundClip:
+        "text",
+
+      WebkitTextFillColor:
+        "transparent",
+
+    },
+
+    subtitle: {
+
+      textAlign: "center",
+
+      marginBottom: "30px",
+
+      color:
+        "rgba(255,255,255,.55)",
+
+      fontSize: "14px",
+
+      lineHeight: "1.7",
+
     },
 
     input: {
+
       width: "100%",
-      padding: "12px",
+
+      padding: "14px 16px",
+
       marginBottom: "20px",
-      border: "1px solid #ddd",
-      borderRadius: "8px",
+
+      border:
+        "1px solid rgba(255,255,255,.08)",
+
+      borderRadius: "14px",
+
       outline: "none",
+
       fontSize: "15px",
+
+      background:
+        "rgba(255,255,255,.03)",
+
+      color: "white",
+
     },
 
     button: {
+
       width: "100%",
-      padding: "14px",
-      background: "black",
+
+      padding: "16px",
+
+      background:
+        "linear-gradient(135deg,#1a1a1a,#2c2c2c)",
+
       color: "white",
+
       border: "none",
-      borderRadius: "10px",
+
+      borderRadius: "14px",
+
       cursor: "pointer",
+
       fontWeight: "600",
+
       fontSize: "15px",
+
+      transition:
+        ".4s ease",
+
     },
+
+    preview: {
+
+      width: "100%",
+
+      height: "260px",
+
+      objectFit: "cover",
+
+      borderRadius: "16px",
+
+      marginBottom: "20px",
+
+    },
+
   };
 
   /* =========================
@@ -126,26 +263,34 @@ export default function GalleryUpload() {
   ========================= */
 
   return (
+
     <div style={styles.container}>
 
       <div style={styles.card}>
 
         {/* TITLE */}
 
-        <h2
-          style={{
-            textAlign: "center",
-            marginBottom: "20px",
-          }}
-        >
+        <h2 style={styles.title}>
+
           Gallery Upload
+
         </h2>
+
+        <p style={styles.subtitle}>
+
+          Upload premium cinematic
+          moments to your luxury
+          gallery collection.
+
+        </p>
 
         {/* FORM */}
 
-        <form onSubmit={handleSubmit}>
+        <form
+          onSubmit={handleSubmit}
+        >
 
-          {/* TITLE INPUT */}
+          {/* TITLE */}
 
           <input
             style={styles.input}
@@ -153,7 +298,9 @@ export default function GalleryUpload() {
             placeholder="Enter title"
             value={title}
             onChange={(e) =>
-              setTitle(e.target.value)
+              setTitle(
+                e.target.value
+              )
             }
           />
 
@@ -163,15 +310,15 @@ export default function GalleryUpload() {
             style={styles.input}
             value={category}
             onChange={(e) =>
-              setCategory(e.target.value)
+              setCategory(
+                e.target.value
+              )
             }
           >
 
             <option value="">
               Select Category
             </option>
-
-            {/* WEDDING */}
 
             <option value="traditional-wedding">
               Traditional Wedding
@@ -189,43 +336,29 @@ export default function GalleryUpload() {
               Bridal Photography
             </option>
 
-            {/* UPDATED */}
-
             <option value="outdoor-shoot">
               Outdoor Shoot
             </option>
-
-            {/* NEW MODEL SHOOTS */}
 
             <option value="model-shoots">
               Model Shoots
             </option>
 
-            {/* ENGAGEMENT */}
-
             <option value="engagement">
               Engagement Photography
             </option>
-
-            {/* BIRTHDAY */}
 
             <option value="birthday">
               Birthday Photography
             </option>
 
-            {/* MATERNITY */}
-
             <option value="maternity">
               Maternity Photography
             </option>
 
-            {/* BABY */}
-
             <option value="baby-shoots">
               Baby Photography
             </option>
-
-            {/* PORTRAIT */}
 
             <option value="bridal">
               Portrait Photography
@@ -239,23 +372,21 @@ export default function GalleryUpload() {
             style={styles.input}
             type="file"
             accept="image/*"
-            onChange={handleImageChange}
+            onChange={
+              handleImageChange
+            }
           />
 
           {/* PREVIEW */}
 
           {preview && (
+
             <img
               src={preview}
               alt="preview"
-              style={{
-                width: "100%",
-                height: "250px",
-                objectFit: "cover",
-                borderRadius: "10px",
-                marginBottom: "20px",
-              }}
+              style={styles.preview}
             />
+
           )}
 
           {/* BUTTON */}
@@ -276,5 +407,6 @@ export default function GalleryUpload() {
       </div>
 
     </div>
+
   );
 }

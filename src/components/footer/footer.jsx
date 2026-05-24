@@ -91,7 +91,7 @@ export default function Footer() {
 
             <span className="footer-tagline">
 
-              ARTISANAL WEDDING PHOTOGRAPHY
+              ETHEREAL WEDDING PHOTOGRAPHY
 
             </span>
 
@@ -145,7 +145,7 @@ export default function Footer() {
 
               onClick={() =>
                 window.open(
-                  "https://wa.me/919597258078",
+                  "https://wa.me/918680068246",
                   "_blank"
                 )
               }

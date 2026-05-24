@@ -1,213 +1,648 @@
 import React from "react";
+
 import { Link } from "react-router-dom";
+
 import {
+
   Image,
+
   Camera,
+
   Star,
+
   MessageCircle,
-  LayoutDashboard,
+
+  LayoutDashboard
+
 } from "lucide-react";
 
 export default function Dashboard() {
+
   const menuItems = [
+
     {
-      title: "Gallery Upload",
-      subtitle: "Manage gallery images",
-      path: "/gallery-upload",
-      icon: <Image size={28} />,
+
+      title:
+        "Gallery Upload",
+
+      subtitle:
+        "Manage gallery images",
+
+      path:
+        "/gallery-upload",
+
+      icon:
+        <Image size={28} />
+
     },
+
+   
+
     {
-      title: "Instagram Upload",
-      subtitle: "Manage instagram posts",
-      path: "/instagram-upload",
-      icon: <Camera size={28} />,
+
+      title:
+        "Featured Upload",
+
+      subtitle:
+        "Manage featured works",
+
+      path:
+        "/featured-upload",
+
+      icon:
+        <Star size={28} />
+
     },
+
     {
-      title: "Featured Upload",
-      subtitle: "Manage featured works",
-      path: "/featured-upload",
-      icon: <Star size={28} />,
-    },
-    {
-      title: "Testimonial Upload",
-      subtitle: "Manage client reviews",
-      path: "/testimonial-upload",
-      icon: <MessageCircle size={28} />,
-    },
+
+      title:
+        "Testimonial Upload",
+
+      subtitle:
+        "Manage client reviews",
+
+      path:
+        "/testimonial-upload",
+
+      icon:
+        <MessageCircle size={28} />
+
+    }
+
   ];
 
   return (
+
     <>
+
       <style>
+
         {`
-          @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400&display=swap');
 
-          *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-          }
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400&display=swap');
 
-          .dashboard-container{
-            min-height:100vh;
-            background:#f4f1ea;
-            font-family:'Montserrat', sans-serif;
-            color:#333;
-          }
+        *{
 
-          /* Navbar */
+          margin:0;
+
+          padding:0;
+
+          box-sizing:border-box;
+
+        }
+
+        body{
+
+          background:#050505;
+
+          font-family:'Montserrat', sans-serif;
+
+        }
+
+        /* =========================================
+           CONTAINER
+        ========================================= */
+
+        .dashboard-container{
+
+          min-height:100vh;
+
+          background:
+          linear-gradient(
+            180deg,
+            #050505 0%,
+            #0b0b0b 45%,
+            #111111 100%
+          );
+
+          color:white;
+
+          position:relative;
+
+          overflow:hidden;
+
+        }
+
+        /* =========================================
+           AMBIENT GLOW
+        ========================================= */
+
+        .dashboard-container::before{
+
+          content:"";
+
+          position:absolute;
+
+          width:500px;
+          height:500px;
+
+          top:-200px;
+          right:-150px;
+
+          background:
+          radial-gradient(
+            circle,
+            rgba(212,175,55,.12),
+            transparent 70%
+          );
+
+          filter:blur(10px);
+
+          pointer-events:none;
+
+        }
+
+        .dashboard-container::after{
+
+          content:"";
+
+          position:absolute;
+
+          width:350px;
+          height:350px;
+
+          bottom:-120px;
+          left:-100px;
+
+          background:
+          radial-gradient(
+            circle,
+            rgba(212,175,55,.06),
+            transparent 70%
+          );
+
+          pointer-events:none;
+
+        }
+
+        /* =========================================
+           NAVBAR
+        ========================================= */
+
+        .dashboard-navbar{
+
+          display:flex;
+
+          justify-content:space-between;
+
+          align-items:center;
+
+          padding:24px 50px;
+
+          border-bottom:
+          1px solid
+          rgba(255,255,255,.06);
+
+          background:
+          rgba(255,255,255,.02);
+
+          backdrop-filter:
+          blur(10px);
+
+          position:relative;
+
+          z-index:2;
+
+        }
+
+        .logo-box{
+
+          display:flex;
+
+          align-items:center;
+
+          gap:12px;
+
+        }
+
+        .logo-box h1{
+
+          font-family:
+          'Cormorant Garamond',
+          serif;
+
+          font-size:34px;
+
+          font-weight:500;
+
+          letter-spacing:2px;
+
+          color:white;
+
+        }
+
+        /* =========================================
+           WELCOME
+        ========================================= */
+
+        .welcome-section{
+
+          text-align:center;
+
+          padding:80px 20px 40px;
+
+          position:relative;
+
+          z-index:2;
+
+        }
+
+        .welcome-section h2{
+
+          font-family:
+          'Cormorant Garamond',
+          serif;
+
+          font-size:58px;
+
+          font-weight:500;
+
+          margin-bottom:14px;
+
+          background:
+          linear-gradient(
+            135deg,
+            #d4af37 0%,
+            #f2c94c 50%,
+            #fff3c4 100%
+          );
+
+          -webkit-background-clip:text;
+
+          -webkit-text-fill-color:transparent;
+
+          text-shadow:
+          0 0 18px rgba(212,175,55,.18);
+
+        }
+
+        .welcome-section p{
+
+          font-size:14px;
+
+          color:
+          rgba(255,255,255,.65);
+
+          letter-spacing:1px;
+
+        }
+
+        /* =========================================
+           CARD GRID
+        ========================================= */
+
+        .card-grid{
+
+          display:grid;
+
+          grid-template-columns:
+          repeat(auto-fit,minmax(260px,1fr));
+
+          gap:30px;
+
+          padding:40px;
+
+          max-width:1200px;
+
+          margin:auto;
+
+          position:relative;
+
+          z-index:2;
+
+        }
+
+        /* =========================================
+           CARD
+        ========================================= */
+
+        .card{
+
+          background:
+          rgba(255,255,255,.03);
+
+          border:
+          1px solid
+          rgba(255,255,255,.06);
+
+          text-decoration:none;
+
+          color:white;
+
+          padding:36px 30px;
+
+          text-align:center;
+
+          border-radius:24px;
+
+          backdrop-filter:
+          blur(14px);
+
+          box-shadow:
+          0 15px 40px
+          rgba(0,0,0,.35);
+
+          transition:
+          .45s ease;
+
+          overflow:hidden;
+
+          position:relative;
+
+        }
+
+        .card::before{
+
+          content:"";
+
+          position:absolute;
+
+          inset:0;
+
+          background:
+          linear-gradient(
+            135deg,
+            rgba(212,175,55,.08),
+            transparent 40%
+          );
+
+          opacity:0;
+
+          transition:.45s ease;
+
+        }
+
+        .card:hover{
+
+          transform:
+          translateY(-10px);
+
+          border-color:
+          rgba(212,175,55,.22);
+
+          box-shadow:
+          0 25px 60px
+          rgba(0,0,0,.45);
+
+        }
+
+        .card:hover::before{
+
+          opacity:1;
+
+        }
+
+        /* =========================================
+           ICON
+        ========================================= */
+
+        .icon-box{
+
+          width:74px;
+          height:74px;
+
+          background:
+          linear-gradient(
+            135deg,
+            #d4af37,
+            #f2c94c
+          );
+
+          color:#111;
+
+          display:flex;
+
+          align-items:center;
+
+          justify-content:center;
+
+          margin:0 auto 24px;
+
+          border-radius:50%;
+
+          box-shadow:
+          0 10px 24px
+          rgba(212,175,55,.28);
+
+        }
+
+        /* =========================================
+           TITLE
+        ========================================= */
+
+        .card h3{
+
+          font-family:
+          'Cormorant Garamond',
+          serif;
+
+          font-size:30px;
+
+          font-weight:500;
+
+          margin-bottom:12px;
+
+          color:white;
+
+        }
+
+        /* =========================================
+           SUBTITLE
+        ========================================= */
+
+        .card p{
+
+          font-size:13px;
+
+          color:
+          rgba(255,255,255,.62);
+
+          line-height:1.7;
+
+        }
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media(max-width:768px){
+
           .dashboard-navbar{
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            padding:20px 50px;
-            border-bottom:1px solid #ddd;
-            background:white;
-          }
 
-          .logo-box{
-            display:flex;
-            align-items:center;
-            gap:10px;
+            padding:20px;
+
+            flex-direction:column;
+
+            gap:15px;
+
           }
 
           .logo-box h1{
-            font-family:'Cormorant Garamond', serif;
-            font-size:32px;
-            font-weight:500;
-            letter-spacing:2px;
+
+            font-size:28px;
+
           }
 
-          .logout-btn{
-            background:#c5a059;
-            color:white;
-            border:none;
-            padding:10px 22px;
-            font-size:12px;
-            letter-spacing:2px;
-            cursor:pointer;
-          }
-
-          .logout-btn:hover{
-            background:#a88745;
-          }
-
-          /* Welcome */
           .welcome-section{
-            text-align:center;
-            padding:60px 20px 30px;
+
+            padding:70px 20px 30px;
+
           }
 
           .welcome-section h2{
-            font-family:'Cormorant Garamond', serif;
-            font-size:50px;
-            font-weight:400;
-            margin-bottom:10px;
+
+            font-size:42px;
+
           }
 
           .welcome-section p{
-            font-size:14px;
-            color:#666;
-            letter-spacing:1px;
+
+            font-size:13px;
+
           }
 
-          /* Cards */
           .card-grid{
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-            gap:30px;
-            padding:40px;
-            max-width:1200px;
-            margin:auto;
+
+            padding:20px;
+
+            gap:20px;
+
           }
 
           .card{
-            background:white;
-            text-decoration:none;
-            color:#333;
-            padding:30px;
-            text-align:center;
-            border-radius:5px;
-            box-shadow:0px 4px 20px rgba(0,0,0,0.08);
-            transition:0.3s ease;
-          }
 
-          .card:hover{
-            transform:translateY(-8px);
-            box-shadow:0px 8px 30px rgba(0,0,0,0.12);
-          }
+            padding:30px 24px;
 
-          .icon-box{
-            width:70px;
-            height:70px;
-            background:#c5a059;
-            color:white;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            margin:0 auto 20px;
-            border-radius:50%;
+            border-radius:20px;
+
           }
 
           .card h3{
-            font-family:'Cormorant Garamond', serif;
-            font-size:28px;
-            font-weight:500;
-            margin-bottom:10px;
+
+            font-size:26px;
+
           }
 
-          .card p{
-            font-size:13px;
-            color:#777;
-            line-height:1.6;
+        }
+
+        /* =========================================
+           SMALL MOBILE
+        ========================================= */
+
+        @media(max-width:480px){
+
+          .welcome-section h2{
+
+            font-size:34px;
+
           }
 
-          /* Mobile */
-          @media(max-width:768px){
-            .dashboard-navbar{
-              padding:20px;
-              flex-direction:column;
-              gap:15px;
-            }
+          .card{
 
-            .welcome-section h2{
-              font-size:36px;
-            }
+            padding:26px 20px;
 
-            .card-grid{
-              padding:20px;
-            }
           }
+
+          .card h3{
+
+            font-size:24px;
+
+          }
+
+          .icon-box{
+
+            width:66px;
+            height:66px;
+
+          }
+
+        }
+
         `}
+
       </style>
 
       <div className="dashboard-container">
-        {/* Navbar */}
+
+        {/* NAVBAR */}
+
         <div className="dashboard-navbar">
+
           <div className="logo-box">
-            <LayoutDashboard size={28} color="#c5a059" />
-            <h1>Admin Dashboard</h1>
+
+            <LayoutDashboard
+              size={30}
+              color="#d4af37"
+            />
+
+            <h1>
+              Admin Dashboard
+            </h1>
+
           </div>
 
         </div>
 
-        {/* Welcome */}
+        {/* WELCOME */}
+
         <div className="welcome-section">
-          <h2>Welcome Admin</h2>
-          <p>Manage your wedding portfolio content beautifully</p>
+
+          <h2>
+            Welcome Admin
+          </h2>
+
+          <p>
+            Manage your wedding portfolio beautifully
+          </p>
+
         </div>
 
-        {/* Cards */}
+        {/* CARDS */}
+
         <div className="card-grid">
-          {menuItems.map((item, index) => (
-            <Link key={index} to={item.path} className="card">
-              <div className="icon-box">{item.icon}</div>
-              <h3>{item.title}</h3>
-              <p>{item.subtitle}</p>
-            </Link>
-          ))}
+
+          {menuItems.map(
+            (
+              item,
+              index
+            ) => (
+
+              <Link
+
+                key={index}
+
+                to={item.path}
+
+                className="card"
+
+              >
+
+                <div className="icon-box">
+
+                  {item.icon}
+
+                </div>
+
+                <h3>
+                  {item.title}
+                </h3>
+
+                <p>
+                  {item.subtitle}
+                </p>
+
+              </Link>
+
+            )
+          )}
+
         </div>
+
       </div>
+
     </>
+
   );
+
 }

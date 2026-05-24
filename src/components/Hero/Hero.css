@@ -870,3 +870,53 @@ body{
   }
 
 }
+.rating-stars {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 20px;
+  color: #d4af37; /* Gold color matching your theme */
+  font-size: 1rem;
+}
+
+.rating-stars span {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  margin-left: 10px;
+  letter-spacing: 0.5px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .rating-stars {
+    justify-content: center;
+    margin-bottom: 15px;
+  }
+}
+.rating-container {
+  display: flex;
+  flex-direction: column; /* Stars kela text varum */
+  align-items: center;    /* Center-la align aagum */
+  margin-bottom: 20px;
+  gap: 8px;               /* Stars-kum text-kum naduvula gap */
+}
+
+.stars-wrapper {
+  display: flex;
+  gap: 4px;
+  color: #d4af37; /* Gold color */
+}
+
+.rating-text {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  font-weight: 300;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .rating-container {
+    margin-bottom: 15px;
+  }
+}

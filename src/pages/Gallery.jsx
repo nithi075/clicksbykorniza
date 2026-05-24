@@ -33,7 +33,7 @@ export default function Gallery() {
 
     {
       title:
-        "Baby Shower",
+        "Baby Shoot",
 
       category:
         "Celebrations",
@@ -45,7 +45,7 @@ export default function Gallery() {
         wedding2,
 
       description:
-        "Beautiful baby shower memories filled with joy, love, and family emotions."
+       "Adorable baby moments captured with warmth, playful emotions, and beautifully styled photography."
     },
 
     {
@@ -84,7 +84,7 @@ export default function Gallery() {
 
     {
       title:
-        "Portrait Studio",
+        "Model Shoots",
 
       category:
         "Portraits",
@@ -96,7 +96,7 @@ export default function Gallery() {
         portrait,
 
       description:
-        "Creative portrait sessions with premium lighting and editorial styling."
+    "Stylized model shoots crafted with cinematic lighting, fashion-forward posing, and premium editorial aesthetics."
     },
 
     {
