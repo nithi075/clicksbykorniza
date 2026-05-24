@@ -87,7 +87,7 @@ export default function Hero() {
       <FaStar key={i} size={16} />
     ))}
   </div>
-  <span className="rating-text">Trusted by 500+ Couples</span>
+  <span className="rating-text">Trusted by 100+ Clients</span>
 </div>
 
               <motion.button
