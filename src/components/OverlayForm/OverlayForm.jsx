@@ -4,7 +4,9 @@ import { useNavigate } from "react-router-dom";
 
 import "./OverlayForm.css";
 
-export default function OverlayForm() {
+export default function OverlayForm({
+  setShowForm
+}) {
 
   const navigate = useNavigate();
 
