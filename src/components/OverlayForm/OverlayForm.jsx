@@ -187,16 +187,16 @@ ${formData.message}
 
         {/* CLOSE BUTTON */}
 
-       <button
+   <button
   type="button"
-  className="close-btn"
-  onClick={() => navigate(-1)}
+  className="form-close-btn"
+  onClick={(e) => {
+    e.stopPropagation();
+    navigate("/");
+  }}
 >
-
-          ✕
-
-        </button>
-
+  ✕
+</button>
         {/* TITLE */}
 
         <h2>

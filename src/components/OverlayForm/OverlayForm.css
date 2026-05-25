@@ -136,7 +136,7 @@
 
   position:relative;
 
-  z-index:5;
+  z-index:1000;
 
   width:100%;
 
@@ -145,6 +145,8 @@
   max-height:92vh;
 
   overflow-y:auto;
+
+  overflow-x:hidden;
 
   border-radius:32px;
 
@@ -170,6 +172,12 @@
 
   animation:
   formPop .45s ease;
+
+  scrollbar-width:thin;
+
+  scrollbar-color:
+  rgba(212,175,55,.3)
+  transparent;
 
 }
 
@@ -220,28 +228,19 @@
 
 }
 
-.form-container{
-
-  scrollbar-width:thin;
-
-  scrollbar-color:
-  rgba(212,175,55,.3)
-  transparent;
-
-}
-
 /* =========================================
-   CLOSE BUTTON
+   FORM CLOSE BUTTON
 ========================================= */
 
-.close-btn{
+.form-close-btn{
 
-  position:absolute;
+  position:sticky;
 
-  top:18px;
-  right:18px;
+  top:0;
 
-  z-index:20;
+  margin-left:auto;
+
+  z-index:999999;
 
   width:42px;
   height:42px;
@@ -258,25 +257,25 @@
 
   justify-content:center;
 
+  pointer-events:auto;
+
   background:
-  rgba(255,255,255,.08);
+  rgba(212,175,55,.95);
 
   backdrop-filter:
   blur(8px);
 
-  color:#fff;
+  color:#111;
 
   font-size:1rem;
+
+  font-weight:700;
 
   transition:.35s ease;
 
 }
 
-.close-btn:hover{
-
-  background:var(--gold);
-
-  color:#111;
+.form-close-btn:hover{
 
   transform:
   rotate(90deg)
@@ -493,8 +492,6 @@ textarea{
 
 }
 
-/* focus */
-
 input:focus,
 select:focus,
 textarea:focus{
@@ -508,8 +505,6 @@ textarea:focus{
 
 }
 
-/* placeholders */
-
 input::placeholder,
 textarea::placeholder{
 
@@ -518,28 +513,11 @@ textarea::placeholder{
 
 }
 
-/* textarea */
-
 textarea{
 
   resize:none;
 
   min-height:120px;
-
-}
-
-/* =========================================
-   NAME FIELDS
-========================================= */
-
-.name-fields{
-
-  display:grid;
-
-  grid-template-columns:
-  1fr 1fr;
-
-  gap:14px;
 
 }
 
@@ -637,13 +615,11 @@ textarea{
 
     max-height:94vh;
 
-    overflow-y:auto;
-
     border-radius:
     28px 28px 0 0;
 
     padding:
-    36px 22px;
+    22px 22px 36px;
 
   }
 
@@ -671,14 +647,6 @@ textarea{
 
   }
 
-  .name-fields{
-
-    grid-template-columns:1fr;
-
-    gap:12px;
-
-  }
-
 }
 
 /* =========================================
@@ -690,7 +658,7 @@ textarea{
   .form-container{
 
     padding:
-    32px 18px;
+    18px 18px 30px;
 
   }
 
@@ -728,13 +696,10 @@ textarea{
 
   }
 
-  .close-btn{
+  .form-close-btn{
 
     width:38px;
     height:38px;
-
-    top:14px;
-    right:14px;
 
   }
 
@@ -752,7 +717,7 @@ textarea{
 
   }
 
-  .close-btn{
+  .form-close-btn{
 
     width:34px;
     height:34px;

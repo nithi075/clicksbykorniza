@@ -1,37 +1,42 @@
-import { useState } from "react";
 import "./floating.css";
-import OverlayForm from "../OverlayForm/OverlayForm";
+import { useNavigate } from "react-router-dom";
 
 export default function FloatingChat() {
-  const [showForm, setShowForm] = useState(false);
+
+  const navigate = useNavigate();
 
   return (
     <>
       {/* =========================================
           FLOATING CONTAINER
       ========================================= */}
+
       <div className="floating-container">
+
         {/* =========================================
             PREMIUM BOOK NOW BUTTON
         ========================================= */}
+
         <button
           className="floating-chat-glass"
-          onClick={() => setShowForm(true)}
+          onClick={() => navigate("/book-event")}
         >
+
           {/* LUXURY SHIMMER OVERLAY */}
+
           <span className="shimmer-effect"></span>
 
-          <span className="chat-label">Book Now</span>
+          <span className="chat-label">
+            Book Now
+          </span>
+
         </button>
 
         {/* BACKGROUND AMBIENT GLOW */}
-        <div className="floating-glow"></div>
-      </div>
 
-      {/* =========================================
-          OVERLAY FORM
-      ========================================= */}
-      {showForm && <OverlayForm setShowForm={setShowForm} />}
+        <div className="floating-glow"></div>
+
+      </div>
     </>
   );
 }
