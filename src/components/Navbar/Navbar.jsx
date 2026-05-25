@@ -64,21 +64,31 @@ export default function Navbar() {
      CONTACT SCROLL
   ========================================= */
 
-/* =========================================
-   CONTACT SCROLL
-========================================= */
+  const handleContactClick = () => {
 
-const handleContactClick = () => {
+    setMenuOpen(false);
 
-  setMenuOpen(false);
+    if (location.pathname !== "/") {
 
-  // IF USER IS NOT IN HOME PAGE
-  if (location.pathname !== "/") {
+      navigate("/");
 
-    navigate("/");
+      setTimeout(() => {
 
-    // WAIT FOR HOME PAGE TO LOAD
-    setTimeout(() => {
+        const section =
+          document.getElementById("contact");
+
+        if (section) {
+
+          section.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+
+        }
+
+      }, 500);
+
+    } else {
 
       const section =
         document.getElementById("contact");
@@ -92,28 +102,56 @@ const handleContactClick = () => {
 
       }
 
-    }, 500);
+    }
 
-  }
+  };
 
-  // IF USER ALREADY IN HOME PAGE
-  else {
+  /* =========================================
+     TESTIMONIALS SCROLL
+  ========================================= */
 
-    const section =
-      document.getElementById("contact");
+  const handleTestimonialsClick = () => {
 
-    if (section) {
+    setMenuOpen(false);
 
-      section.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+    if (location.pathname !== "/") {
+
+      navigate("/");
+
+      setTimeout(() => {
+
+        const section =
+          document.getElementById("testimonials");
+
+        if (section) {
+
+          section.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+
+        }
+
+      }, 500);
+
+    } else {
+
+      const section =
+        document.getElementById("testimonials");
+
+      if (section) {
+
+        section.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+
+      }
 
     }
 
-  }
+  };
 
-};
   const navItems = [
 
     {
@@ -196,6 +234,13 @@ const handleContactClick = () => {
       ]
     },
 
+    /* ================= TESTIMONIALS ================= */
+
+    {
+      name: "Testimonials",
+      action: handleTestimonialsClick
+    },
+
     /* ================= CONTACT ================= */
 
     {
@@ -251,10 +296,7 @@ const handleContactClick = () => {
 
                     <button
                       className="nav-link nav-btn"
-
-                      onClick={
-                        item.action
-                      }
+                      onClick={item.action}
                     >
 
                       {item.name}
@@ -283,9 +325,7 @@ const handleContactClick = () => {
                       {item.name}
 
                       <span className="dropdown-arrow">
-
                         +
-
                       </span>
 
                     </div>
@@ -300,11 +340,7 @@ const handleContactClick = () => {
 
                           <a
                             key={subIndex}
-
-                            href={
-                              subItem.href
-                            }
-
+                            href={subItem.href}
                             className="dropdown-link"
                           >
 
@@ -332,11 +368,8 @@ const handleContactClick = () => {
 
         <div
           className="menu-btn"
-
           onClick={() =>
-            setMenuOpen(
-              !menuOpen
-            )
+            setMenuOpen(!menuOpen)
           }
         >
 
@@ -367,7 +400,6 @@ const handleContactClick = () => {
         {menuOpen && (
 
           <motion.div
-
             className="mobile-overlay"
 
             initial={{
@@ -381,11 +413,9 @@ const handleContactClick = () => {
             exit={{
               opacity: 0
             }}
-
           >
 
             <motion.div
-
               className="mobile-menu-container"
 
               initial={{
@@ -403,7 +433,6 @@ const handleContactClick = () => {
               transition={{
                 duration: 0.45
               }}
-
             >
 
               <div className="mobile-menu-list">
@@ -413,7 +442,6 @@ const handleContactClick = () => {
 
                     <div
                       key={index}
-
                       className="mobile-menu-item"
                     >
 
@@ -422,13 +450,8 @@ const handleContactClick = () => {
                         item.action ? (
 
                           <button
-
                             className="mobile-main-link nav-btn"
-
-                            onClick={
-                              item.action
-                            }
-
+                            onClick={item.action}
                           >
 
                             {item.name}
@@ -438,15 +461,12 @@ const handleContactClick = () => {
                         ) : (
 
                           <a
-
                             href={item.href}
-
                             className="mobile-main-link"
 
                             onClick={() =>
                               setMenuOpen(false)
                             }
-
                           >
 
                             {item.name}
@@ -460,7 +480,6 @@ const handleContactClick = () => {
                         <>
 
                           <div
-
                             className="mobile-dropdown-header"
 
                             onClick={() =>
@@ -474,23 +493,18 @@ const handleContactClick = () => {
                               )
 
                             }
-
                           >
 
                             <span>
-
                               {item.name}
-
                             </span>
 
                             <FiChevronDown
-
                               className={`dropdown-icon ${
                                 openMobileDropdown === index
                                   ? "rotate"
                                   : ""
                               }`}
-
                             />
 
                           </div>
@@ -500,7 +514,6 @@ const handleContactClick = () => {
                             {openMobileDropdown === index && (
 
                               <motion.div
-
                                 className="mobile-submenu"
 
                                 initial={{
@@ -517,7 +530,6 @@ const handleContactClick = () => {
                                   height: 0,
                                   opacity: 0
                                 }}
-
                               >
 
                                 {item.dropdown.map(
@@ -527,19 +539,15 @@ const handleContactClick = () => {
                                   ) => (
 
                                     <a
-
                                       key={subIndex}
 
-                                      href={
-                                        subItem.href
-                                      }
+                                      href={subItem.href}
 
                                       className="mobile-sub-link"
 
                                       onClick={() =>
                                         setMenuOpen(false)
                                       }
-
                                     >
 
                                       {subItem.name}
