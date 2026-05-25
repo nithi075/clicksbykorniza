@@ -1200,3 +1200,187 @@
   }
 
 }
+.clickable-image {
+  cursor: pointer;
+}
+
+/* Fullscreen Overlay */
+.image-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 9999;
+
+  animation: fadeIn 0.4s ease;
+}
+
+.modal-image {
+  width: 90%;
+  max-width: 900px;
+
+  border-radius: 12px;
+
+  animation: zoomIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.8);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+/* =========================================
+   CLICKABLE IMAGE
+========================================= */
+
+
+
+
+
+/* =========================================
+   FIX OVERLAY BLOCKING CLICK
+========================================= */
+
+
+
+/* =========================================
+   FULLSCREEN IMAGE MODAL
+========================================= */
+
+
+/* =========================================
+   MODAL IMAGE
+========================================= */
+
+.modal-image{
+
+  width:auto;
+
+  max-width:92%;
+
+  max-height:92vh;
+
+  object-fit:contain;
+
+  border-radius:20px;
+
+  box-shadow:
+
+  0 25px 80px rgba(0,0,0,.65),
+
+  0 0 40px rgba(212,175,55,.14);
+
+  animation:
+  zoomIn .45s cubic-bezier(0.16,1,0.3,1);
+
+}
+
+/* =========================================
+   CLOSE EFFECT
+========================================= */
+
+.image-modal:active .modal-image{
+
+  transform:scale(.98);
+
+}
+
+/* =========================================
+   FADE ANIMATION
+========================================= */
+
+@keyframes fadeIn{
+
+  from{
+    opacity:0;
+  }
+
+  to{
+    opacity:1;
+  }
+
+}
+
+/* =========================================
+   ZOOM ANIMATION
+========================================= */
+
+@keyframes zoomIn{
+
+  from{
+
+    opacity:0;
+
+    transform:
+    scale(.82)
+    translateY(20px);
+
+  }
+
+  to{
+
+    opacity:1;
+
+    transform:
+    scale(1)
+    translateY(0);
+
+  }
+
+}
+
+/* =========================================
+   MOBILE RESPONSIVE
+========================================= */
+
+@media(max-width:768px){
+
+  .image-modal{
+
+    padding:14px;
+
+  }
+
+  .modal-image{
+
+    max-width:100%;
+
+    max-height:84vh;
+
+    border-radius:12px;
+
+  }
+
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media(max-width:480px){
+
+  .modal-image{
+
+    border-radius:10px;
+
+  }
+
+}

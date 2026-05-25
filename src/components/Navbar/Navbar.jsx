@@ -119,10 +119,6 @@ export default function Navbar() {
       ]
     },
 
-    {
-      name: "Packages",
-      href: "#packages"
-    },
 
     {
       name: "Contact",

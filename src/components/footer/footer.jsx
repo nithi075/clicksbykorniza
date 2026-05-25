@@ -54,10 +54,7 @@ export default function Footer() {
 
           <div className="footer-brand-section">
 
-            <Link
-              to="/admin"
-              className="footer-logo-link"
-            >
+           
 
               <motion.h2
 
@@ -87,7 +84,7 @@ export default function Footer() {
 
               </motion.h2>
 
-            </Link>
+           
 
             <span className="footer-tagline">
 
@@ -215,12 +212,7 @@ export default function Footer() {
 
             </a>
 
-            <a href="#services">
-
-              SERVICES
-
-            </a>
-
+        
             <a href="#testimonials">
 
               JOURNAL
@@ -256,7 +248,7 @@ export default function Footer() {
 
             <motion.a
 
-              href="https://wa.me/919597258078"
+              href="https://wa.me/918680068246"
 
               target="_blank"
 
