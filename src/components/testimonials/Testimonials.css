@@ -211,3 +211,233 @@
     display: flex; align-items: center; justify-content: center;
   }
 }
+/* =========================
+   PREMIUM OVERLAY
+========================= */
+
+.testimonial-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 25px;
+
+  background:
+    radial-gradient(circle at top right, rgba(212,175,55,0.12), transparent 35%),
+    radial-gradient(circle at bottom left, rgba(242,201,76,0.08), transparent 40%),
+    rgba(0,0,0,0.88);
+
+  backdrop-filter: blur(18px);
+  animation: overlayFade 0.35s ease;
+}
+
+.overlay-card {
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+
+  padding: 55px 45px 45px;
+
+  border-radius: 34px;
+
+  background: rgba(255,255,255,0.04);
+
+  backdrop-filter: blur(20px);
+
+  border: 1px solid rgba(212,175,55,0.22);
+
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.03),
+    0 25px 80px rgba(0,0,0,0.6),
+    0 0 60px rgba(212,175,55,0.08);
+
+  overflow: hidden;
+}
+
+/* Gold Glow */
+.overlay-card::before {
+  content: "";
+  position: absolute;
+  width: 280px;
+  height: 280px;
+
+  top: -120px;
+  right: -120px;
+
+  background: radial-gradient(circle, rgba(212,175,55,0.22), transparent 70%);
+  filter: blur(10px);
+
+  pointer-events: none;
+}
+
+.overlay-card img {
+  width: 130px;
+  height: 130px;
+
+  object-fit: cover;
+  border-radius: 50%;
+
+  margin-bottom: 24px;
+
+  border: 4px solid rgba(212,175,55,0.45);
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.45),
+    0 0 25px rgba(212,175,55,0.18);
+}
+
+.overlay-card h3 {
+  font-size: 2.2rem;
+  margin-bottom: 18px;
+
+  color: #fff;
+
+  font-family: "Cormorant Garamond", serif;
+
+  letter-spacing: 0.5px;
+}
+
+.overlay-card p {
+  color: rgba(255,255,255,0.72);
+
+  font-size: 1rem;
+  line-height: 2;
+
+  font-weight: 300;
+}
+
+/* Quote Icon */
+.overlay-card::after {
+  content: "“";
+
+  position: absolute;
+
+  top: 20px;
+  left: 30px;
+
+  font-size: 7rem;
+
+  color: rgba(212,175,55,0.08);
+
+  font-family: serif;
+
+  pointer-events: none;
+}
+
+/* Close Button */
+.close-btn {
+  position: absolute;
+
+  top: 18px;
+  right: 18px;
+
+  width: 42px;
+  height: 42px;
+
+  border: none;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  background: rgba(255,255,255,0.06);
+
+  color: #fff;
+
+  backdrop-filter: blur(10px);
+
+  transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+  background: var(--gold);
+  color: #111;
+
+  transform: rotate(90deg) scale(1.08);
+}
+
+/* Animation */
+@keyframes overlayFade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+
+  .overlay-card {
+    padding: 45px 24px 30px;
+    border-radius: 26px;
+  }
+
+  .overlay-card img {
+    width: 95px;
+    height: 95px;
+  }
+
+  .overlay-card h3 {
+    font-size: 1.7rem;
+  }
+
+  .overlay-card p {
+    font-size: 0.92rem;
+    line-height: 1.9;
+  }
+
+  .close-btn {
+    width: 36px;
+    height: 36px;
+  }
+}
+/* MOBILE OVERLAY SCROLL FIX */
+
+@media (max-width: 768px) {
+
+  .testimonial-overlay {
+    align-items: flex-start;
+    overflow-y: auto;
+
+    padding: 30px 18px;
+  }
+
+  .overlay-card {
+    margin: auto 0;
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    scrollbar-width: thin;
+    scrollbar-color: rgba(212,175,55,0.4) transparent;
+  }
+
+  /* Chrome Scrollbar */
+  .overlay-card::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  .overlay-card::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .overlay-card::-webkit-scrollbar-thumb {
+    background: rgba(212,175,55,0.35);
+    border-radius: 20px;
+  }
+
+}

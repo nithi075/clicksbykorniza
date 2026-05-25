@@ -18,7 +18,7 @@ import wedding from "../assets/img2.jpg";
 import wedding2 from "../assets/img6.jpg";
 import couple from "../assets/img3.jpg";
 import portrait from "../assets/img4.jpg";
-import candid from "../assets/img5.jpg";
+import candid from "../assets/img5.jpeg";
 
 export default function Gallery() {
 

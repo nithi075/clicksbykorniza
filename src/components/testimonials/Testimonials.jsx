@@ -30,7 +30,7 @@ export default function Testimonials() {
 
   useEffect(() => {
     if (reviews.length === 0) return;
-    const timer = setInterval(() => nextSlide(), 10000);
+    const timer = setInterval(() => nextSlide(), 30000);
     return () => clearInterval(timer);
   }, [index, reviews]);
 
