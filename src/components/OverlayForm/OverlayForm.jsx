@@ -68,9 +68,9 @@ export default function OverlayForm() {
 
     "Diamond 130-150K",
 
-    "Royal 2L - 2.5L",
+    "Luxury 2L - 3L",
 
-    "Luxury 3L - 12L",
+    "Royal 3L - 12L",
 
     "Custom"
 
@@ -187,10 +187,11 @@ ${formData.message}
 
         {/* CLOSE BUTTON */}
 
-        <button
-          className="close-btn"
-          onClick={() => navigate(-1)}
-        >
+       <button
+  type="button"
+  className="close-btn"
+  onClick={() => navigate(-1)}
+>
 
           ✕
 
@@ -204,12 +205,10 @@ ${formData.message}
 
         <p className="form-subtitle">
 
-          Let’s create a luxury
-          cinematic experience
-          for your special day.
-
+        We don’t shoot weddings. We craft cinematic legacies for your special day.  
         </p>
-
+        <p>
+2026 dates filling fast 💨</p>
         {/* FORM */}
 
         <form

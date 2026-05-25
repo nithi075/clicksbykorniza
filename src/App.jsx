@@ -150,13 +150,10 @@ function App() {
         path="/galleryDetails/:category"
         element={<GalleryDetails />}
       />
-    
-    <Route 
-      path="/book-event"
-      element={
-        <OverlayForm setShowForm={() => {}}/>
-      }
-      />
+  <Route 
+  path="/book-event"
+  element={<OverlayForm />}
+/>
       
 
       {/* ================= ADMIN ROUTES ================= */}
