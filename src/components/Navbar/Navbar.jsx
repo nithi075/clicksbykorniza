@@ -1,29 +1,55 @@
 import { useState, useEffect } from "react";
+
+import {
+  useNavigate,
+  useLocation
+} from "react-router-dom";
+
 import { motion, AnimatePresence } from "framer-motion";
+
 import { FiChevronDown } from "react-icons/fi";
 
 import "./Navbar.css";
+
 import logo from "../../assets/logo.png";
 
 export default function Navbar() {
 
-  const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
-  const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
 
-  const [openMobileDropdown, setOpenMobileDropdown] =
-    useState(null);
+  const [menuOpen, setMenuOpen] =
+    useState(false);
+
+  const [scrolled, setScrolled] =
+    useState(false);
+
+  const [
+    openMobileDropdown,
+    setOpenMobileDropdown
+  ] = useState(null);
 
   useEffect(() => {
 
     const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
+
+      setScrolled(
+        window.scrollY > 40
+      );
+
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener(
+      "scroll",
+      handleScroll
+    );
 
     return () =>
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener(
+        "scroll",
+        handleScroll
+      );
 
   }, []);
 
@@ -34,6 +60,60 @@ export default function Navbar() {
 
   }, [menuOpen]);
 
+  /* =========================================
+     CONTACT SCROLL
+  ========================================= */
+
+/* =========================================
+   CONTACT SCROLL
+========================================= */
+
+const handleContactClick = () => {
+
+  setMenuOpen(false);
+
+  // IF USER IS NOT IN HOME PAGE
+  if (location.pathname !== "/") {
+
+    navigate("/");
+
+    // WAIT FOR HOME PAGE TO LOAD
+    setTimeout(() => {
+
+      const section =
+        document.getElementById("contact");
+
+      if (section) {
+
+        section.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+
+      }
+
+    }, 500);
+
+  }
+
+  // IF USER ALREADY IN HOME PAGE
+  else {
+
+    const section =
+      document.getElementById("contact");
+
+    if (section) {
+
+      section.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+
+    }
+
+  }
+
+};
   const navItems = [
 
     {
@@ -76,10 +156,7 @@ export default function Navbar() {
         {
           name: "Outdoor Shoot",
           href: "/galleryDetails/outdoor-shoot"
-        },
-
-       
-
+        }
 
       ]
     },
@@ -119,10 +196,11 @@ export default function Navbar() {
       ]
     },
 
+    /* ================= CONTACT ================= */
 
     {
       name: "Contact",
-      href: "#contact"
+      action: handleContactClick
     }
 
   ];
@@ -131,7 +209,9 @@ export default function Navbar() {
 
     <nav
       className={`navbar ${
-        scrolled ? "navbar-scroll" : ""
+        scrolled
+          ? "navbar-scroll"
+          : ""
       }`}
     >
 
@@ -157,61 +237,94 @@ export default function Navbar() {
 
         <div className="desktop-menu">
 
-          {navItems.map((item, index) => (
+          {navItems.map(
+            (item, index) => (
 
-            <div
-              key={index}
-              className="nav-item"
-            >
+              <div
+                key={index}
+                className="nav-item"
+              >
 
-              {!item.dropdown ? (
+                {!item.dropdown ? (
 
-                <a
-                  href={item.href}
-                  className="nav-link"
-                >
-                  {item.name}
-                </a>
+                  item.action ? (
 
-              ) : (
+                    <button
+                      className="nav-link nav-btn"
 
-                <div className="dropdown-wrapper">
+                      onClick={
+                        item.action
+                      }
+                    >
 
-                  <div className="dropdown-title">
+                      {item.name}
 
-                    {item.name}
+                    </button>
 
-                    <span className="dropdown-arrow">
-                      +
-                    </span>
+                  ) : (
+
+                    <a
+                      href={item.href}
+                      className="nav-link"
+                    >
+
+                      {item.name}
+
+                    </a>
+
+                  )
+
+                ) : (
+
+                  <div className="dropdown-wrapper">
+
+                    <div className="dropdown-title">
+
+                      {item.name}
+
+                      <span className="dropdown-arrow">
+
+                        +
+
+                      </span>
+
+                    </div>
+
+                    <div className="dropdown-menu">
+
+                      {item.dropdown.map(
+                        (
+                          subItem,
+                          subIndex
+                        ) => (
+
+                          <a
+                            key={subIndex}
+
+                            href={
+                              subItem.href
+                            }
+
+                            className="dropdown-link"
+                          >
+
+                            {subItem.name}
+
+                          </a>
+
+                        )
+                      )}
+
+                    </div>
 
                   </div>
 
-                  <div className="dropdown-menu">
+                )}
 
-                    {item.dropdown.map(
-                      (subItem, subIndex) => (
+              </div>
 
-                        <a
-                          key={subIndex}
-                          href={subItem.href}
-                          className="dropdown-link"
-                        >
-                          {subItem.name}
-                        </a>
-
-                      )
-                    )}
-
-                  </div>
-
-                </div>
-
-              )}
-
-            </div>
-
-          ))}
+            )
+          )}
 
         </div>
 
@@ -219,8 +332,11 @@ export default function Navbar() {
 
         <div
           className="menu-btn"
+
           onClick={() =>
-            setMenuOpen(!menuOpen)
+            setMenuOpen(
+              !menuOpen
+            )
           }
         >
 
@@ -254,11 +370,17 @@ export default function Navbar() {
 
             className="mobile-overlay"
 
-            initial={{ opacity: 0 }}
+            initial={{
+              opacity: 0
+            }}
 
-            animate={{ opacity: 1 }}
+            animate={{
+              opacity: 1
+            }}
 
-            exit={{ opacity: 0 }}
+            exit={{
+              opacity: 0
+            }}
 
           >
 
@@ -266,141 +388,181 @@ export default function Navbar() {
 
               className="mobile-menu-container"
 
-              initial={{ x: "100%" }}
+              initial={{
+                x: "100%"
+              }}
 
-              animate={{ x: 0 }}
+              animate={{
+                x: 0
+              }}
 
-              exit={{ x: "100%" }}
+              exit={{
+                x: "100%"
+              }}
 
-              transition={{ duration: 0.45 }}
+              transition={{
+                duration: 0.45
+              }}
 
             >
 
               <div className="mobile-menu-list">
 
-                {navItems.map((item, index) => (
+                {navItems.map(
+                  (item, index) => (
 
-                  <div
-                    key={index}
-                    className="mobile-menu-item"
-                  >
+                    <div
+                      key={index}
 
-                    {!item.dropdown ? (
+                      className="mobile-menu-item"
+                    >
 
-                      <a
+                      {!item.dropdown ? (
 
-                        href={item.href}
+                        item.action ? (
 
-                        className="mobile-main-link"
+                          <button
 
-                        onClick={() =>
-                          setMenuOpen(false)
-                        }
+                            className="mobile-main-link nav-btn"
 
-                      >
+                            onClick={
+                              item.action
+                            }
 
-                        {item.name}
+                          >
 
-                      </a>
+                            {item.name}
 
-                    ) : (
+                          </button>
 
-                      <>
+                        ) : (
 
-                        <div
+                          <a
 
-                          className="mobile-dropdown-header"
+                            href={item.href}
 
-                          onClick={() =>
+                            className="mobile-main-link"
 
-                            setOpenMobileDropdown(
+                            onClick={() =>
+                              setMenuOpen(false)
+                            }
 
-                              openMobileDropdown === index
-                                ? null
-                                : index
+                          >
 
-                            )
+                            {item.name}
 
-                          }
+                          </a>
 
-                        >
+                        )
 
-                          <span>{item.name}</span>
+                      ) : (
 
-                          <FiChevronDown
+                        <>
 
-                            className={`dropdown-icon ${
-                              openMobileDropdown === index
-                                ? "rotate"
-                                : ""
-                            }`}
+                          <div
 
-                          />
+                            className="mobile-dropdown-header"
 
-                        </div>
+                            onClick={() =>
 
-                        <AnimatePresence>
+                              setOpenMobileDropdown(
 
-                          {openMobileDropdown === index && (
+                                openMobileDropdown === index
+                                  ? null
+                                  : index
 
-                            <motion.div
+                              )
 
-                              className="mobile-submenu"
+                            }
 
-                              initial={{
-                                height: 0,
-                                opacity: 0
-                              }}
+                          >
 
-                              animate={{
-                                height: "auto",
-                                opacity: 1
-                              }}
+                            <span>
 
-                              exit={{
-                                height: 0,
-                                opacity: 0
-                              }}
+                              {item.name}
 
-                            >
+                            </span>
 
-                              {item.dropdown.map(
-                                (subItem, subIndex) => (
+                            <FiChevronDown
 
-                                  <a
+                              className={`dropdown-icon ${
+                                openMobileDropdown === index
+                                  ? "rotate"
+                                  : ""
+                              }`}
 
-                                    key={subIndex}
+                            />
 
-                                    href={subItem.href}
+                          </div>
 
-                                    className="mobile-sub-link"
+                          <AnimatePresence>
 
-                                    onClick={() =>
-                                      setMenuOpen(false)
-                                    }
+                            {openMobileDropdown === index && (
 
-                                  >
+                              <motion.div
 
-                                    {subItem.name}
+                                className="mobile-submenu"
 
-                                  </a>
+                                initial={{
+                                  height: 0,
+                                  opacity: 0
+                                }}
 
-                                )
-                              )}
+                                animate={{
+                                  height: "auto",
+                                  opacity: 1
+                                }}
 
-                            </motion.div>
+                                exit={{
+                                  height: 0,
+                                  opacity: 0
+                                }}
 
-                          )}
+                              >
 
-                        </AnimatePresence>
+                                {item.dropdown.map(
+                                  (
+                                    subItem,
+                                    subIndex
+                                  ) => (
 
-                      </>
+                                    <a
 
-                    )}
+                                      key={subIndex}
 
-                  </div>
+                                      href={
+                                        subItem.href
+                                      }
 
-                ))}
+                                      className="mobile-sub-link"
+
+                                      onClick={() =>
+                                        setMenuOpen(false)
+                                      }
+
+                                    >
+
+                                      {subItem.name}
+
+                                    </a>
+
+                                  )
+                                )}
+
+                              </motion.div>
+
+                            )}
+
+                          </AnimatePresence>
+
+                        </>
+
+                      )}
+
+                    </div>
+
+                  )
+                )}
 
               </div>
 

@@ -28,6 +28,15 @@ const GalleryPage = () => {
 
   const location = useLocation();
 
+  /* =========================================
+     NAVBAR MENU STATE
+  ========================================= */
+
+  const [
+    menuOpen,
+    setMenuOpen
+  ] = useState(false);
+
   const [allImages, setAllImages] =
     useState([]);
 
@@ -108,10 +117,13 @@ const GalleryPage = () => {
       desc:
         "Grand reception celebrations documented.",
     },
+
     engagement: {
-  title: "Engagement",
-  desc: "Capturing beautiful engagement moments forever.",
-},
+      title: "Engagement",
+
+      desc:
+        "Capturing beautiful engagement moments forever.",
+    },
 
     "bridal-photography": {
       title:
@@ -145,7 +157,6 @@ const GalleryPage = () => {
         "Celebrating motherhood beautifully.",
     },
 
-
     "baby-shoots": {
       title:
         "Baby Photography",
@@ -153,8 +164,6 @@ const GalleryPage = () => {
       desc:
         "Capturing little smiles forever.",
     },
-
-   
 
   };
 
@@ -201,6 +210,7 @@ const GalleryPage = () => {
         } finally {
 
           setLoading(false);
+
         }
       };
 
@@ -234,13 +244,21 @@ const GalleryPage = () => {
     setVisibleCount(
       (prev) => prev + 8
     );
+
   };
 
   return (
 
     <div className="gallery-page-container">
 
-      <Navbar />
+      {/* =========================================
+         NAVBAR
+      ========================================= */}
+
+      <Navbar
+        menuOpen={menuOpen}
+        setMenuOpen={setMenuOpen}
+      />
 
       <div className="gallery-main-wrapper">
 
