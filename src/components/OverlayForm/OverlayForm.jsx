@@ -1,7 +1,5 @@
 import { useState } from "react";
-
 import { useNavigate } from "react-router-dom";
-
 import "./OverlayForm.css";
 
 export default function OverlayForm({
@@ -44,6 +42,8 @@ export default function OverlayForm({
 
     "Engagement",
 
+    "Christian Weddings",
+
     "Birthday",
 
     "Ear Piercing Ceremony",
@@ -57,7 +57,7 @@ export default function OverlayForm({
   ];
 
   /* =========================================
-     BUDGET OPTIONS
+     WEDDING BUDGET OPTIONS
   ========================================= */
 
   const weddingBudgets = [
@@ -78,6 +78,34 @@ export default function OverlayForm({
 
   ];
 
+  /* =========================================
+     CHRISTIAN WEDDING BUDGETS
+  ========================================= */
+
+  const christianWeddingBudgets = [
+
+    "Bronze ₹30K",
+
+    "Silver ₹40K",
+
+    "Gold ₹50K - ₹60K",
+
+    "Platinum ₹65K - ₹1L",
+
+    "Diamond Above ₹1.5L",
+
+    "Luxury 2L - 3L",
+
+    "Royal 3L - 12L",
+
+    "Custom"
+
+  ];
+
+  /* =========================================
+     NORMAL EVENT BUDGETS
+  ========================================= */
+
   const normalBudgets = [
 
     "Bronze 18-24K",
@@ -92,12 +120,21 @@ export default function OverlayForm({
 
   ];
 
+  /* =========================================
+     SELECT BUDGET BASED ON EVENT
+  ========================================= */
+
   const selectedBudgetOptions =
 
     formData.event ===
     "Wedding & Reception"
 
       ? weddingBudgets
+
+      : formData.event ===
+        "Christian Weddings"
+
+      ? christianWeddingBudgets
 
       : normalBudgets;
 
@@ -189,16 +226,17 @@ ${formData.message}
 
         {/* CLOSE BUTTON */}
 
-   <button
-  type="button"
-  className="form-close-btn"
-  onClick={(e) => {
-    e.stopPropagation();
-    navigate("/");
-  }}
->
-  ✕
-</button>
+        <button
+          type="button"
+          className="form-close-btn"
+          onClick={(e) => {
+            e.stopPropagation();
+            navigate("/");
+          }}
+        >
+          ✕
+        </button>
+
         {/* TITLE */}
 
         <h2>
@@ -207,10 +245,14 @@ ${formData.message}
 
         <p className="form-subtitle">
 
-        We don’t shoot weddings. We craft cinematic legacies for your special day.  
+          We don’t shoot weddings. We craft cinematic legacies for your special day.
+
         </p>
+
         <p>
-2026 dates filling fast 💨</p>
+          2026 dates filling fast 💨
+        </p>
+
         {/* FORM */}
 
         <form
