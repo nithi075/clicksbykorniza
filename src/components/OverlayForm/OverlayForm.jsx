@@ -46,6 +46,8 @@ export default function OverlayForm({
 
     "Birthday",
 
+    "Baby Shoot",
+
     "Ear Piercing Ceremony",
 
     "Half Saree Ceremony",
@@ -405,7 +407,7 @@ ${formData.message}
             <input
               type="text"
               name="location"
-              placeholder="Enter location"
+              placeholder="Example: Chennai"
               value={formData.location}
               onChange={handleChange}
               required
