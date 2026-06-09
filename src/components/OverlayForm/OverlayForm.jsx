@@ -2,528 +2,165 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./OverlayForm.css";
 
-export default function OverlayForm({
-  setShowForm
-}) {
-
+export default function OverlayForm({ setShowForm }) {
   const navigate = useNavigate();
 
   /* =========================================
      FORM STATE
   ========================================= */
-
-  const [formData, setFormData] =
-    useState({
-
-      name:"",
-      phone:"",
-      eventDate:"",
-
-      event:"",
-      crowd:"",
-
-      location:"",
-      budget:"",
-      customBudget:"",
-
-      message:""
-
-    });
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    eventDate: "",
+    event: "",
+    crowd: "",
+    location: "",
+    budget: "",
+    customBudget: "",
+    message: ""
+  });
 
   /* =========================================
-     EVENT OPTIONS
+     OPTIONS DATA
   ========================================= */
-
   const eventOptions = [
-
     "Wedding & Reception",
-
     "Reception",
-
     "Engagement",
-
     "Christian Weddings",
-
     "Birthday",
-
+     "Modeling & Portfolio Shoots",
     "Baby Shoot",
-
     "Ear Piercing Ceremony",
-
     "Half Saree Ceremony",
-
     "Name Ceremony",
-
     "Corporate Events"
-
+   
   ];
 
-  /* =========================================
-     WEDDING BUDGET OPTIONS
-  ========================================= */
-
-  const weddingBudgets = [
-
-    "Bronze 55-65K",
-
-    "Silver 70-80K",
-
-    "Gold 80-90K",
-
-    "Diamond 130-150K",
-
-    "Luxury 2L - 3L",
-
-    "Royal 3L - 12L",
-
-    "Custom"
-
-  ];
-
-  /* =========================================
-     CHRISTIAN WEDDING BUDGETS
-  ========================================= */
-
-  const christianWeddingBudgets = [
-
-    "Bronze ₹30K",
-
-    "Silver ₹40K",
-
-    "Gold ₹50K - ₹60K",
-
-    "Platinum ₹65K - ₹1L",
-
-    "Diamond Above ₹1.5L",
-
-    "Luxury 2L - 3L",
-
-    "Royal 3L - 12L",
-
-    "Custom"
-
-  ];
-
-  /* =========================================
-     NORMAL EVENT BUDGETS
-  ========================================= */
-
-  const normalBudgets = [
-
-    "Bronze 18-24K",
-
-    "Silver 28-32K",
-
-    "Gold 40-50K",
-
-    "Diamond 65-75K",
-
-    "Custom"
-
-  ];
+  const weddingBudgets = ["Bronze 55-65K", "Silver 70-80K", "Gold 80-90K", "Diamond 130-150K", "Luxury 2L - 3L", "Royal 3L - 12L", "Custom"];
+  const christianWeddingBudgets = ["Bronze ₹30K", "Silver ₹40K", "Gold ₹50K - ₹60K", "Platinum ₹65K - ₹1L", "Diamond Above ₹1.5L", "Luxury 2L - 3L", "Royal 3L - 12L", "Custom"];
+  const modelingBudgets = ["Bronze ₹20K - ₹30K", "Silver ₹30K - ₹45K", "Gold ₹45K - ₹60K", "Diamond ₹60K - ₹90K", "Royal Above ₹1L", "Custom"];
+  const normalBudgets = ["Bronze 18-24K", "Silver 28-32K", "Gold 40-50K", "Diamond 65-75K", "Custom"];
 
   /* =========================================
      SELECT BUDGET BASED ON EVENT
   ========================================= */
-
-  const selectedBudgetOptions =
-
-    formData.event ===
-    "Wedding & Reception"
-
-      ? weddingBudgets
-
-      : formData.event ===
-        "Christian Weddings"
-
-      ? christianWeddingBudgets
-
-      : normalBudgets;
-
-  /* =========================================
-     HANDLE CHANGE
-  ========================================= */
-
-  const handleChange = (e) => {
-
-    setFormData({
-
-      ...formData,
-
-      [e.target.name]:
-      e.target.value
-
-    });
+  const getBudgetOptions = () => {
+    if (formData.event === "Wedding & Reception") return weddingBudgets;
+    if (formData.event === "Christian Weddings") return christianWeddingBudgets;
+    if (formData.event === "Modeling & Portfolio Shoots") return modelingBudgets;
+    return normalBudgets;
   };
 
+  const selectedBudgetOptions = getBudgetOptions();
+
   /* =========================================
-     WHATSAPP SUBMIT
+     HANDLERS
   ========================================= */
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+      // Reset budget if event changes to avoid mismatched selections
+      ...(name === "event" ? { budget: "" } : {})
+    }));
+  };
 
   const handleSubmit = (e) => {
-
     e.preventDefault();
-
-    const whatsappNumber =
-      "918680068246";
-
+    const whatsappNumber = "918680068246";
     const whatsappMessage = `🚨 Alert: Fresh Story Incoming 📲
 
 Welcome to the Clicks By Korniza family 🤍
 
-👤 Name:
-${formData.name}
+👤 Name: ${formData.name}
+📱 Whatsapp: ${formData.phone}
+📅 Event Date: ${formData.eventDate}
+🎉 Event Type: ${formData.event}
+👥 Expected Crowd: ${formData.crowd}
+📍 Event Location: ${formData.location}
+💰 Expected Budget: ${formData.budget === "Custom" ? formData.customBudget : formData.budget}
+📝 Additional Details: ${formData.message}
 
-📱 Whatsapp:
-${formData.phone}
+✨ We’ll get back to you shortly with a luxury cinematic experience.`;
 
-📅 Event Date:
-${formData.eventDate}
-
-🎉 Event Type:
-${formData.event}
-
-👥 Expected Crowd:
-${formData.crowd}
-
-📍 Event Location:
-${formData.location}
-
-💰 Expected Budget:
-${
-  formData.budget === "Custom"
-    ? formData.customBudget
-    : formData.budget
-}
-
-📝 Additional Details:
-${formData.message}
-
-✨ We’ll get back to you shortly with a luxury cinematic experience.
-`;
-
-    const whatsappURL =
-      `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
-
-    window.open(
-      whatsappURL,
-      "_blank"
-    );
+    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+    window.open(whatsappURL, "_blank");
   };
 
   return (
-
     <div className="overlay-form">
-
-      {/* BACKDROP CLOSE */}
-
-      <div
-        className="overlay-bg"
-        onClick={() => navigate(-1)}
-      />
-
-      {/* FORM CONTAINER */}
-
+      <div className="overlay-bg" onClick={() => navigate(-1)} />
       <div className="form-container">
+        <button type="button" className="form-close-btn" onClick={() => navigate("/")}>✕</button>
 
-        {/* CLOSE BUTTON */}
+        <h2>Book Your Event</h2>
+        <p className="form-subtitle">We don’t shoot weddings. We craft cinematic legacies for your special day.</p>
+        <p>2026 dates filling fast 💨</p>
 
-        <button
-          type="button"
-          className="form-close-btn"
-          onClick={(e) => {
-            e.stopPropagation();
-            navigate("/");
-          }}
-        >
-          ✕
-        </button>
-
-        {/* TITLE */}
-
-        <h2>
-          Book Your Event
-        </h2>
-
-        <p className="form-subtitle">
-
-          We don’t shoot weddings. We craft cinematic legacies for your special day.
-
-        </p>
-
-        <p>
-          2026 dates filling fast 💨
-        </p>
-
-        {/* FORM */}
-
-        <form
-          onSubmit={handleSubmit}
-        >
-
-          {/* NAME */}
-
+        <form onSubmit={handleSubmit}>
           <div className="input-group">
-
-            <label>
-
-              Name
-              <span>*</span>
-
-            </label>
-
-            <input
-              type="text"
-              name="name"
-              placeholder="Enter your name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
-
+            <label>Name <span>*</span></label>
+            <input type="text" name="name" placeholder="Enter your name" value={formData.name} onChange={handleChange} required />
           </div>
 
-          {/* PHONE */}
-
           <div className="input-group">
-
-            <label>
-
-              Whatsapp Number
-              <span>*</span>
-
-            </label>
-
-            <input
-              type="tel"
-              name="phone"
-              placeholder="+91 00000 00000"
-              value={formData.phone}
-              onChange={handleChange}
-              required
-            />
-
+            <label>Whatsapp Number <span>*</span></label>
+            <input type="tel" name="phone" placeholder="+91 00000 00000" value={formData.phone} onChange={handleChange} required />
           </div>
 
-          {/* EVENT DATE */}
-
           <div className="input-group">
-
-            <label>
-
-              Event Date
-              <span>*</span>
-
-            </label>
-
-            <input
-              type="date"
-              name="eventDate"
-              value={formData.eventDate}
-              onChange={handleChange}
-              required
-            />
-
+            <label>Event Date <span>*</span></label>
+            <input type="date" name="eventDate" value={formData.eventDate} onChange={handleChange} required />
           </div>
 
-          {/* EVENT */}
-
           <div className="input-group">
-
-            <label>
-
-              Name of the Event
-              <span>*</span>
-
-            </label>
-
-            <select
-              name="event"
-              value={formData.event}
-              onChange={handleChange}
-              required
-            >
-
-              <option value="">
-                Please Select
-              </option>
-
-              {
-                eventOptions.map(
-                  (
-                    item,
-                    index
-                  ) => (
-
-                    <option
-                      key={index}
-                      value={item}
-                    >
-
-                      {item}
-
-                    </option>
-                  )
-                )
-              }
-
+            <label>Name of the Event <span>*</span></label>
+            <select name="event" value={formData.event} onChange={handleChange} required>
+              <option value="">Please Select</option>
+              {eventOptions.map((item, index) => (
+                <option key={index} value={item}>{item}</option>
+              ))}
             </select>
-
           </div>
 
-          {/* CROWD */}
-
           <div className="input-group">
-
-            <label>
-
-              Expected Crowd
-              <span>*</span>
-
-            </label>
-
-            <input
-              type="number"
-              name="crowd"
-              placeholder="Approx crowd count"
-              value={formData.crowd}
-              onChange={handleChange}
-              required
-            />
-
+            <label>Expected Crowd <span>*</span></label>
+            <input type="number" name="crowd" placeholder="Approx crowd count" value={formData.crowd} onChange={handleChange} required />
           </div>
 
-          {/* LOCATION */}
-
           <div className="input-group">
-
-            <label>
-
-              Event Location
-              <span>*</span>
-
-            </label>
-
-            <input
-              type="text"
-              name="location"
-              placeholder="Example: Chennai"
-              value={formData.location}
-              onChange={handleChange}
-              required
-            />
-
+            <label>Event Location <span>*</span></label>
+            <input type="text" name="location" placeholder="Example: Chennai" value={formData.location} onChange={handleChange} required />
           </div>
 
-          {/* BUDGET */}
-
           <div className="input-group">
-
-            <label>
-
-              Expected Budget
-              <small>
-                (Optional)
-              </small>
-
-            </label>
-
-            <select
-              name="budget"
-              value={formData.budget}
-              onChange={handleChange}
-            >
-
-              <option value="">
-                Select Budget
-              </option>
-
-              {
-                selectedBudgetOptions.map(
-                  (
-                    item,
-                    index
-                  ) => (
-
-                    <option
-                      key={index}
-                      value={item}
-                    >
-
-                      {item}
-
-                    </option>
-                  )
-                )
-              }
-
+            <label>Expected Budget <small>(Optional)</small></label>
+            <select name="budget" value={formData.budget} onChange={handleChange}>
+              <option value="">Select Budget</option>
+              {selectedBudgetOptions.map((item, index) => (
+                <option key={index} value={item}>{item}</option>
+              ))}
             </select>
-
           </div>
 
-          {/* CUSTOM BUDGET */}
-
-          {
-            formData.budget ===
-            "Custom" && (
-
-              <div className="input-group">
-
-                <label>
-
-                  Enter Custom Budget
-
-                </label>
-
-                <input
-                  type="text"
-                  name="customBudget"
-                  placeholder="Enter your expected budget"
-                  value={formData.customBudget}
-                  onChange={handleChange}
-                />
-
-              </div>
-            )
-          }
-
-          {/* MESSAGE */}
+          {formData.budget === "Custom" && (
+            <div className="input-group">
+              <label>Enter Custom Budget</label>
+              <input type="text" name="customBudget" placeholder="Enter your expected budget" value={formData.customBudget} onChange={handleChange} />
+            </div>
+          )}
 
           <div className="input-group">
-
-            <label>
-
-              Tell us more
-              <small>(Optional)</small>
-
-            </label>
-
-            <textarea
-              rows="5"
-              name="message"
-              placeholder="Tell us about your event..."
-              value={formData.message}
-              onChange={handleChange}
-            />
-
+            <label>Tell us more <small>(Optional)</small></label>
+            <textarea rows="5" name="message" placeholder="Tell us about your event..." value={formData.message} onChange={handleChange} />
           </div>
 
-          {/* BUTTON */}
-
-          <button
-            type="submit"
-            className="submit-btn"
-          >
-
-            SEND TO WHATSAPP
-
-          </button>
-
+          <button type="submit" className="submit-btn">SEND TO WHATSAPP</button>
         </form>
-
       </div>
-
     </div>
-
   );
 }
