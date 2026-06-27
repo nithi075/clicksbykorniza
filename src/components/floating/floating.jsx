@@ -1,42 +1,30 @@
-import "./floating.css";
-import { useNavigate } from "react-router-dom";
+import './floating.css'
+import { FaPhoneAlt, FaWhatsapp } from 'react-icons/fa'
 
-export default function FloatingChat() {
-
-  const navigate = useNavigate();
-
+export default function Floating() {
   return (
-    <>
-      {/* =========================================
-          FLOATING CONTAINER
-      ========================================= */}
+    <div className="floating-contact">
 
-      <div className="floating-container">
+      {/* Phone */}
+      <a
+        href="tel:+919543061112"
+        className="floating-contact__btn floating-contact__btn--phone"
+        aria-label="Call Us"
+      >
+        <FaPhoneAlt size={22} />
+      </a>
 
-        {/* =========================================
-            PREMIUM BOOK NOW BUTTON
-        ========================================= */}
+      {/* WhatsApp */}
+      <a
+        href="https://wa.me/919543061112?text=Hello%20Devz%20Studio,%20I%20would%20like%20to%20discuss%20my%20upcoming%20event."
+        target="_blank"
+        rel="noopener noreferrer"
+        className="floating-contact__btn floating-contact__btn--whatsapp"
+        aria-label="WhatsApp Us"
+      >
+        <FaWhatsapp size={30} />
+      </a>
 
-        <button
-          className="floating-chat-glass"
-          onClick={() => navigate("/book-event")}
-        >
-
-          {/* LUXURY SHIMMER OVERLAY */}
-
-          <span className="shimmer-effect"></span>
-
-          <span className="chat-label">
-            Book Now
-          </span>
-
-        </button>
-
-        {/* BACKGROUND AMBIENT GLOW */}
-
-        <div className="floating-glow"></div>
-
-      </div>
-    </>
-  );
+    </div>
+  )
 }
